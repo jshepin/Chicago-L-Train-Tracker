@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1030364885939-n5mr0o43ta37hvh9ctreji6pd7ndo3mc.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1030364885939-n5mr0o43ta37hvh9ctreji6pd7ndo3mc</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAV_T8QalZpBzQzQO3N25RBw-OhIwa7eOA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1030364885939</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ctatracker.app</string>
+	<key>PROJECT_ID</key>
+	<string>ctatracker-2bcbb</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ctatracker-2bcbb.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1030364885939:ios:90e7fc8fb541f49f5551c6</string>
+	<key>DATABASE_URL</key>
+	<string>https://ctatracker-2bcbb.firebaseio.com</string>
+</dict>
+</plist>

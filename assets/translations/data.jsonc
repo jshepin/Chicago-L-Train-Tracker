@@ -1,0 +1,121 @@
+{
+
+    "general": {
+        "line": "line",  //get on the red LINE
+        "lines": "lines", //train LINES
+        "fetchFailed": "Unable to fetch data, please try again later",
+        "bound": "Bound" //north BOUND
+    },
+    "status": {
+        "now": "Now" //its time NOW
+    },
+    "icons": {
+        "map": "Map", //use the MAP
+        "ADA": "Accessible", 
+        "favorite": "Favorite",
+        "parking": "Parking Available",
+        "refresh": "Refresh", //REFRESH the page
+        "airport": "Airport", //go to the AIRPORT
+        "back": "Back" //go BACK to the other page
+    },
+    "colors": {
+        "red": "Red",
+        "brown": "Brown",
+        "blue": "Blue",
+        "green": "Green",
+        "pink": "Pink",
+        "orange": "Orange",
+        "yellow": "Yellow",
+        "purple": "Purple"
+    },
+    "home": {
+        "title": "Home", //your HOME page
+        "distanceUnit": "mi" //my house is 10 MI away
+    },
+    "predictionRow": {
+        "viewButton": "View", //VIEW the page
+        "timeUnit": "min", //I will leave in 10 MIN
+        "onTime": "On Time", 
+        "delayed": "Delayed" 
+
+    },
+    "btmBar": {
+        "btmBar0": "Trains", //there are 5 TRAINS
+        "btmBar": "Stations", //there are 2 STATIONS
+        "btmBar2": "Settings" //open SETTINGS
+    },
+    "lines": {
+        "viewFullMap": "View Full Map",
+        "editOrder": "Edit Order", //EDIT ORDER of the pages
+        "reset": "Reset", //RESET to default settings
+        "saveChanges": "Save Changes", 
+        "holdMessage": "Tap and hold a card to reorder it"
+    },
+    "stations": {
+        "subTitle": "Click a station to view the schedule",
+        "serviceInformation": "Service Information" //here is the SERIVCE INFORMATION for all the trains
+    },
+
+    "station": {
+        "title": "Arrivals", //here are ther ARRIVALS for the upcomming trains
+        "subtitle": "Service Information"
+    },
+    "map": {
+        "layers": "Layers", //the map has 5 LAYERS
+        "showStations": "Show Stations" 
+    },
+    "settings": {
+        "accessibility": {
+            "title": "Show Accessibility Info.",
+            "subtitle": "Show Park'n ride and ADA compliance info on stations"
+        },
+        "closestStation": {
+            "title": "Show Closest Station", 
+            "subtitle": "Show the station closest to you within 0 miles"
+        },
+
+        "showMap": {
+            "title": "Show Map",
+            "subtitle": "Show map view for stations"
+        },
+        "darkMap": {
+            "title": "Map Dark Theme",
+            "subtitle": "In dark mode, enable the map preview to dark theme"
+        },
+        "theme": {
+            "theme": "Theme", //(the THEME is dark)
+            "light": "Light", //(light colors)
+            "dark": "Dark", //(dark colors)
+            "system": "Use System" //(use the settings of the device)
+        },
+        "showStations": "Show Stations", 
+        "location": {
+            "title": "Location Services",
+            "subtitle": "Your location data never leaves your device",
+            "enabled": "Enabled",
+            "disabled": "Disabled"
+        },
+        "contact": {
+            "title": "Contact",
+            "info": "Made By Joseph Shepin\nContact: chicagoloopapp@gmail.com",
+            "button": "Contact"
+        }
+
+    },
+    "purple": {
+        "title": "Purple Line Express",
+        "dismiss": "Dismiss", //I don't need this right now, let me DISMISS this notification
+        "purpleEx": "Only During weekday rush periods, Purple Line Express trains continue express to downtown",
+        "moreInfo": "More Info",
+        "purpleLongEx": "Normally, the purple line only services between Linden and Howard. \n\nHowever during weekday rush periods, Purple Line Express trains continue express to downtown via Loop 'L' shown by the dashed lines"
+    },
+    "notes": {
+        "brown": "After leaving Clark/Lake, trains then exit Loop and make all stops from Merchandise Mart back through to Kimball.",
+        "pink": "After leaving Washington/Wells, trains then exit Loop and make all stops from Clinton back through to 54th/Cermak.",
+        "orange": "After leaving Adams/Wabash, trains then exit Loop and make all stops from Roosevelt back through to Midway.",
+        "purple": "After leaving Washington/Wells, Purple Line Express trains then exit Loop and make all stops from Merchandise Mart back through to Linden."
+    },
+    "snotes": {
+        "lake": "To connect to other lines, you must transfer to the above ground station State/Lake. Predictions are not shown for those lines here"
+    }
+}

@@ -1,0 +1,119 @@
+{
+
+    "general": {
+        "line": "线", 
+        "lines": "火车线",
+        "fetchFailed": "",
+        "bound": ""
+    },
+    "status": {
+        "now": "现在"
+    },
+    "icons": {
+        "map": "地图",
+        "ADA": "无障碍通道",
+        "favorite": "喜爱",
+        "parking": "停车场",
+        "refresh": "",
+        "airport": "飞机场",
+        "back": ""
+    },
+    "colors": {
+        "red": "红色",
+        "brown": "棕色",
+        "blue": "蓝色",
+        "green": "绿色",
+        "pink": "粉色",
+        "orange": "橘色",
+        "yellow": "黄色",
+        "purple": "紫色"
+    },
+    "home": {
+        "title": "",
+        "distanceUnit": "英里"
+    },
+    "predictionRow": {
+        "viewButton": "",
+        "timeUnit": "分钟",
+        "onTime": "准时",
+        "delayed": "吃到"
+    },
+    "btmBar": {
+        "btmBar0": "火车",
+        "btmBar1": "站",
+        "btmBar2": "设定"
+    },
+    "lines": {
+        "viewFullMap": "查看地图",
+        "editOrder": "",
+        "reset": "",
+        "saveChanges": "",
+        "holdMessage": ""
+    },
+    "stations": {
+        "subTitle": "",
+        "serviceInformation": ""
+    },
+
+    "station": {
+        "title": "到达",
+        "subtitle": ""
+    },
+    "map": {
+        "layers": "地图图层",
+        "showStations": ""
+    },
+    "settings": {
+        "accessibility": {
+            "title": "显示辅助功能信息",
+            "subtitle": ""
+        },
+        "closestStation": {
+            "title": "显示最近的车站",
+            "subtitle": ""
+        },
+
+        "showMap": {
+            "title": "显示地图",
+            "subtitle": ""
+        },
+        "darkMap": {
+            "title": "",
+            "subtitle": ""
+        },
+        "theme": {
+            "theme": "颜色主题",
+            "light": "灯光模式",
+            "dark": "暗模式",
+            "system": "使用系统"
+        },
+        "showStations": "显示站",
+        "location": {
+            "title": "位置",
+            "subtitle": "您的位置数据永远不会离开您的设备",
+            "enabled": "已启用",
+            "disabled": "残障人士"
+        },
+        "contact": {
+            "title": "联系",
+            "info": "由制成 Joseph Shepin\n联系: jshepin@gmail.com",
+            "button": "联系"
+        }
+    },
+    "purple": {
+        "title": "",
+        "dismiss": "",
+        "purpleEx": "",
+        "moreInfo": "",
+        "purpleLongEx": ""
+    },
+    "notes": {
+        "brown": "",
+        "pink": "",
+        "orange": "",
+        "purple": ""
+    },
+    "snotes": {
+        "lake": ""
+    }
+}

@@ -1,0 +1,121 @@
+{
+
+    "general": {
+        "line": "line", 
+        "lines": "Lines",
+        "fetchFailed": "Unable to fetch data, please try again later",
+        "bound": "Bound"
+    },
+    "status": {
+        "now": "Now"
+    },
+    "icons": {
+        "map": "Map",
+        "ADA": "ADA Compliant",
+        "favorite": "Favorite",
+        "parking": "Park'n Ride Available",
+        "refresh": "Refresh",
+        "airport": "Airport",
+        "back": "Back"
+    },
+    "colors": {
+        "red": "Red",
+        "brown": "Brown",
+        "blue": "Blue",
+        "green": "Green",
+        "pink": "Pink",
+        "orange": "Orange",
+        "yellow": "Yellow",
+        "purple": "Purple"
+    },
+    "home": {
+        "title": "Home",
+        "distanceUnit": "mi"
+    },
+    "predictionRow": {
+        "viewButton": "View",
+        "timeUnit": "min",
+        "onTime": "On Time",
+        "delayed": "Delayed"
+
+    },
+    "btmBar": {
+        "btmBar0": "Trains",
+        "btmBar1": "Stations",
+        "btmBar2": "Settings"
+    },
+    "lines": {
+        "viewFullMap": "View Full Map",
+        "editOrder": "Edit Order",
+        "reset": "Reset",
+        "saveChanges": "Save Changes",
+        "holdMessage": "Tap and hold a card to reorder it"
+    },
+    "stations": {
+        "subTitle": "Click a station to view the schedule",
+        "serviceInformation": "Service Information"
+    },
+
+    "station": {
+        "title": "Arrivals",
+        "subtitle": "Service Information"
+    },
+    "map": {
+        "layers": "Layers",
+        "showStations": "Show Stations"
+    },
+    "settings": {
+        "accessibility": {
+            "title": "Show Accessibility Info.",
+            "subtitle": "Show Parking and ADA compliance info on stations"
+        },
+        "closestStation": {
+            "title": "Show Closest Station",
+            "subtitle": "Show the station closest to you within 10 miles"
+        },
+
+        "showMap": {
+            "title": "Show Map",
+            "subtitle": "Show map view for stations"
+        },
+        "darkMap": {
+            "title": "Map Dark Theme",
+            "subtitle": "In dark mode, enable the map preview to dark theme"
+        },
+        "theme": {
+            "theme": "Theme",
+            "light": "Light",
+            "dark": "Dark",
+            "system": "Use System"
+        },
+        "showStations": "Show Stations",
+        "location": {
+            "title": "Location Services",
+            "subtitle": "Your location data never leaves your device",
+            "enabled": "Enabled",
+            "disabled": "Disabled"
+        },
+        "contact": {
+            "title": "Contact",
+            "info": "Made By Joseph Shepin\nchicagoloopapp@gmail.com",
+            "button": "Contact"
+        }
+
+    },
+    "purple": {
+        "title": "Purple Line Express",
+        "dismiss": "Dismiss",
+        "purpleEx": "Only During weekday rush periods, Purple Line Express trains continue express to downtown",
+        "moreInfo": "More Info",
+        "purpleLongEx": "Normally, the purple line only services between Linden and Howard. \n\nHowever during weekday rush periods, Purple Line Express trains continue express to downtown via Loop shown by the dashed lines"
+    },
+    "notes": {
+        "brown": "After leaving Clark/Lake, trains then exit Loop and make all stops from Merchandise Mart back through to Kimball.",
+        "pink": "After leaving Washington/Wells, trains then exit Loop and make all stops from Clinton back through to 54th/Cermak.",
+        "orange": "After leaving Adams/Wabash, trains then exit Loop and make all stops from Roosevelt back through to Midway.",
+        "purple": "After leaving Washington/Wells, Purple Line Express trains then exit Loop and make all stops from Merchandise Mart back through to Linden."
+    },
+    "snotes": {
+        "lake": "To connect to other lines, you must transfer to the above ground station State/Lake. Predictions are not shown for those lines here"
+    }
+}
