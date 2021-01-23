@@ -26,6 +26,7 @@ class _ConnectionIndicatorState extends State<ConnectionIndicator>
   void initState() {
     _timer = Timer.periodic(Duration(seconds: 3), (Timer t) => refresh());
     _controller = AnimationController(
+      vsync: this,
       duration: Duration(seconds: 4),
     );
     _controller.repeat();
