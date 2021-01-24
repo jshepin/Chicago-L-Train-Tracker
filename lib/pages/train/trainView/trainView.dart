@@ -317,114 +317,109 @@ class _TrainViewState extends State<TrainView> {
                 child: Align(
                   alignment: Alignment.center,
                   child: Container(
-                    child: Container(
-                      height: 270,
-                      width: 270,
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: isDark(context)
-                                  ? Colors.transparent
-                                  : Colors.grey[300].withOpacity(0.9),
-                              spreadRadius: 3,
-                              blurRadius: 10,
-                            )
-                          ],
-                          color: getPrimary(context),
-                          borderRadius: BorderRadius.all(Radius.circular(1000)),
-                          border: Border.all(color: color, width: 2)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(right: 8),
-                            padding: EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              color: isDark(context)
-                                  ? Colors.white.withOpacity(0.1)
-                                  : Colors.grey[100],
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                            child: Icon(
-                              widget.isBus ? Icons.directions_bus : Icons.train,
-                              size: 35,
-                            ),
-                          ),
-                          Container(
-                            height: 8,
-                          ),
-                          Center(
-                            child: Text(
-                              "${convertShortColorDisplay(updatedPrediction.rt)} ${convertShortColorDisplay(updatedPrediction.rt).contains('Line') ? '' : 'Line'}",
-                              style: TextStyle(
-                                  color: color,
-                                  fontSize: 21,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 6, bottom: 5),
-                            child: Text(
-                              "${updatedPrediction.destNm} Bound",
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          ),
-                          Text(
-                            mainInfo.name,
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w600),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                  "${(mainInfo.isApp == "1") ? 'status.now'.tr() : formatTime(convertShortColor(mainInfo.arrT), updatedPrediction.prdt, false, preciseNow: true)}",
-                                  style: TextStyle(
-                                      fontSize: 45,
-                                      fontWeight: FontWeight.w600)),
-                              if ((mainInfo.isApp == "0" &&
-                                      formatTime(
-                                              convertShortColor(mainInfo.arrT),
-                                              updatedPrediction.prdt,
-                                              false,
-                                              preciseNow: true) !=
-                                          "Late") &&
-                                  formatTime(convertShortColor(mainInfo.arrT),
-                                          updatedPrediction.prdt, false,
-                                          preciseNow: true) !=
-                                      "Now") ...[
-                                Container(width: 5),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    "min",
-                                    style: TextStyle(fontSize: 30),
-                                  ),
-                                )
-                              ]
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8, top: 1),
-                            child: Text(
-                              "${(updatedPrediction.isDly == "1" ? tr('predictionRow.delayed') : tr('predictionRow.onTime'))}",
-                              style: TextStyle(
-                                  color: isDark(context)
-                                      ? ((updatedPrediction.isDly == "1"
-                                          ? Colors.red
-                                          : color))
-                                      : ((updatedPrediction.isDly == "1"
-                                          ? Colors.red
-                                          : color)),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ),
+                    height: 270,
+                    width: 270,
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: isDark(context)
+                                ? Colors.transparent
+                                : Colors.grey[300].withOpacity(0.9),
+                            spreadRadius: 3,
+                            blurRadius: 10,
+                          )
                         ],
-                      ),
+                        color: getPrimary(context),
+                        borderRadius: BorderRadius.all(Radius.circular(1000)),
+                        border: Border.all(color: color, width: 2)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(right: 8),
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: isDark(context)
+                                ? Colors.white.withOpacity(0.1)
+                                : Colors.grey[100],
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          child: Icon(
+                            widget.isBus ? Icons.directions_bus : Icons.train,
+                            size: 35,
+                          ),
+                        ),
+                        Container(
+                          height: 8,
+                        ),
+                        Center(
+                          child: Text(
+                            "${convertShortColorDisplay(updatedPrediction.rt)} ${convertShortColorDisplay(updatedPrediction.rt).contains('Line') ? '' : 'Line'}",
+                            style: TextStyle(
+                                color: color,
+                                fontSize: 21,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 6, bottom: 5),
+                          child: Text(
+                            "${updatedPrediction.destNm} Bound",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ),
+                        Text(
+                          mainInfo.name,
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                                "${(mainInfo.isApp == "1") ? 'status.now'.tr() : formatTime(convertShortColor(mainInfo.arrT), updatedPrediction.prdt, false, preciseNow: true)}",
+                                style: TextStyle(
+                                    fontSize: 45, fontWeight: FontWeight.w600)),
+                            if ((mainInfo.isApp == "0" &&
+                                    formatTime(convertShortColor(mainInfo.arrT),
+                                            updatedPrediction.prdt, false,
+                                            preciseNow: true) !=
+                                        "Late") &&
+                                formatTime(convertShortColor(mainInfo.arrT),
+                                        updatedPrediction.prdt, false,
+                                        preciseNow: true) !=
+                                    "Now") ...[
+                              Container(width: 5),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text(
+                                  "min",
+                                  style: TextStyle(fontSize: 30),
+                                ),
+                              )
+                            ]
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8, top: 1),
+                          child: Text(
+                            "${(updatedPrediction.isDly == "1" ? tr('predictionRow.delayed') : tr('predictionRow.onTime'))}",
+                            style: TextStyle(
+                                color: isDark(context)
+                                    ? ((updatedPrediction.isDly == "1"
+                                        ? Colors.red
+                                        : color))
+                                    : ((updatedPrediction.isDly == "1"
+                                        ? Colors.red
+                                        : color)),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -439,46 +434,54 @@ class _TrainViewState extends State<TrainView> {
                   )),
                 ),
               if (!endOfLine)
-                Padding(
-                  padding: const EdgeInsets.only(left: 5, right: 5, top: 8),
-                  child: Column(
-                    children: [
-                      Row(
+                Center(
+                  child: Container(
+                    constraints: BoxConstraints(maxWidth: 700),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 5, right: 5, top: 8),
+                      child: Column(
                         children: [
-                          Container(
-                            margin: EdgeInsets.only(right: 5, left: 6),
-                            padding: EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              color: isDark(context)
-                                  ? Colors.white.withOpacity(0.1)
-                                  : Colors.grey[100],
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
+                          Row(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(right: 5, left: 6),
+                                padding: EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  color: isDark(context)
+                                      ? Colors.white.withOpacity(0.1)
+                                      : Colors.grey[100],
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                ),
+                                child: Icon(
+                                  widget.isBus
+                                      ? Icons.directions_bus
+                                      : Icons.train,
+                                  size: 25,
+                                ),
                               ),
-                            ),
-                            child: Icon(
-                              widget.isBus ? Icons.directions_bus : Icons.train,
-                              size: 25,
-                            ),
+                              Text(
+                                "#${updatedPrediction.rn}",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ],
                           ),
-                          Text(
-                            "#${updatedPrediction.rn}",
-                            style: TextStyle(fontSize: 20),
-                          ),
+                          if (!endOfLine)
+                            if (predictions != null &&
+                                predictions.length > 0) ...[
+                              UpcomingStations(predictions, widget, (var data) {
+                                setState(() {
+                                  changed = true;
+                                  mainInfo = data;
+                                });
+                              })
+                            ]
+
+                          // })
                         ],
                       ),
-                      if (!endOfLine)
-                        if (predictions != null && predictions.length > 0) ...[
-                          UpcomingStations(predictions, widget, (var data) {
-                            setState(() {
-                              changed = true;
-                              mainInfo = data;
-                            });
-                          })
-                        ]
-
-                      // })
-                    ],
+                    ),
                   ),
                 )
             ]),

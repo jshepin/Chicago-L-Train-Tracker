@@ -34,10 +34,11 @@ class Predictions extends StatefulWidget {
   bool vstack;
   bool showMap;
   bool isBus;
+  bool tabletShrink;
 
   SettingsData settings;
   Predictions(this.color, this.vstack, this.showMap, this.settings,
-      {station, stop}) {
+      {station, stop, this.tabletShrink}) {
     if (station != null) {
       this.station = station;
       this.isBus = false;
@@ -87,7 +88,10 @@ class _PredictionsState extends State<Predictions> {
                     setPreference = true;
                   }
                   return Container(
-                      constraints: BoxConstraints(maxWidth: 450),
+                      constraints:
+                          widget.tabletShrink != null && widget.tabletShrink
+                              ? BoxConstraints(maxWidth: 500)
+                              : BoxConstraints(),
                       child: data.data.length > 0
                           ? (widget.vstack
                               ? SingleChildScrollView(

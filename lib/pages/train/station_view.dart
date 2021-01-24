@@ -462,6 +462,7 @@ class Station_viewState extends State<Station_view> {
                                   _settings.showMap,
                                   _settings,
                                   station: selectedStation,
+                                  tabletShrink: true,
                                 )),
                               )
                             : Predictions(
