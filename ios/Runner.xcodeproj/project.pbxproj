@@ -217,7 +217,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh\"\n";
+			shellScript = "
+";
 			showEnvVarsInLog = 0;
 		};
 		39EBFF67147F1F89ED4D226C /* [CP] Copy Pods Resources */ = {
