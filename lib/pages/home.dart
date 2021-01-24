@@ -194,6 +194,8 @@ class _HomeState extends State<Home> {
                                           if (snapshot.data.length == 0) {
                                             return Center(
                                               child: Container(
+                                                constraints: BoxConstraints(
+                                                    maxWidth: 500),
                                                 width: double.infinity,
                                                 decoration: BoxDecoration(
                                                     border: Border.all(
@@ -219,7 +221,7 @@ class _HomeState extends State<Home> {
                                                               FontWeight.w600),
                                                     ),
                                                     Text(
-                                                      "It doesn't look like you have pinned anything to your homescreen yet",
+                                                      "Welcome to Loop, favorited stops and stations will appear here.",
                                                       textAlign:
                                                           TextAlign.center,
                                                       style: TextStyle(

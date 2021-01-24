@@ -87,6 +87,7 @@ class _PredictionsState extends State<Predictions> {
                     setPreference = true;
                   }
                   return Container(
+                      constraints: BoxConstraints(maxWidth: 450),
                       child: data.data.length > 0
                           ? (widget.vstack
                               ? SingleChildScrollView(

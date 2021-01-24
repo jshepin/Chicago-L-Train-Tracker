@@ -330,15 +330,18 @@ class _SettingsState extends State<Settings> {
                   ),
                 ),
                 DividerLine(),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                  child: Text(
-                    "Realtime predictions data is updated often and provided by the CTA but is not gaurenteed to be 100% accurate. Please take this into consideration on your next trip as we have no control over any inaccuracies in their system - Thank You",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        color: isDark(context) ? Colors.orange : Colors.blue),
+                Container(
+                  constraints: BoxConstraints(maxWidth: 550),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                    child: Text(
+                      "Realtime predictions data is updated often and provided by the CTA but is not gaurenteed to be 100% accurate. Please take this into consideration on your next trip as we have no control over any inaccuracies in their system - Thank You",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          color: isDark(context) ? Colors.orange : Colors.blue),
+                    ),
                   ),
                 )
               ],

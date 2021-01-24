@@ -186,8 +186,9 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
                   markerId: MarkerId("${p.rn}${p.lat}${p.lon}$count"),
                   position: LatLng(double.parse(p.lat), double.parse(p.lon)),
                   icon: BitmapDescriptor.fromAsset(
-                      "assets/arrows/${layerStrings[c]}${defaultTargetPlatform == TargetPlatform.iOS ? 'IOS' : ''}.png"),
+                      "assets/arrows/${layerStrings[c]}${defaultTargetPlatform == TargetPlatform.iOS ? 'iOS' : ''}.png"),
                   onTap: () {
+                    // print("setting oclor to ${x}");
                     setState(() {
                       selectedStation = null;
                       selectedTrain = p;
@@ -256,6 +257,7 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
               onTap: () {
                 setState(() {
                   selectedStation = s;
+                  selectedTrain = null;
                 });
               }));
         }

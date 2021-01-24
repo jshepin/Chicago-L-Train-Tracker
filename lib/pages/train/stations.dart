@@ -567,6 +567,8 @@ class _StationsState extends State<Stations> {
                                                   title: new Text(
                                                       'purple.title'.tr()),
                                                   content: Container(
+                                                    constraints: BoxConstraints(
+                                                        maxWidth: 350),
                                                     child: new Text(
                                                         'purple.purpleLongEx'
                                                             .tr(),
@@ -631,9 +633,12 @@ class _StationsState extends State<Stations> {
                         ),
                       ),
                       if (line.note != null) ...[
-                        Text(
-                          line.note,
-                          style: TextStyle(height: 1.4, fontSize: 16),
+                        Container(
+                          constraints: BoxConstraints(maxWidth: 450),
+                          child: Text(
+                            line.note,
+                            style: TextStyle(height: 1.4, fontSize: 16),
+                          ),
                         ),
                       ],
                       Container(height: 20),

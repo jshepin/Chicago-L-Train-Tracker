@@ -54,6 +54,7 @@ class _StopViewCardState extends State<StopViewCard> {
     directions = getBusDirections(widget.predictions);
     directions.insert(0, "All");
     return Container(
+      constraints: BoxConstraints(maxWidth: 450),
       child: SingleChildScrollView(
           child: Column(
         children: [
