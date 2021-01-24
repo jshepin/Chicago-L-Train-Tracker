@@ -2,22 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-
-<key>NSLocationAlwaysUsageDescription</key>
-	<string>This application requires location services to find your closest station</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This application requires location services find your closest station</string>
-
-<key>CFBundleLocalizations</key>
-<array>
-	<string>en</string>
-		<string>es</string>
-
-	<!-- <string>nb</string> -->
-</array>
-
-
-
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -28,6 +12,11 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>es</string>
+	</array>
 	<key>CFBundleName</key>
 	<string>CTA_Tracker</string>
 	<key>CFBundlePackageType</key>
@@ -40,7 +29,11 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-		<key>UILaunchStoryboardName</key>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This application requires location services to find your closest station</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This application requires location services find your closest station</string>
+	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
