@@ -42,7 +42,6 @@ bool connected = true;
 var showCard = true;
 var _settingsData = new SettingsData(false, false, false, false, false);
 var _connection;
-var _gotWelcome;
 
 class _HomeState extends State<Home> {
   Timer _timer;
@@ -53,11 +52,7 @@ class _HomeState extends State<Home> {
 
     print("initstate");
     _timer = Timer.periodic(Duration(seconds: 15), (Timer t) => update(t));
-    getWelcomeShown().then((value) {
-      setState(() {
-        _gotWelcome = value;
-      });
-    });
+
     getSettings().then((value) {
       setState(() {
         _settingsData = value;
@@ -87,218 +82,208 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     getTopBar();
-    if (_gotWelcome != null) {
-      if (_gotWelcome) {
-        return Scaffold(
-            backgroundColor: getPrimary(context),
-            bottomNavigationBar: BtmBar(),
-            body: FutureBuilder(
-              future: getPredictions("40080"),
-              builder: (c, snap) {
-                if (snap.hasData) {
-                  return SafeArea(
-                    child: Container(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 0, vertical: 5),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 12, right: 5),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('home.title'.tr(),
-                                      style: TextStyle(
-                                          fontSize: 49,
-                                          fontWeight: FontWeight.w600)),
-                                  Row(
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            right: 10, top: 2),
-                                        child: ConnectionIndicator(),
-                                      ),
-                                      IconButton(
-                                        tooltip: tr('icons.refresh'),
-                                        iconSize: 34,
-                                        icon: Icon(Icons.refresh),
-                                        onPressed: () async {
-                                          bool s = await checkConnection();
-                                          setState(() {
-                                            connected = s;
-                                          });
-                                        },
-                                      ),
-                                    ],
+    return Scaffold(
+        backgroundColor: getPrimary(context),
+        bottomNavigationBar: BtmBar(),
+        body: FutureBuilder(
+          future: getPredictions("40080"),
+          builder: (c, snap) {
+            if (snap.hasData) {
+              return SafeArea(
+                child: Container(
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 12, right: 5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('home.title'.tr(),
+                                  style: TextStyle(
+                                      fontSize: 49,
+                                      fontWeight: FontWeight.w600)),
+                              Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 10, top: 2),
+                                    child: ConnectionIndicator(),
+                                  ),
+                                  IconButton(
+                                    tooltip: tr('icons.refresh'),
+                                    iconSize: 34,
+                                    icon: Icon(Icons.refresh),
+                                    onPressed: () async {
+                                      bool s = await checkConnection();
+                                      setState(() {
+                                        connected = s;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Expanded(
+                            child: SingleChildScrollView(
+                              child: Column(children: [
+                                if (_settingsData.closestStationEnabled) ...[
+                                  FutureBuilder<List<StationWithDistance>>(
+                                    future: findClosestStation(),
+                                    builder: (c, snapshot) {
+                                      if (snapshot.hasData) {
+                                        if (snapshot.data.length == 0) {
+                                          return Container();
+                                        }
+                                        return Column(
+                                          children: [
+                                            if (_connection != null)
+                                              for (StationWithDistance s
+                                                  in snapshot.data) ...[
+                                                PredictionRow(
+                                                  _settingsData,
+                                                  stop: s.isBus ? s.stop : null,
+                                                  station: s.isBus
+                                                      ? null
+                                                      : s.station,
+                                                  stations: s.isBus
+                                                      ? null
+                                                      : getStations(
+                                                          s.station.lines[0]),
+                                                  distance: s.distance,
+                                                  isConnected: _connection,
+                                                  callback: () {
+                                                    setState(() {});
+                                                  },
+                                                ),
+                                              ]
+                                          ],
+                                        );
+                                      } else {
+                                        return Container();
+                                      }
+                                    },
+                                  ),
+                                  Container(
+                                    height: 10,
                                   )
                                 ],
-                              ),
-                            ),
-                            Container(
-                              child: Expanded(
-                                child: SingleChildScrollView(
-                                  child: Column(children: [
-                                    if (_settingsData
-                                        .closestStationEnabled) ...[
-                                      FutureBuilder<List<StationWithDistance>>(
-                                        future: findClosestStation(),
-                                        builder: (c, snapshot) {
-                                          if (snapshot.hasData) {
-                                            if (snapshot.data.length == 0) {
-                                              return Container();
-                                            }
-                                            return Column(
+                                FutureBuilder(
+                                  future: getSavedStations(),
+                                  builder: (c, snapshot) {
+                                    if (snapshot.hasData) {
+                                      if (snapshot.data.length == 0) {
+                                        return Center(
+                                          child: Container(
+                                            constraints:
+                                                BoxConstraints(maxWidth: 500),
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                                // border: Border.all(
+                                                //   color: Colors.grey[300],
+                                                //   width: 2,
+                                                // ),
+                                                color: getPrimary(context),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: isDark(context)
+                                                        ? Colors.transparent
+                                                        : Colors.grey
+                                                            .withOpacity(0.2),
+                                                    spreadRadius: 3,
+                                                    blurRadius: 7,
+                                                  ),
+                                                ],
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10))),
+                                            padding: EdgeInsets.all(8),
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 17),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
                                               children: [
-                                                if (_connection != null)
-                                                  for (StationWithDistance s
-                                                      in snapshot.data) ...[
-                                                    PredictionRow(
+                                                Text(
+                                                  "Hi there 👋 ",
+                                                  style: TextStyle(
+                                                      fontSize: 22,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
+                                                Text(
+                                                  "Welcome to Loop, favorited stops and stations will appear here.",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      } else {
+                                        return Column(
+                                          children: [
+                                            for (var id in snapshot.data) ...[
+                                              Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 0, bottom: 0),
+                                                  child: DividerLine()),
+                                              id.contains("%BUS%")
+                                                  ? PredictionRow(
                                                       _settingsData,
-                                                      stop: s.isBus
-                                                          ? s.stop
-                                                          : null,
-                                                      station: s.isBus
-                                                          ? null
-                                                          : s.station,
-                                                      stations: s.isBus
-                                                          ? null
-                                                          : getStations(s
-                                                              .station
+                                                      stop:
+                                                          getStationFromID(id),
+                                                      callback: () {
+                                                        setState(() {});
+                                                      },
+                                                    )
+                                                  : PredictionRow(
+                                                      _settingsData,
+                                                      station:
+                                                          getStationFromID(id),
+                                                      stations: getStations(
+                                                          getStationFromID(id)
                                                               .lines[0]),
-                                                      distance: s.distance,
-                                                      isConnected: _connection,
                                                       callback: () {
                                                         setState(() {});
                                                       },
                                                     ),
-                                                  ]
-                                              ],
-                                            );
-                                          } else {
-                                            return Container();
-                                          }
-                                        },
-                                      ),
-                                      Container(
-                                        height: 10,
-                                      )
-                                    ],
-                                    FutureBuilder(
-                                      future: getSavedStations(),
-                                      builder: (c, snapshot) {
-                                        if (snapshot.hasData) {
-                                          if (snapshot.data.length == 0) {
-                                            return Center(
-                                              child: Container(
-                                                constraints: BoxConstraints(
-                                                    maxWidth: 500),
-                                                width: double.infinity,
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      color: Colors.grey[300],
-                                                      width: 2,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10))),
-                                                padding: EdgeInsets.all(8),
-                                                margin: EdgeInsets.symmetric(
-                                                    horizontal: 17),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      "Hi there 👋 ",
-                                                      style: TextStyle(
-                                                          fontSize: 22,
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                    ),
-                                                    Text(
-                                                      "Welcome to Loop, favorited stops and stations will appear here.",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          } else {
-                                            return Column(
-                                              children: [
-                                                for (var id
-                                                    in snapshot.data) ...[
-                                                  Padding(
-                                                      padding: EdgeInsets.only(
-                                                          top: 0, bottom: 0),
-                                                      child: DividerLine()),
-                                                  id.contains("%BUS%")
-                                                      ? PredictionRow(
-                                                          _settingsData,
-                                                          stop:
-                                                              getStationFromID(
-                                                                  id),
-                                                          callback: () {
-                                                            setState(() {});
-                                                          },
-                                                        )
-                                                      : PredictionRow(
-                                                          _settingsData,
-                                                          station:
-                                                              getStationFromID(
-                                                                  id),
-                                                          stations: getStations(
-                                                              getStationFromID(
-                                                                      id)
-                                                                  .lines[0]),
-                                                          callback: () {
-                                                            setState(() {});
-                                                          },
-                                                        ),
-                                                  Container(
-                                                    height: 10,
-                                                  )
-                                                ],
-                                              ],
-                                            );
-                                          }
-                                        } else {
-                                          return Center(
-                                            child: CircularProgressIndicator(),
-                                          );
-                                        }
-                                      },
-                                    ),
-                                  ]),
+                                              Container(
+                                                height: 10,
+                                              )
+                                            ],
+                                          ],
+                                        );
+                                      }
+                                    } else {
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                  },
                                 ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                              ]),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                  );
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
-              },
-            ));
-      } else {
-        return Welcome(0);
-      }
-    } else {
-      return Container();
-    }
+                  ),
+                ),
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          },
+        ));
   }
 }
 

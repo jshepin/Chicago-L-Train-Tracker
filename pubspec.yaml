@@ -67,7 +67,6 @@ flutter:
     - assets/markers/
     - assets/arrows/
     - assets/translations/
-    - assets/welcome/
     - assets/busData/
   #   - images/a_dot_ham.jpeg
 

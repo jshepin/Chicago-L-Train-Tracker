@@ -470,6 +470,7 @@ class Station_viewState extends State<Station_view> {
                                 false,
                                 _settings.showMap,
                                 _settings,
+                                tabletShrink: true,
                                 station: selectedStation,
                               ),
                         if (_settings.showAlerts && (_alerts != null)) ...[

@@ -27,7 +27,6 @@ export 'package:CTA_Tracker/pages/bus/routeView.dart';
 export 'package:theme_mode_handler/theme_mode_handler.dart';
 export 'package:CTA_Tracker/data/bus/routesData.dart';
 export 'package:CTA_Tracker/common/btmBar.dart';
-export 'package:CTA_Tracker/pages/welcome.dart';
 export 'package:CTA_Tracker/common/train/predictionRow.dart';
 export 'package:CTA_Tracker/data/train/locationData.dart';
 export 'package:CTA_Tracker/main.dart';

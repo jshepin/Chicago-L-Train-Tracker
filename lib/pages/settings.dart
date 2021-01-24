@@ -312,30 +312,31 @@ class _SettingsState extends State<Settings> {
                                 : Colors.grey[600]),
                       ),
                     ),
-                    trailing: Tooltip(
-                      message: "Contact developer",
-                      child: RaisedButton(
-                          color: getSecondary(context),
-                          child: Text('settings.contact.button'.tr()),
-                          onPressed: () async {
-                            var url =
-                                "mailto:chicagoloopapp@gmail.com?subject='Loop' App inquiry - ${defaultTargetPlatform == TargetPlatform.iOS ? 'iOS' : 'Android'}";
-                            if (await canLaunch(url)) {
-                              await launch(url);
-                            } else {
-                              throw 'Could not launch $url';
-                            }
-                          }),
-                    ),
+                    trailing: defaultTargetPlatform != TargetPlatform.iOS
+                        ? Tooltip(
+                            message: "Contact developer",
+                            child: RaisedButton(
+                                color: getSecondary(context),
+                                child: Text('settings.contact.button'.tr()),
+                                onPressed: () async {
+                                  var url =
+                                      "mailto:chicagoloopapp@gmail.com?subject='Loop' App inquiry - ${defaultTargetPlatform == TargetPlatform.iOS ? 'iOS' : 'Android'}";
+                                  if (await canLaunch(url)) {
+                                    await launch(url);
+                                  } else {
+                                    throw 'Could not launch $url';
+                                  }
+                                }),
+                          )
+                        : Text(""),
                   ),
                 ),
                 DividerLine(),
                 Container(
-                  constraints: BoxConstraints(maxWidth: 550),
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                     child: Text(
-                      "Realtime predictions data is updated often and provided by the CTA but is not gaurenteed to be 100% accurate. Please take this into consideration on your next trip as we have no control over any inaccuracies in their system - Thank You",
+                      "Realtime predictions data is provided by the CTA but not gaurenteed to be 100% accurate. Please take this into consideration as we have no control their system - Thank You",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
