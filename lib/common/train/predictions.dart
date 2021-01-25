@@ -289,7 +289,10 @@ class _PredictionsState extends State<Predictions> {
                                     height: 5,
                                   ),
                                   Text(
-                                    'No Data',
+                                    'No Data ' +
+                                        dPredictions
+                                            .map((e) => e.direction)
+                                            .toString(),
                                     style: TextStyle(fontSize: 18),
                                   ),
                                 ],

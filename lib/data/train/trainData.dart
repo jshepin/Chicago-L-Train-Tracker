@@ -123,6 +123,8 @@ Future<List<Prediction>> getPredictions(String stationID) async {
             '${ConfigReader.getServerURL()}/arrivalpredictions?stationID&token=${ConfigReader.getAPIKEY()}';
         var response = await http.get(url).timeout(const Duration(seconds: 5),
             onTimeout: () {
+          print("timeout");
+          return null;
           // return new http.Response({}, 404);
         }).catchError((e) {
           return null;
@@ -168,6 +170,7 @@ Future<List<Prediction>> getPredictions(String stationID) async {
         lastPredictionsCall = DateTime.now();
       } else {}
     } catch (e) {}
+    print(cachedPredictions);
     return cachedPredictions[stationID] ?? [];
   } else {
     if (cachedPredictions[stationID] != null) {
