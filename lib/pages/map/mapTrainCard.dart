@@ -12,7 +12,7 @@ class MapTrainCard extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomLeft,
         child: Container(
-          constraints: BoxConstraints(maxWidth: 400),
+          constraints: BoxConstraints(maxWidth: 430),
           width: double.infinity,
           height: 59,
           decoration: BoxDecoration(

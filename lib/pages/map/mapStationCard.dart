@@ -14,7 +14,7 @@ class MapStationCard extends StatelessWidget {
         child: Container(
           width: double.infinity,
           height: 70,
-          constraints: BoxConstraints(maxWidth: 420),
+          constraints: BoxConstraints(maxWidth: 430),
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(

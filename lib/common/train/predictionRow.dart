@@ -64,81 +64,78 @@ class _PredictionRowState extends State<PredictionRow> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width - 90,
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 8),
-                              padding: EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                color: isDark(context)
-                                    ? Colors.white.withOpacity(0.1)
-                                    : Colors.grey[100],
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(right: 8),
+                            padding: EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: isDark(context)
+                                  ? Colors.white.withOpacity(0.1)
+                                  : Colors.grey[100],
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
                               ),
-                              child: Icon(widget.isBus
-                                  ? Icons.directions_bus
-                                  : Icons.train),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    PageTransition(
-                                        curve: Curves.fastLinearToSlowEaseIn,
-                                        type: PageTransitionType.fade,
-                                        duration: Duration(milliseconds: 50),
-                                        child: widget.isBus
-                                            ? Stop_view(widget.stop, true)
-                                            : Station_view(
-                                                widget.station,
-                                                widget.stations,
-                                                getLineFromColor("Red"),
-                                                widget.station.lines.length > 1
-                                                    ? Colors.black
-                                                    : colorFromLine(
-                                                        widget.station.lines[0],
-                                                        context),
-                                                true)));
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 2),
-                                child: Container(
-                                  child: Text(
-                                    "${widget.isBus ? widget.stop.name : widget.station.name} ",
-                                    style: TextStyle(
-                                      fontSize: widget.isBus ? 25 : 27,
-                                    ),
-                                    softWrap: false,
+                            child: Icon(widget.isBus
+                                ? Icons.directions_bus
+                                : Icons.train),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  PageTransition(
+                                      curve: Curves.fastLinearToSlowEaseIn,
+                                      type: PageTransitionType.fade,
+                                      duration: Duration(milliseconds: 50),
+                                      child: widget.isBus
+                                          ? Stop_view(widget.stop, true)
+                                          : Station_view(
+                                              widget.station,
+                                              widget.stations,
+                                              getLineFromColor("Red"),
+                                              widget.station.lines.length > 1
+                                                  ? Colors.black
+                                                  : colorFromLine(
+                                                      widget.station.lines[0],
+                                                      context),
+                                              true)));
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 2),
+                              child: Container(
+                                child: Text(
+                                  "${widget.isBus ? widget.stop.name : widget.station.name} ",
+                                  style: TextStyle(
+                                    fontSize: widget.isBus ? 25 : 27,
                                   ),
+                                  softWrap: false,
                                 ),
                               ),
                             ),
-                            if (widget.distance != null &&
-                                double.parse(widget.distance) > 0.03) ...[
-                              Text(
-                                "${widget.distance == null ? "" : '-'} ${widget.distance == null ? "" : widget.distance}",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                ),
+                          ),
+                          if (widget.distance != null &&
+                              double.parse(widget.distance) > 0.03) ...[
+                            Text(
+                              "${widget.distance == null ? "" : '-'} ${widget.distance == null ? "" : widget.distance}",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
                               ),
-                              Text(
-                                " ${widget.distance == null ? "" : 'home.distanceUnit'.tr()}",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
+                            ),
+                            Text(
+                              " ${widget.distance == null ? "" : 'home.distanceUnit'.tr()}",
+                              style: TextStyle(
+                                fontSize: 18,
                               ),
-                            ]
-                          ],
-                        ),
+                            ),
+                          ]
+                        ],
                       ),
                     ),
                     if (widget.settings.showAlerts)
