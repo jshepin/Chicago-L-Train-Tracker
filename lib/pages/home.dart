@@ -102,7 +102,7 @@ class _HomeState extends State<Home> {
           backgroundColor: getPrimary(context),
           bottomNavigationBar: BtmBar(),
           body: FutureBuilder(
-            future: getPredictions("40080"),
+            future: getPredictions("40080", homeView: true),
             builder: (c, snap) {
               if (snap.hasData) {
                 return SafeArea(
