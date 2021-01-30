@@ -95,8 +95,7 @@ class _SettingsState extends State<Settings> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text('btmBar.btmBar2'.tr(),
-                        style: TextStyle(
-                            fontSize: 49, fontWeight: FontWeight.w600)),
+                        style: Theme.of(context).textTheme.headline1),
                   ],
                 ),
                 Padding(
@@ -230,7 +229,7 @@ class _SettingsState extends State<Settings> {
                           children: [
                             SettingsLabel(
                               'settings.location.title'.tr(),
-                              'settings.location.subtitle'.tr(),
+                              'Location data never leaves your device',
                             ),
                             Container(
                               height: 5,

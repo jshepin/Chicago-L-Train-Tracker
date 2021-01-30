@@ -114,8 +114,7 @@ class _LinesState extends State<Lines> {
                       Padding(
                         padding: const EdgeInsets.only(left: 4),
                         child: Text(trainSelected ? 'Lines' : 'Routes',
-                            style: TextStyle(
-                                fontSize: 49, fontWeight: FontWeight.w600)),
+                            style: Theme.of(context).textTheme.headline1),
                       ),
                       Row(
                         children: [

@@ -22,10 +22,20 @@ class Main extends StatelessWidget {
           darkTheme: ThemeData(
             fontFamily: 'Roboto',
             brightness: Brightness.dark,
+            textTheme: TextTheme(
+                headline1: TextStyle(
+                    fontSize: 49,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white)),
           ),
           theme: ThemeData(
             fontFamily: 'Roboto',
             brightness: Brightness.light,
+            textTheme: TextTheme(
+                headline1: TextStyle(
+                    fontSize: 49,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black)),
           ),
         );
       },
@@ -108,10 +118,10 @@ class _HomeState extends State<Home> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('home.title'.tr(),
-                                    style: TextStyle(
-                                        fontSize: 49,
-                                        fontWeight: FontWeight.w600)),
+                                Text(
+                                  'home.title'.tr(),
+                                  style: Theme.of(context).textTheme.headline1,
+                                ),
                                 Row(
                                   children: <Widget>[
                                     Padding(
@@ -192,10 +202,6 @@ class _HomeState extends State<Home> {
                                                   BoxConstraints(maxWidth: 500),
                                               width: double.infinity,
                                               decoration: BoxDecoration(
-                                                  // border: Border.all(
-                                                  //   color: Colors.grey[300],
-                                                  //   width: 2,
-                                                  // ),
                                                   color: getPrimary(context),
                                                   boxShadow: [
                                                     BoxShadow(
@@ -306,8 +312,6 @@ Future<List<String>> getSavedStations() async {
 
 Future<bool> getWelcomeShown() async {
   return true;
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  return prefs.getBool("welcomeShown") ?? false;
 }
 
 Future<void> setWelcomeShown(bool s) async {

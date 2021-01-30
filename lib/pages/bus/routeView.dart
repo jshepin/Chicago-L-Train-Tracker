@@ -326,9 +326,6 @@ class _RouteViewState extends State<RouteView> {
                                                             CrossAxisAlignment
                                                                 .start,
                                                         children: [
-                                                          Container(
-                                                            height: 2,
-                                                          ),
                                                           for (StopPreview stop
                                                               in stops) ...[
                                                             GestureDetector(

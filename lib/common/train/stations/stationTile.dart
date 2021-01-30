@@ -1,5 +1,4 @@
 import 'package:CTA_Tracker/pages/train/stations.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:CTA_Tracker/exports.dart';
 
@@ -35,87 +34,32 @@ class StationTitle extends StatelessWidget {
                           ),
                         ),
                       ),
-                      station.isAirport != null && station.isAirport
-                          ? Padding(
-                              padding: const EdgeInsets.only(top: 0, left: 5),
-                              child: Container(
-                                padding: EdgeInsets.all(1),
-                                child: Tooltip(
-                                  message: tr('icons.airport'),
-                                  child: Icon(
-                                    Icons.local_airport,
-                                    size: 20,
-                                    color: Colors.grey,
+                      AccessiblilityRow(
+                        station,
+                        isTrainRow: true,
+                      ),
+                      if (alerts != null &&
+                          snapshot.data.showAlerts &&
+                          alerts
+                              .map((e) => (e.impactedServices
+                                  .map((f) => f.id)
+                                  .contains(station.id)))
+                              .contains(true)) ...[
+                        Tooltip(
+                          message: "Station Issues",
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: isDark(context)
+                                ? Icon(
+                                    Icons.error_outline,
+                                    color: Colors.red,
+                                  )
+                                : Icon(
+                                    Icons.error,
+                                    color: Colors.red,
                                   ),
-                                ),
-                              ),
-                            )
-                          : Container(),
-                      station.ada && snapshot.data.showExtraInformation
-                          ? Padding(
-                              padding: const EdgeInsets.only(top: 0, left: 5),
-                              child: FutureBuilder(
-                                future: hasElevatorIssue(station.id),
-                                builder: (c, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return Container(
-                                      padding: EdgeInsets.all(1),
-                                      child: Tooltip(
-                                        message: snapshot.data
-                                            ? "Accessibility Related Issue"
-                                            : tr('icons.ADA'),
-                                        child: Icon(Icons.accessible_forward,
-                                            size: 20,
-                                            color: snapshot.data
-                                                ? Colors.red
-                                                : Colors.grey),
-                                      ),
-                                    );
-                                  } else {
-                                    return Container();
-                                  }
-                                },
-                              ),
-                            )
-                          : Container(),
-                      station.parking && snapshot.data.showExtraInformation
-                          ? Padding(
-                              padding: const EdgeInsets.only(top: 0, left: 2),
-                              child: Container(
-                                padding: EdgeInsets.all(1),
-                                child: Tooltip(
-                                  message: tr('icons.parking'),
-                                  child: Icon(
-                                    Icons.local_parking,
-                                    size: 20,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Container(),
-                      if (alerts != null && snapshot.data.showAlerts) ...[
-                        alerts
-                                .map((e) => (e.impactedServices
-                                    .map((f) => f.id)
-                                    .contains(station.id)))
-                                .contains(true)
-                            ? Tooltip(
-                                message: "Station Issues",
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: isDark(context)
-                                      ? Icon(
-                                          Icons.error_outline,
-                                          color: Colors.red,
-                                        )
-                                      : Icon(
-                                          Icons.error,
-                                          color: Colors.red,
-                                        ),
-                                ),
-                              )
-                            : Container()
+                          ),
+                        )
                       ]
                     ],
                   ),
