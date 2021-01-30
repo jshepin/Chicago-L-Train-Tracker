@@ -92,7 +92,6 @@ Future<List<StationWithDistance>> findClosestStation() async {
     }
 
     if (smallest <= 10) {
-      // print("over 10");
       s.add(new StationWithDistance(smallest.toStringAsFixed(2) ?? "",
           station: stations[smallestIndex]));
     }

@@ -25,7 +25,6 @@ Future<List<RouteData>> getStopsFromID(String id) async {
   if (cachedStops[id] != null) {
     return cachedStops[id];
   }
-  print("getting stops from server");
   bool isConnected = await checkConnection();
 
   if (isConnected) {
@@ -42,8 +41,6 @@ Future<List<RouteData>> getStopsFromID(String id) async {
         Map<String, dynamic> data = jsonDecode(response.body);
         List<StopPreview> previews = [];
         List<RouteData> rData = [];
-
-        print("stops length is ${data['stops'].length}");
 
         for (var y = 0; y < data['stops'].length; y++) {
           previews = [];

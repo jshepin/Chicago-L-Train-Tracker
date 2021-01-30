@@ -252,13 +252,11 @@ class _ServiceInformationState extends State<ServiceInformation> {
 }
 
 List<List<String>> getElements(String s) {
-  // print(s);
   List<List<String>> cols = [];
   List<String> elements = [];
   var a = "";
   for (var x = 0; x < s.length; x++) {
     if (s[x] == "n") {
-      print("reset ${s[x]}");
       cols.add(elements);
       elements = [];
     } else {
@@ -283,6 +281,5 @@ List<List<String>> getElements(String s) {
       }
     }
   }
-  print(cols);
   return cols;
 }

@@ -86,7 +86,6 @@ class GetSearchResult extends StatelessWidget {
         onTap: () {
           if (results[i].itemType == 1) {
             //if it's a train station
-            print("opening train station");
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -94,14 +93,12 @@ class GetSearchResult extends StatelessWidget {
                       stations, getLines()[0], Colors.red, false)),
             );
           } else if (results[i].itemType == 2) {
-            print("opening bus route view");
             Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => RouteView(results[i].passData)),
             );
           } else {
-            print("opening stop  view");
             Navigator.push(
               context,
               MaterialPageRoute(

@@ -190,9 +190,6 @@ class _PredictionRowState extends State<PredictionRow> {
                                             : widget.station.id),
                                         builder: (context, snapshot) {
                                           if (snapshot.hasData) {
-                                            print(
-                                                "snapshot is ${snapshot.data}");
-
                                             selectedStyle = snapshot.data[0];
                                             allSelected =
                                                 (snapshot.data[1] == 0);
@@ -276,7 +273,6 @@ Line getLineFromColor(String color) {
   List<Line> lines = getLines();
   for (var line in lines) {
     if (line.name == color) {
-      print("returning $color");
       return line;
     }
   }

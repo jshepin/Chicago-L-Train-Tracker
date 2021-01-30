@@ -30,7 +30,6 @@ class _EditDialogState extends State<EditDialog> {
   @override
   void initState() {
     // TODO: implement initStat
-    print("ASDFDASFs is ${widget.snapshot.data[1]}");
     var index = widget.snapshot.data[1] - 1;
 
     var line =
@@ -213,10 +212,7 @@ class _EditDialogState extends State<EditDialog> {
                                 widget.station.lines.indexOf(color) + 1,
                                 0);
                             if (this.widget.widget.callback != null) {
-                              print("callign back");
                               this.widget.widget.callback();
-                            } else {
-                              print("not callign back");
                             }
 
                             setState(() {
@@ -254,8 +250,6 @@ class _EditDialogState extends State<EditDialog> {
             if (savedStations.contains(widget.widget.isBus
                 ? widget.widget.stop.id + "%BUS%"
                 : widget.widget.station.id.toString())) {
-              // print("unfavoriting");
-
               savedStations.remove(widget.widget.isBus
                   ? widget.widget.stop.id + '%BUS%'
                   : widget.widget.station.id.toString());

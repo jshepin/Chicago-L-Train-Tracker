@@ -106,13 +106,10 @@ class _TrainViewState extends State<TrainView> {
   void update(Timer timer) {
     if (!endOfLine) {
       setState(() {});
-    } else {
-      print("NOT FETCHING DATA");
     }
   }
 
   void getData() {
-    // print("GETTING DATA");
     getRunData(widget.prediction.rn).then((s) {
       if (s != null && s.length > 0) {
         var x = s[0];
@@ -154,13 +151,10 @@ class _TrainViewState extends State<TrainView> {
 
       lastFetch = DateTime.now();
     } else {}
-    // print(predictions.map((e) => e.staNm));
-
     if (predictions != null &&
         predictions.length > 0 &&
         predictions[0].staId != updatedPrediction.staId &&
         !predictions.map((e) => e.staId).contains(widget.prediction.staId)) {
-      print("SETTING NEW PREDICTION");
       var s = predictions[0];
       setState(() {
         updatedPrediction = new Prediction(
@@ -189,22 +183,15 @@ class _TrainViewState extends State<TrainView> {
 
     color = textColorFromLine(convertShortColor(widget.prediction.rt), context);
     if (!changed) {
-      print("eee");
-
       if (predictions != null && predictions.length > 0) {
-        print("qqq");
         if (!predictions.map((e) => e.staId).contains(mainInfo.staId)) {
-          print("saf");
-
           var p = predictions[0];
           mainInfo = new MainInfo(p.staNm, p.staId, p.arrT, p.isApp, p.isDly);
           setState(() {
             changed = false;
           });
         } else {
-          print("ret");
           var found = false;
-
           for (var p in predictions) {
             if (!found && p.staId == widget.prediction.staId) {
               mainInfo =
@@ -215,8 +202,6 @@ class _TrainViewState extends State<TrainView> {
           }
         }
       } else {
-        print("yyy");
-
         mainInfo = new MainInfo(
             updatedPrediction.staNm,
             updatedPrediction.staId,
@@ -226,11 +211,8 @@ class _TrainViewState extends State<TrainView> {
         // mainTime = updatedPrediction.arrT;
       }
     } else {
-      print("AA");
       if (predictions != null && predictions.length > 0) {
         if (predictions.map((e) => e.staId).contains(mainInfo.staId)) {
-          print("ccc");
-
           for (var p in predictions) {
             if (p.staId == mainInfo.staId) {
               mainInfo =
@@ -238,8 +220,6 @@ class _TrainViewState extends State<TrainView> {
             }
           }
         } else {
-          print("bbb");
-
           var p = predictions[0];
           mainInfo = new MainInfo(p.staNm, p.staId, p.arrT, p.isApp, p.isDly);
           setState(() {
@@ -254,7 +234,6 @@ class _TrainViewState extends State<TrainView> {
           (getTimeFromString(predictions.last.arrT).difference(DateTime.now()));
 
       var lastStopDiffSec = (lastStopDiff.inSeconds);
-      print(lastStopDiffSec);
       if (lastStopDiffSec < 25) {
         endOfLine = true;
       } else {

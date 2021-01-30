@@ -84,7 +84,6 @@ Future<LineLocations> getLocations(String name) async {
               locations.add(p);
             }
           }
-          // print("USING LOCATIONS $locations");
           cachedLocations[lineName] = new LineLocations(lineName, locations);
         }
         lastLocationCall = DateTime.now();
@@ -92,7 +91,6 @@ Future<LineLocations> getLocations(String name) async {
     } catch (e) {}
     return cachedLocations[name.toLowerCase()] ?? new LineLocations("", []);
   } else {
-    // print("**RETURNING EMPTY***");
     return new LineLocations("", []);
   }
 }
@@ -123,7 +121,6 @@ Future<List<Prediction>> getPredictions(String stationID) async {
             '${ConfigReader.getServerURL()}/arrivalpredictions?stationID&token=${ConfigReader.getAPIKEY()}';
         var response = await http.get(url).timeout(const Duration(seconds: 5),
             onTimeout: () {
-          print("timeout");
           return null;
           // return new http.Response({}, 404);
         }).catchError((e) {
@@ -170,7 +167,6 @@ Future<List<Prediction>> getPredictions(String stationID) async {
         lastPredictionsCall = DateTime.now();
       } else {}
     } catch (e) {}
-    print(cachedPredictions);
     return cachedPredictions[stationID] ?? [];
   } else {
     if (cachedPredictions[stationID] != null) {

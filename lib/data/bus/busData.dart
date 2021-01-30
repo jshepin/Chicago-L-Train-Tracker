@@ -52,7 +52,6 @@ Future<List<BusPrediction>> getBusPredictions(String stationID) async {
             String idString = busIds.join(',');
             var url =
                 '${ConfigReader.getServerURL()}/busPredictions?stpid=$idString&token=${ConfigReader.getAPIKEY()}';
-            print("$url");
             var response = await http
                 .get(url)
                 .timeout(const Duration(seconds: 5), onTimeout: () {})
@@ -62,10 +61,8 @@ Future<List<BusPrediction>> getBusPredictions(String stationID) async {
 
             Map<String, dynamic> data = jsonDecode(response.body);
             var errors = data["bustime-response"]["error"] ?? [];
-            print("errors $errors");
             for (var e in errors) {
               String sid = e['stpid'].toString().replaceAll("\n", "");
-              print("ERROR FOR ID $sid");
               if (sid.length > 0) {
                 cachedBusPredictions.update(sid, (value) {
                   return [];
@@ -126,11 +123,9 @@ Future<List<BusPrediction>> getBusPredictions(String stationID) async {
 }
 
 List<List<String>> splitArray(arr, len) {
-  print("got arrayt $arr and arr length ${arr.length}");
   List<List<String>> chunks = [];
   if (arr.length <= len) {
     chunks.add(arr);
-    print("size less than or equal to $len");
     return chunks;
   }
   int i = 0;
@@ -138,6 +133,5 @@ List<List<String>> splitArray(arr, len) {
   while (i < n) {
     chunks.add(arr.sublist(i, i += len));
   }
-  print("returning $chunks");
   return chunks;
 }

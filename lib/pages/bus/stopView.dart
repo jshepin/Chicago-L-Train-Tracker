@@ -171,8 +171,6 @@ class Stop_viewState extends State<Stop_view> {
                                                             busCount++;
                                                           }
                                                         }
-                                                        print(
-                                                            "length is ${busCount}");
                                                         if (busCount < 9) {
                                                           setState(() {
                                                             favorited = true;

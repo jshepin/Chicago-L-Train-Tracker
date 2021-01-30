@@ -172,7 +172,7 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
               var rn = selectedTrain.rn;
               if (rn == p.rn) {
                 if (selectedTrain != p) {
-                  // print("resetting selected train");
+                  // "resetting selected train");
                   setState(() {
                     selectedTrain = p;
                   });
@@ -188,7 +188,6 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
                   icon: BitmapDescriptor.fromAsset(
                       "assets/arrows/${layerStrings[c]}${defaultTargetPlatform == TargetPlatform.iOS ? 'IOS' : ''}.png"),
                   onTap: () {
-                    // print("setting oclor to ${x}");
                     setState(() {
                       selectedStation = null;
                       selectedTrain = p;

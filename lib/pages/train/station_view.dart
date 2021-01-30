@@ -343,7 +343,6 @@ class Station_viewState extends State<Station_view> {
                                           [];
                                       if (savedStations.contains(
                                           selectedStation.id.toString())) {
-                                        // print("unfavoriting");
                                         setState(() {
                                           favorited = false;
                                         });
@@ -353,9 +352,6 @@ class Station_viewState extends State<Station_view> {
                                         setState(() {
                                           favorited = true;
                                         });
-                                        // print("favoriting " +
-                                        // selectedStation.id.toString());
-
                                         savedStations
                                             .add(selectedStation.id.toString());
                                       }
