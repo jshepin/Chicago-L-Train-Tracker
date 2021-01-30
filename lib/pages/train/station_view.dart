@@ -110,6 +110,7 @@ SettingsData _settings = new SettingsData(false, false, false, false, false);
 
 class Station_viewState extends State<Station_view> {
   Timer _timer;
+  bool loadMap = false;
 
   void getTopBar() {
     FlutterStatusbarcolor.setStatusBarWhiteForeground(isDark(context));
@@ -122,6 +123,7 @@ class Station_viewState extends State<Station_view> {
       selectedStation = station;
     });
     _timer = Timer.periodic(Duration(seconds: 20), (Timer t) => update(t));
+    Future.delayed(const Duration(milliseconds: 400), () => initLoadMap());
     super.initState();
   }
 
@@ -129,6 +131,12 @@ class Station_viewState extends State<Station_view> {
   void dispose() {
     _timer?.cancel();
     super.dispose();
+  }
+
+  void initLoadMap() {
+    setState(() {
+      loadMap = true;
+    });
   }
 
   var count = 0;
@@ -482,60 +490,69 @@ class Station_viewState extends State<Station_view> {
                             AlertCard(alert)
                           ],
                         ],
-                        _settings.showMap
-                            ? Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(12),
-                                    topRight: Radius.circular(12),
-                                    bottomRight: Radius.circular(12),
-                                    bottomLeft: Radius.circular(12),
+                        if (_settings.showMap)
+                          loadMap
+                              ? Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(12),
+                                      topRight: Radius.circular(12),
+                                      bottomRight: Radius.circular(12),
+                                      bottomLeft: Radius.circular(12),
+                                    ),
+                                    child: FutureBuilder(
+                                        future: getMarkers(selectedStation),
+                                        builder: (c, markerSnapshot) {
+                                          if (markerSnapshot.hasData) {
+                                            return Container(
+                                                height: 450,
+                                                child: GoogleMap(
+                                                  mapType: MapType.normal,
+                                                  gestureRecognizers: Set()
+                                                    ..add(Factory<
+                                                            PanGestureRecognizer>(
+                                                        () =>
+                                                            PanGestureRecognizer()))
+                                                    ..add(Factory<
+                                                            VerticalDragGestureRecognizer>(
+                                                        () =>
+                                                            VerticalDragGestureRecognizer())),
+                                                  polylines: getPolyLine(
+                                                      selectedStation, context),
+                                                  onMapCreated:
+                                                      (GoogleMapController
+                                                          controller) {
+                                                    controller = controller;
+                                                    controller
+                                                        .setMapStyle(_mapStyle);
+                                                  },
+                                                  initialCameraPosition:
+                                                      CameraPosition(
+                                                          target: LatLng(
+                                                              selectedStation
+                                                                  .lat,
+                                                              selectedStation
+                                                                  .long),
+                                                          zoom: 14
+                                                          // zoom: 16,
+                                                          ),
+                                                  markers: markerSnapshot.data,
+                                                ));
+                                          } else {
+                                            return Container();
+                                          }
+                                        }),
                                   ),
-                                  child: FutureBuilder(
-                                      future: getMarkers(selectedStation),
-                                      builder: (c, markerSnapshot) {
-                                        if (markerSnapshot.hasData) {
-                                          return Container(
-                                              height: 450,
-                                              child: GoogleMap(
-                                                mapType: MapType.normal,
-                                                gestureRecognizers: Set()
-                                                  ..add(Factory<
-                                                          PanGestureRecognizer>(
-                                                      () =>
-                                                          PanGestureRecognizer()))
-                                                  ..add(Factory<
-                                                          VerticalDragGestureRecognizer>(
-                                                      () =>
-                                                          VerticalDragGestureRecognizer())),
-                                                polylines: getPolyLine(
-                                                    selectedStation, context),
-                                                onMapCreated:
-                                                    (GoogleMapController
-                                                        controller) {
-                                                  controller = controller;
-                                                  controller
-                                                      .setMapStyle(_mapStyle);
-                                                },
-                                                initialCameraPosition:
-                                                    CameraPosition(
-                                                        target: LatLng(
-                                                            selectedStation.lat,
-                                                            selectedStation
-                                                                .long),
-                                                        zoom: 14
-                                                        // zoom: 16,
-                                                        ),
-                                                markers: markerSnapshot.data,
-                                              ));
-                                        } else {
-                                          return Container();
-                                        }
-                                      }),
-                                ),
-                              )
-                            : Container(),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.only(top: 20),
+                                  child: Center(
+                                      child: CircularProgressIndicator(
+                                    valueColor:
+                                        AlwaysStoppedAnimation<Color>(color),
+                                  )),
+                                )
                       ],
                     ),
                   );

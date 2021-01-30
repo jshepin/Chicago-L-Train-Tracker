@@ -108,12 +108,12 @@ Future<List<Prediction>> getPredictions(String stationID,
   bool isConnected = await checkConnection();
   List<Prediction> predictions = [];
   bool deny = false;
-  if (homeView != null && homeView && s.length == 0) {
-    deny = true;
-    print("settting deny to true");
-  } else {
-    print("nope");
-  }
+  // if (homeView != null && homeView && s.length == 0) {
+  //   deny = true;
+  //   print("settting deny to true");
+  // } else {
+  //   print("nope");
+  // }
   if (isConnected && !deny) {
     try {
       var diff = DateTime.now().difference(lastPredictionsCall).inSeconds;

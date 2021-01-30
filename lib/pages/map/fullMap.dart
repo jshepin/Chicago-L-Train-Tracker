@@ -98,10 +98,12 @@ class FullMap extends StatefulWidget {
 class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Timer _timer;
+  bool loadMap = false;
 
   @override
   void initState() {
     _timer = Timer.periodic(Duration(seconds: 10), (Timer t) => refresh());
+    Future.delayed(const Duration(milliseconds: 200), () => initLoadMap());
 
     if (all != null && all) {
       mapLayers = [true, true, true, true, true, true, true, true];
@@ -129,6 +131,12 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
     _timer?.cancel();
     _controller?.dispose();
     super.dispose();
+  }
+
+  void initLoadMap() {
+    setState(() {
+      loadMap = true;
+    });
   }
 
   void getTopBar() {
@@ -322,27 +330,29 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
                 future: getFullMarkers(mapLayers),
                 builder: (context, markers) {
                   if (markers.hasData) {
-                    return GoogleMap(
-                      indoorViewEnabled: false,
-                      rotateGesturesEnabled: false,
-                      gestureRecognizers: Set()
-                        ..add(Factory<PanGestureRecognizer>(
-                            () => PanGestureRecognizer()))
-                        ..add(Factory<VerticalDragGestureRecognizer>(
-                            () => VerticalDragGestureRecognizer())),
-                      polylines: getFullPolyline(mapLayers, context),
-                      onMapCreated: (GoogleMapController controller) {
-                        fullController = controller;
-                        fullController.setMapStyle(_mapStyle);
-                      },
-                      initialCameraPosition: CameraPosition(
-                        target: all
-                            ? LatLng(41.920288, -87.692974)
-                            : getCenter(line.name).center,
-                        zoom: all ? 11 : getCenter(line.name).zoom,
-                      ),
-                      markers: markers.data,
-                    );
+                    return loadMap
+                        ? GoogleMap(
+                            indoorViewEnabled: false,
+                            rotateGesturesEnabled: false,
+                            gestureRecognizers: Set()
+                              ..add(Factory<PanGestureRecognizer>(
+                                  () => PanGestureRecognizer()))
+                              ..add(Factory<VerticalDragGestureRecognizer>(
+                                  () => VerticalDragGestureRecognizer())),
+                            polylines: getFullPolyline(mapLayers, context),
+                            onMapCreated: (GoogleMapController controller) {
+                              fullController = controller;
+                              fullController.setMapStyle(_mapStyle);
+                            },
+                            initialCameraPosition: CameraPosition(
+                              target: all
+                                  ? LatLng(41.920288, -87.692974)
+                                  : getCenter(line.name).center,
+                              zoom: all ? 11 : getCenter(line.name).zoom,
+                            ),
+                            markers: markers.data,
+                          )
+                        : Center(child: CircularProgressIndicator());
                   } else {
                     return Container();
                   }

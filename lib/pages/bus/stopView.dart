@@ -46,7 +46,6 @@ class Stop_viewState extends State<Stop_view> {
   }
 
   Station station;
-  // Color color;
   bool showDesc = false;
   List<Station> stations;
   @override
