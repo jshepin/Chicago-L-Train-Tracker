@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:CTA_Tracker/pages/home.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -99,12 +100,21 @@ var gotData = false;
 Map<String, List<Prediction>> cachedPredictions = {};
 DateTime lastPredictionsCall = DateTime.now();
 
-Future<List<Prediction>> getPredictions(String stationID) async {
+Future<List<Prediction>> getPredictions(String stationID,
+    {bool homeView}) async {
+  List<String> s = await getSavedStations();
+
   //get predictions based on mapid
   bool isConnected = await checkConnection();
   List<Prediction> predictions = [];
-
-  if (isConnected) {
+  bool deny = false;
+  if (homeView != null && homeView && s.length == 0) {
+    deny = true;
+    print("settting deny to true");
+  } else {
+    print("nope");
+  }
+  if (isConnected && !deny) {
     try {
       var diff = DateTime.now().difference(lastPredictionsCall).inSeconds;
       if (diff < 30) {
@@ -119,6 +129,7 @@ Future<List<Prediction>> getPredictions(String stationID) async {
         lastPredictionsCall = DateTime.now();
         var url =
             '${ConfigReader.getServerURL()}/arrivalpredictions?stationID&token=${ConfigReader.getAPIKEY()}';
+        print("FETCHING TRAIN DATA");
         var response = await http.get(url).timeout(const Duration(seconds: 5),
             onTimeout: () {
           return null;

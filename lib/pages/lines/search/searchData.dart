@@ -68,16 +68,4 @@ bool queryContains(String option, String query) {
   option = option.toLowerCase();
   query = query.toLowerCase();
   return option.contains(query);
-  List<String> optionWords = option.split(" ");
-  List<String> queryWords = query.split(" ");
-  int matches = 0;
-  for (var word in queryWords) {
-    if (optionWords.contains(word)) {
-      matches++;
-    }
-  }
-  if (matches > 0) {
-    return true;
-  }
-  return false;
 }

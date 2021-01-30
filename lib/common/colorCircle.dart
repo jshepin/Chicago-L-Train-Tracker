@@ -13,39 +13,31 @@ class ColorCircle extends StatelessWidget {
   final String color;
   final Station selectedStation;
 
+  bool isPurpleExp() {
+    return color == "Purple" &&
+        getPurpleExpressIds().contains(selectedStation.id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: color == "Purple" &&
-              getPurpleExpressIds().contains(selectedStation.id)
-          ? "Purple Express"
-          : "$color ${'general.line'.tr()}",
+      message:
+          isPurpleExp() ? "Purple Express" : "$color ${'general.line'.tr()}",
       child: Padding(
-        padding: (color == "Purple" &&
-                getPurpleExpressIds().contains(selectedStation.id))
-            ? EdgeInsets.all(3)
-            : EdgeInsets.only(left: 0),
+        padding: isPurpleExp() ? EdgeInsets.all(3) : EdgeInsets.only(left: 0),
         child: DottedBorder(
           borderType: BorderType.RRect,
           dashPattern: [7, 4.5],
           radius: Radius.circular(100),
-          color: (color == "Purple" &&
-                  getPurpleExpressIds().contains(selectedStation.id)
+          color: isPurpleExp()
               ? colorFromLine(color, context)
-              : Colors.transparent),
+              : Colors.transparent,
           strokeWidth: 3,
           child: Container(
-            height: (color == "Purple" &&
-                    getPurpleExpressIds().contains(selectedStation.id))
-                ? 22
-                : 27,
-            width: (color == "Purple" &&
-                    getPurpleExpressIds().contains(selectedStation.id))
-                ? 22
-                : 27,
+            height: isPurpleExp() ? 22 : 27,
+            width: isPurpleExp() ? 22 : 27,
             decoration: BoxDecoration(
-                color: (color == "Purple" &&
-                        getPurpleExpressIds().contains(selectedStation.id))
+                color: isPurpleExp()
                     ? Colors.transparent
                     : colorFromLine(color, context),
                 borderRadius: BorderRadius.all(Radius.circular(100))),
@@ -53,8 +45,7 @@ class ColorCircle extends StatelessWidget {
                 child: Text(
               color.substring(0, 1),
               style: TextStyle(
-                  color: (color == "Purple" &&
-                          getPurpleExpressIds().contains(selectedStation.id))
+                  color: isPurpleExp()
                       ? (isDark(context)
                           ? Colors.white
                           : colorFromLine(color, context))
