@@ -42,10 +42,8 @@ class _RouteSwiperState extends State<RouteSwiper> {
                   Padding(
                     padding: const EdgeInsets.only(top: 2, left: 3),
                     child: Container(
-                      child: Text(
-                          widget.snapshot.data[selectedDirection].direction,
-                          style: TextStyle(
-                              fontSize: 40, fontWeight: FontWeight.w600)),
+                      child: Text(widget.snapshot.data[selectedDirection].direction,
+                          style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600)),
                     ),
                   ),
                   Padding(
@@ -60,16 +58,11 @@ class _RouteSwiperState extends State<RouteSwiper> {
                               width: getWidth(x),
                               decoration: BoxDecoration(
                                   color: x == 0
-                                      ? Colors.grey[700].withOpacity(
-                                          selectedDirection == x ? 1.0 : 0.8)
-                                      : (isDark(context)
-                                              ? Colors.white
-                                              : Colors.grey[400])
-                                          .withOpacity(selectedDirection == x
-                                              ? 0.8
-                                              : 0.7),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))))
+                                      ? Colors.grey[700]
+                                          .withOpacity(selectedDirection == x ? 1.0 : 0.8)
+                                      : (isDark(context) ? Colors.white : Colors.grey[400])
+                                          .withOpacity(selectedDirection == x ? 0.8 : 0.7),
+                                  borderRadius: BorderRadius.all(Radius.circular(20))))
                         ]
                       ],
                     ),
@@ -88,8 +81,7 @@ class _RouteSwiperState extends State<RouteSwiper> {
                           padding: EdgeInsets.only(bottom: 3.5, top: 0),
                           decoration: BoxDecoration(
                               color: Colors.grey[800],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30))),
+                              borderRadius: BorderRadius.all(Radius.circular(30))),
                           child: Column(children: [
                             for (var stop in stops) ...[
                               FutureBuilder(
@@ -104,8 +96,7 @@ class _RouteSwiperState extends State<RouteSwiper> {
                                       return Container();
                                     }
                                   }),
-                              if (stops.indexOf(stop) != stops.length - 1)
-                                Container(height: 20)
+                              if (stops.indexOf(stop) != stops.length - 1) Container(height: 20)
                             ],
                           ]),
                         ),
@@ -120,17 +111,14 @@ class _RouteSwiperState extends State<RouteSwiper> {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => Stop_view(
-                                                getStopFromID(
-                                                    stop.id.toString()),
-                                                false),
+                                            builder: (context) =>
+                                                Stop_view(getStopFromID(stop.id.toString()), false),
                                           ));
                                     },
                                     child: Column(
                                       children: [
                                         Container(
-                                          padding:
-                                              EdgeInsets.symmetric(vertical: 5),
+                                          padding: EdgeInsets.symmetric(vertical: 5),
                                           color: Colors.transparent,
                                           child: Text(
                                             stop.name,

@@ -69,22 +69,17 @@ class Stop_viewState extends State<Stop_view> {
                               future: getSavedStations(),
                               builder: (c, snap) {
                                 if (snap.hasData) {
-                                  favorited = snap.data
-                                      .contains(widget.stop.id + "%BUS%");
+                                  favorited = snap.data.contains(widget.stop.id + "%BUS%");
                                   return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 0, vertical: 5),
+                                    padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
                                               children: [
                                                 IconButton(
                                                   tooltip: "Back",
@@ -99,9 +94,7 @@ class Stop_viewState extends State<Stop_view> {
                                                       Navigator.pushReplacement(
                                                           context,
                                                           MaterialPageRoute(
-                                                            builder:
-                                                                (context) =>
-                                                                    Home(),
+                                                            builder: (context) => Home(),
                                                           ));
                                                     } else {
                                                       _timer.cancel();
@@ -110,61 +103,46 @@ class Stop_viewState extends State<Stop_view> {
                                                   },
                                                 ),
                                                 Container(
-                                                  margin:
-                                                      EdgeInsets.only(top: 3),
-                                                  child:
-                                                      Text('station.title'.tr(),
-                                                          style: TextStyle(
-                                                            fontSize: 35,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          )),
+                                                  margin: EdgeInsets.only(top: 3),
+                                                  child: Text('station.title'.tr(),
+                                                      style: TextStyle(
+                                                        fontSize: 35,
+                                                        fontWeight: FontWeight.bold,
+                                                      )),
                                                 ),
                                               ],
                                             ),
                                             Row(
                                               children: [
                                                 Padding(
-                                                  padding:
-                                                      EdgeInsets.only(right: 5),
+                                                  padding: EdgeInsets.only(right: 5),
                                                   child: IconButton(
                                                     tooltip: 'Favorite',
                                                     iconSize: 28,
                                                     icon: Icon(
                                                       favorited
                                                           ? Icons.favorite
-                                                          : Icons
-                                                              .favorite_border,
+                                                          : Icons.favorite_border,
                                                     ),
                                                     onPressed: () async {
                                                       SharedPreferences prefs =
-                                                          await SharedPreferences
-                                                              .getInstance();
+                                                          await SharedPreferences.getInstance();
 
-                                                      List<String>
-                                                          savedStations =
-                                                          prefs.getStringList(
-                                                                  "savedStations") ??
+                                                      List<String> savedStations =
+                                                          prefs.getStringList("savedStations") ??
                                                               [];
-                                                      if (savedStations
-                                                          .contains(widget
-                                                                  .stop.id
-                                                                  .toString() +
-                                                              "%BUS%")) {
+                                                      if (savedStations.contains(
+                                                          widget.stop.id.toString() + "%BUS%")) {
                                                         print("unfavoriting");
                                                         setState(() {
                                                           favorited = false;
                                                         });
                                                         savedStations.remove(
-                                                            widget.stop.id
-                                                                    .toString() +
-                                                                "%BUS%");
+                                                            widget.stop.id.toString() + "%BUS%");
                                                       } else {
                                                         var busCount = 0;
-                                                        for (var s
-                                                            in savedStations) {
-                                                          if (s.contains(
-                                                              "%BUS%")) {
+                                                        for (var s in savedStations) {
+                                                          if (s.contains("%BUS%")) {
                                                             busCount++;
                                                           }
                                                         }
@@ -173,36 +151,28 @@ class Stop_viewState extends State<Stop_view> {
                                                             favorited = true;
                                                           });
                                                           print("favoriting " +
-                                                              widget.stop.id
-                                                                  .toString());
+                                                              widget.stop.id.toString());
 
-                                                          savedStations.add(widget
-                                                                  .stop.id
-                                                                  .toString() +
-                                                              "%BUS%");
+                                                          savedStations.add(
+                                                              widget.stop.id.toString() + "%BUS%");
                                                         } else {
                                                           print('exceeded');
-                                                          _showMyDialog(
-                                                              context);
+                                                          _showMyDialog(context);
                                                         }
                                                       }
                                                       prefs.setStringList(
-                                                          'savedStations',
-                                                          savedStations);
+                                                          'savedStations', savedStations);
                                                     },
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 5),
+                                                  padding: const EdgeInsets.only(right: 5),
                                                   child: IconButton(
                                                       tooltip: "Refresh",
                                                       iconSize: 34,
                                                       icon: Icon(Icons.refresh),
                                                       onPressed: () async {
-                                                        bool s =
-                                                            await checkConnection();
+                                                        bool s = await checkConnection();
                                                         setState(() {
                                                           connected = s;
                                                         });
@@ -213,8 +183,7 @@ class Stop_viewState extends State<Stop_view> {
                                           ],
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 10, bottom: 3),
+                                          padding: const EdgeInsets.only(left: 10, bottom: 3),
                                           child: Text(
                                             widget.stop.name,
                                             overflow: TextOverflow.clip,
@@ -222,31 +191,23 @@ class Stop_viewState extends State<Stop_view> {
                                           ),
                                         ),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 10.0),
+                                              padding: const EdgeInsets.only(left: 10.0),
                                               child: Text(
                                                 "Stop #${widget.stop.id}",
                                                 style: TextStyle(
-                                                    fontSize: 21,
-                                                    fontWeight:
-                                                        FontWeight.w600),
+                                                    fontSize: 21, fontWeight: FontWeight.w600),
                                               ),
                                             ),
                                             Row(
                                               children: [
-                                                if (_settings
-                                                        .showExtraInformation &&
+                                                if (_settings.showExtraInformation &&
                                                     widget.stop.isAda)
-                                                  Icon(
-                                                      Icons.accessible_forward),
+                                                  Icon(Icons.accessible_forward),
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 8, left: 7),
+                                                  padding: const EdgeInsets.only(right: 8, left: 7),
                                                   child: ConnectionIndicator(),
                                                 ),
                                               ],
@@ -261,75 +222,58 @@ class Stop_viewState extends State<Stop_view> {
                                                 });
                                               },
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Container(
                                                     color: Colors.transparent,
                                                     child: Row(
                                                       children: [
                                                         showDesc
-                                                            ? Icon(Icons
-                                                                .arrow_drop_down_rounded)
-                                                            : Icon(Icons
-                                                                .arrow_right_rounded),
+                                                            ? Icon(Icons.arrow_drop_down_rounded)
+                                                            : Icon(Icons.arrow_right_rounded),
                                                         Text(
                                                           "Info",
                                                           style: TextStyle(
                                                               fontSize: 17,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
+                                                              fontWeight: FontWeight.w700),
                                                         ),
                                                       ],
                                                     ),
                                                   ),
                                                   if (showDesc)
                                                     Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 10,
-                                                              bottom: 3),
+                                                      padding: const EdgeInsets.only(
+                                                          left: 10, bottom: 3),
                                                       child: Text(
-                                                        widget.stop.name +
-                                                            widget.stop.desc,
-                                                        overflow:
-                                                            TextOverflow.clip,
+                                                        widget.stop.name + widget.stop.desc,
+                                                        overflow: TextOverflow.clip,
                                                         style: TextStyle(
                                                             fontSize: 19,
-                                                            color: isDark(
-                                                                    context)
-                                                                ? Colors
-                                                                    .grey[400]
-                                                                : Colors.grey[
-                                                                    7600]),
+                                                            color: isDark(context)
+                                                                ? Colors.grey[400]
+                                                                : Colors.grey[7600]),
                                                       ),
                                                     ),
                                                 ],
                                               )),
                                           Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 1, bottom: 5),
+                                            padding: EdgeInsets.only(top: 1, bottom: 5),
                                             child: DividerLine(),
                                           ),
                                         ],
                                         FutureBuilder(
-                                            future: getBusPredictions(
-                                                widget.stop.id),
+                                            future: getBusPredictions(widget.stop.id),
                                             builder: (c, data) {
                                               if (data.hasData) {
-                                                return StopViewCard(data.data,
-                                                    widget.stop, false);
+                                                return StopViewCard(data.data, widget.stop, false);
                                               } else {
                                                 return Container();
                                               }
                                             }),
-                                        if (_settings.showAlerts &&
-                                            (_alerts != null)) ...[
+                                        if (_settings.showAlerts && (_alerts != null)) ...[
                                           for (var alert in _alerts) ...[
                                             Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 11, bottom: 5, top: 9),
+                                              padding: EdgeInsets.only(left: 11, bottom: 5, top: 9),
                                               child: Text(
                                                 "There ${_alerts.length != 1 ? 'are' : 'is'} ${_alerts.length} alert${_alerts.length != 1 ? "s" : ''} for this stop",
                                                 style: TextStyle(fontSize: 18),

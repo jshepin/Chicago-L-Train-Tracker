@@ -23,9 +23,7 @@ class Layers extends StatelessWidget {
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: isDark(context)
-                    ? Colors.transparent
-                    : Colors.grey.withOpacity(0.21),
+                color: isDark(context) ? Colors.transparent : Colors.grey.withOpacity(0.21),
                 spreadRadius: 3,
                 blurRadius: 5,
               ),
@@ -75,8 +73,7 @@ class Layers extends StatelessWidget {
                   child: Container(
                     color: Colors.transparent,
                     child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 2, right: 11, left: 7, bottom: 0),
+                      padding: const EdgeInsets.only(top: 2, right: 11, left: 7, bottom: 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -88,9 +85,7 @@ class Layers extends StatelessWidget {
                             Icons.check,
                             size: 23,
                             color: showTrains
-                                ? (isDark(context)
-                                    ? Colors.white
-                                    : Colors.black)
+                                ? (isDark(context) ? Colors.white : Colors.black)
                                 : Colors.transparent,
                           ),
                         ],
@@ -101,8 +96,7 @@ class Layers extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 5, bottom: 0),
                   child: Container(
-                    color:
-                        isDark(context) ? Colors.grey[700] : Colors.grey[200],
+                    color: isDark(context) ? Colors.grey[700] : Colors.grey[200],
                     height: 1,
                   ),
                 ),
@@ -113,8 +107,7 @@ class Layers extends StatelessWidget {
                   child: Container(
                     color: Colors.transparent,
                     child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 6, right: 11, left: 7, bottom: 0),
+                      padding: const EdgeInsets.only(top: 6, right: 11, left: 7, bottom: 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -126,9 +119,7 @@ class Layers extends StatelessWidget {
                             Icons.check,
                             size: 23,
                             color: showStations
-                                ? (isDark(context)
-                                    ? Colors.white
-                                    : Colors.black)
+                                ? (isDark(context) ? Colors.white : Colors.black)
                                 : Colors.transparent,
                           ),
                         ],
@@ -136,9 +127,7 @@ class Layers extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                    padding: const EdgeInsets.only(top: 6, bottom: 0),
-                    child: DividerLine()),
+                Padding(padding: const EdgeInsets.only(top: 6, bottom: 0), child: DividerLine()),
                 for (var x in lines) ...[
                   GestureDetector(
                     onTap: () {
@@ -147,8 +136,7 @@ class Layers extends StatelessWidget {
                     child: Container(
                       color: Colors.transparent,
                       child: Padding(
-                        padding:
-                            const EdgeInsets.only(top: 6, right: 11, left: 3),
+                        padding: const EdgeInsets.only(top: 6, right: 11, left: 3),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -159,17 +147,13 @@ class Layers extends StatelessWidget {
                               height: 28,
                               width: 28,
                               decoration: BoxDecoration(
-                                  color:
-                                      isDark(context) ? x.darkColor : x.color,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(100))),
+                                  color: isDark(context) ? x.darkColor : x.color,
+                                  borderRadius: BorderRadius.all(Radius.circular(100))),
                               child: Center(
                                   child: Text(
                                 x.name.substring(0, 1),
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w700),
+                                    color: Colors.white, fontSize: 17, fontWeight: FontWeight.w700),
                               )),
                             ),
                             Container(
@@ -177,9 +161,7 @@ class Layers extends StatelessWidget {
                               Icons.check,
                               size: 23,
                               color: mapLayers[lines.indexOf(x)]
-                                  ? (isDark(context)
-                                      ? Colors.white
-                                      : Colors.black)
+                                  ? (isDark(context) ? Colors.white : Colors.black)
                                   : Colors.transparent,
                             )),
                           ],

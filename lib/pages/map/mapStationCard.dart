@@ -15,18 +15,13 @@ class MapStationCard extends StatelessWidget {
           width: double.infinity,
           height: 70,
           constraints: BoxConstraints(maxWidth: 430),
-          decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: isDark(context)
-                      ? Colors.transparent
-                      : Colors.grey.withOpacity(0.21),
-                  spreadRadius: 3,
-                  blurRadius: 5,
-                ),
-              ],
-              color: getPrimary(context),
-              borderRadius: BorderRadius.all(Radius.circular(10))),
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+              color: isDark(context) ? Colors.transparent : Colors.grey.withOpacity(0.21),
+              spreadRadius: 3,
+              blurRadius: 5,
+            ),
+          ], color: getPrimary(context), borderRadius: BorderRadius.all(Radius.circular(10))),
           child: Column(
             children: [
               Row(
@@ -37,8 +32,7 @@ class MapStationCard extends StatelessWidget {
                     child: Text(
                       selectedStation.name,
                       overflow: TextOverflow.clip,
-                      style: TextStyle(
-                          fontSize: selectedStation.name.length > 19 ? 20 : 25),
+                      style: TextStyle(fontSize: selectedStation.name.length > 19 ? 20 : 25),
                     ),
                   ),
                 ],
@@ -71,33 +65,25 @@ class MapStationCard extends StatelessWidget {
                                     : Colors.transparent),
                                 strokeWidth: 3,
                                 child: Container(
-                                  height: showDashed(color, selectedStation)
-                                      ? 21
-                                      : 25,
-                                  width: showDashed(color, selectedStation)
-                                      ? 21
-                                      : 25,
+                                  height: showDashed(color, selectedStation) ? 21 : 25,
+                                  width: showDashed(color, selectedStation) ? 21 : 25,
                                   decoration: BoxDecoration(
                                       color: showDashed(color, selectedStation)
                                           ? Colors.transparent
                                           : colorFromLine(color, context),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(100))),
+                                      borderRadius: BorderRadius.all(Radius.circular(100))),
                                   child: Center(
                                       child: Text(
                                     color.substring(0, 1),
                                     style: TextStyle(
-                                        color: showDashed(
-                                                color, selectedStation)
+                                        color: showDashed(color, selectedStation)
                                             ? (isDark(context)
                                                 ? Colors.white
                                                 : colorFromLine(color, context))
                                             : Colors.white,
                                         fontSize: ((color == "Purple" &&
                                                     getPurpleExpressIds()
-                                                        .contains(
-                                                            selectedStation
-                                                                .id)) ||
+                                                        .contains(selectedStation.id)) ||
                                                 (selectedStation.pexp != null &&
                                                     selectedStation.pexp))
                                             ? 15

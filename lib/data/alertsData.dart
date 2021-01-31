@@ -20,8 +20,7 @@ Future<List<Alert>> getAlerts(String line) async {
       }
 
       if (!gotAlerts) {
-        var url =
-            '${ConfigReader.getServerURL()}/alerts?token=${ConfigReader.getAPIKEY()}';
+        var url = '${ConfigReader.getServerURL()}/alerts?token=${ConfigReader.getAPIKEY()}';
         var response = await http
             .get(url)
             .timeout(const Duration(seconds: 5), onTimeout: () {})
@@ -36,13 +35,8 @@ Future<List<Alert>> getAlerts(String line) async {
           var a = alerts[x];
           for (int y = 0; y < a["ImpactedService"].length; y++) {
             var v = a["ImpactedService"][y];
-            impactedServices.add(new Service(
-                v["ServiceType"],
-                v["ServiceTypeDescription"],
-                v["ServiceName"],
-                v["ServiceId"],
-                v["ServiceBackColor"],
-                v["ServiceTextColor"]));
+            impactedServices.add(new Service(v["ServiceType"], v["ServiceTypeDescription"],
+                v["ServiceName"], v["ServiceId"], v["ServiceBackColor"], v["ServiceTextColor"]));
           }
           Alert alert = new Alert(
               a["AlertId"],

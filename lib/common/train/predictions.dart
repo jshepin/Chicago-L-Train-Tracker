@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:CTA_Tracker/exports.dart';
 
-List<DirectionPrediction> getDestinationPredictions(
-    List<Prediction> predictions, Station station) {
+List<DirectionPrediction> getDestinationPredictions(List<Prediction> predictions, Station station) {
   List<DirectionPrediction> directionPredictions = [];
   if (station.lines.length > 1) {
     for (var l in station.lines) {
@@ -57,27 +56,22 @@ class _PredictionsState extends State<Predictions> {
   SettingsData cachedSettings;
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: widget.isBus
-          ? getBusPredictions(widget.stop.id)
-          : getPredictions(widget.station.id),
+      future: widget.isBus ? getBusPredictions(widget.stop.id) : getPredictions(widget.station.id),
       builder: (c, data) {
         if (data.hasData) {
           List<DirectionPrediction> dPredictions = [];
-          if (!widget.isBus)
-            dPredictions = getDestinationPredictions(data.data, widget.station);
+          if (!widget.isBus) dPredictions = getDestinationPredictions(data.data, widget.station);
           return FutureBuilder(
-              future: getStationSettings(
-                  widget.isBus ? widget.stop.id + "%BUS%" : widget.station.id),
+              future:
+                  getStationSettings(widget.isBus ? widget.stop.id + "%BUS%" : widget.station.id),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  if (!changed &&
-                      (!setPreference || widget.settings != cachedSettings)) {
+                  if (!changed && (!setPreference || widget.settings != cachedSettings)) {
                     if (snapshot.data[1] == 0) {
                       selected = 0;
                     } else {
                       for (int x = 0; x < dPredictions.length; x++) {
-                        if (convertShortColor(
-                                dPredictions[x].predictions[0].rt) ==
+                        if (convertShortColor(dPredictions[x].predictions[0].rt) ==
                             widget.station.lines[snapshot.data[1] - 1]) {
                           selected = x;
                         }
@@ -87,10 +81,9 @@ class _PredictionsState extends State<Predictions> {
                     setPreference = true;
                   }
                   return Container(
-                      constraints:
-                          widget.tabletShrink != null && widget.tabletShrink
-                              ? BoxConstraints(maxWidth: 500)
-                              : BoxConstraints(),
+                      constraints: widget.tabletShrink != null && widget.tabletShrink
+                          ? BoxConstraints(maxWidth: 500)
+                          : BoxConstraints(),
                       child: data.data.length > 0
                           ? (widget.vstack
                               ? SingleChildScrollView(
@@ -98,42 +91,33 @@ class _PredictionsState extends State<Predictions> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 6),
                                     child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         if (dPredictions.length > 2)
                                           Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
-                                              for (int x = 0;
-                                                  x < dPredictions.length;
-                                                  x++) ...[
+                                              for (int x = 0; x < dPredictions.length; x++) ...[
                                                 Container(
-                                                  margin: EdgeInsets.only(
-                                                      top: 7, right: 4),
-                                                  height:
-                                                      selected == x ? 13 : 9,
+                                                  margin: EdgeInsets.only(top: 7, right: 4),
+                                                  height: selected == x ? 13 : 9,
                                                   width: selected == x ? 13 : 9,
                                                   decoration: BoxDecoration(
                                                       color: x == 0
                                                           ? (isDark(context)
                                                                   ? Colors.white
-                                                                  : Colors.grey[
-                                                                      350])
+                                                                  : Colors.grey[350])
                                                               .withOpacity(
-                                                                  selected == x
-                                                                      ? 0.8
-                                                                      : 0.7)
-                                                          : ((colorFromLine(convertShortColor(dPredictions[x].predictions[0].rt), context)))
+                                                                  selected == x ? 0.8 : 0.7)
+                                                          : ((colorFromLine(
+                                                                  convertShortColor(dPredictions[x]
+                                                                      .predictions[0]
+                                                                      .rt),
+                                                                  context)))
                                                               .withOpacity(
-                                                                  selected == x
-                                                                      ? 1.0
-                                                                      : 0.8),
+                                                                  selected == x ? 1.0 : 0.8),
                                                       borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  20))),
+                                                          BorderRadius.all(Radius.circular(20))),
                                                 )
                                               ]
                                             ],
@@ -141,47 +125,33 @@ class _PredictionsState extends State<Predictions> {
                                         widget.isBus
                                             ? Row(
                                                 children: [
-                                                  InnerCard(
-                                                      snapshot.data[0] == 0,
+                                                  InnerCard(snapshot.data[0] == 0,
                                                       busPrediction: data.data),
                                                 ],
                                               )
                                             : Container(
-                                                height: snapshot.data[0] == 0
-                                                    ? 116
-                                                    : 145, //smallcard ?
+                                                height:
+                                                    snapshot.data[0] == 0 ? 116 : 145, //smallcard ?
                                                 child: dPredictions.length > 2
                                                     ? Container(
                                                         constraints: BoxConstraints(
                                                             minWidth:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width),
-                                                        width: dPredictions[
-                                                                        selected]
+                                                                MediaQuery.of(context).size.width),
+                                                        width: dPredictions[selected]
                                                                     .predictions
                                                                     .length *
                                                                 (145.0) +
                                                             50,
                                                         child: new Swiper(
                                                           index: selected,
-                                                          key: ValueKey(
-                                                              selected),
-                                                          scrollDirection:
-                                                              Axis.vertical,
+                                                          key: ValueKey(selected),
+                                                          scrollDirection: Axis.vertical,
                                                           itemBuilder:
-                                                              (BuildContext
-                                                                      context,
-                                                                  int index) {
+                                                              (BuildContext context, int index) {
                                                             return InnerCard(
-                                                              snapshot.data[
-                                                                      0] ==
-                                                                  0,
+                                                              snapshot.data[0] == 0,
                                                               prediction:
-                                                                  dPredictions[
-                                                                          index]
-                                                                      .predictions,
+                                                                  dPredictions[index].predictions,
                                                             );
                                                           },
                                                           onIndexChanged: (i) {
@@ -190,9 +160,7 @@ class _PredictionsState extends State<Predictions> {
                                                               selected = i;
                                                             });
                                                           },
-                                                          itemCount:
-                                                              dPredictions
-                                                                  .length,
+                                                          itemCount: dPredictions.length,
                                                         ),
                                                       )
                                                     : InnerCard(
@@ -209,22 +177,15 @@ class _PredictionsState extends State<Predictions> {
                                     Container(
                                       height: (dPredictions.length > 2
                                           ? 200
-                                          : (widget.settings.showMap
-                                              ? 200
-                                              : 250)),
+                                          : (widget.settings.showMap ? 200 : 250)),
                                       child: dPredictions.length > 2
                                           ? Container(
                                               child: new Swiper(
-                                                key:
-                                                    ValueKey(widget.station.id),
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
+                                                key: ValueKey(widget.station.id),
+                                                scrollDirection: Axis.horizontal,
+                                                itemBuilder: (BuildContext context, int index) {
                                                   return StationViewCard(
-                                                      dPredictions[index]
-                                                          .predictions);
+                                                      dPredictions[index].predictions);
                                                 },
                                                 onIndexChanged: (i) {
                                                   setState(() {
@@ -299,9 +260,7 @@ class HDots extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        for (int x = 0;
-            x < (isBus ? busDPredictions.length : dPredictions.length);
-            x++) ...[
+        for (int x = 0; x < (isBus ? busDPredictions.length : dPredictions.length); x++) ...[
           Container(
             margin: EdgeInsets.only(top: 7, right: 4), //
             height: getHeight(x), //
@@ -315,9 +274,7 @@ class HDots extends StatelessWidget {
                   : (isBus
                       ? Colors.grey[700].withOpacity(selected == x ? 0.9 : 0.4)
                       : ((colorFromLine(
-                              convertShortColor(
-                                  dPredictions[x].predictions[0].rt),
-                              context)))
+                              convertShortColor(dPredictions[x].predictions[0].rt), context)))
                           .withOpacity(selected == x ? 1.0 : 0.8)),
               borderRadius: BorderRadius.all(
                 Radius.circular(20),

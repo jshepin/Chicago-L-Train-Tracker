@@ -32,8 +32,7 @@ class _EditDialogState extends State<EditDialog> {
     // TODO: implement initStat
     var index = widget.snapshot.data[1] - 1;
 
-    var line =
-        widget.isBus ? "Red" : widget.station.lines[index == -1 ? 0 : index];
+    var line = widget.isBus ? "Red" : widget.station.lines[index == -1 ? 0 : index];
 
     var x = getLineFromColor(line);
 
@@ -83,9 +82,7 @@ class _EditDialogState extends State<EditDialog> {
                     onTap: () async {
                       setData(
                           widget.widget.isBus,
-                          widget.widget.isBus
-                              ? widget.widget.stop.id
-                              : widget.station.id,
+                          widget.widget.isBus ? widget.widget.stop.id : widget.station.id,
                           0,
                           widget.snapshot.data[1],
                           widget.snapshot.data[2]);
@@ -103,9 +100,7 @@ class _EditDialogState extends State<EditDialog> {
                   onTap: () async {
                     await setData(
                         widget.widget.isBus,
-                        widget.widget.isBus
-                            ? widget.widget.stop.id
-                            : widget.widget.station.id,
+                        widget.widget.isBus ? widget.widget.stop.id : widget.widget.station.id,
                         1,
                         widget.snapshot.data[1],
                         widget.snapshot.data[2]);
@@ -143,9 +138,7 @@ class _EditDialogState extends State<EditDialog> {
                       child: GestureDetector(
                         onTap: () async {
                           await setData(
-                              widget.widget.isBus
-                                  ? widget.widget.stop.id
-                                  : widget.widget.isBus,
+                              widget.widget.isBus ? widget.widget.stop.id : widget.widget.isBus,
                               widget.widget.station.id,
                               widget.snapshot.data[0],
                               0,
@@ -163,13 +156,10 @@ class _EditDialogState extends State<EditDialog> {
                             width: 34,
                             height: 34,
                             decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(100)),
+                                borderRadius: BorderRadius.all(Radius.circular(100)),
                                 border: Border.all(
                                     color: _allSelected ?? true
-                                        ? (isDark(context)
-                                            ? Colors.white
-                                            : Colors.grey[400])
+                                        ? (isDark(context) ? Colors.white : Colors.grey[400])
                                         : Colors.transparent,
                                     width: 2)),
                             child: Padding(
@@ -190,22 +180,16 @@ class _EditDialogState extends State<EditDialog> {
                         margin: EdgeInsets.only(right: 3),
                         padding: EdgeInsets.all(1),
                         decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(100)),
+                            borderRadius: BorderRadius.all(Radius.circular(100)),
                             border: Border.all(
-                                color: (!_allSelected &&
-                                        color == _selectedLine.name)
-                                    ? (isDark(context)
-                                        ? Colors.white
-                                        : Colors.grey[400])
+                                color: (!_allSelected && color == _selectedLine.name)
+                                    ? (isDark(context) ? Colors.white : Colors.grey[400])
                                     : Colors.transparent,
                                 width: 2)),
                         child: GestureDetector(
                           onTap: () async {
                             setData(
-                                widget.widget.isBus
-                                    ? widget.widget.stop.id
-                                    : widget.widget.isBus,
+                                widget.widget.isBus ? widget.widget.stop.id : widget.widget.isBus,
                                 widget.station.id,
                                 widget.snapshot.data[0],
                                 widget.station.lines.indexOf(color) + 1,
@@ -220,8 +204,7 @@ class _EditDialogState extends State<EditDialog> {
                               _selectedLine = getLineFromColor(color);
                             });
                           },
-                          child: ColorCircle(
-                              color: color, selectedStation: widget.station),
+                          child: ColorCircle(color: color, selectedStation: widget.station),
                         ),
                       ),
                     ],
@@ -239,12 +222,10 @@ class _EditDialogState extends State<EditDialog> {
       actions: [
         FlatButton(
           child: Text('Unfavorite',
-              style: TextStyle(
-                  color: isDark(context) ? Colors.red[400] : Colors.red)),
+              style: TextStyle(color: isDark(context) ? Colors.red[400] : Colors.red)),
           onPressed: () async {
             SharedPreferences prefs = await SharedPreferences.getInstance();
-            List<String> savedStations =
-                prefs.getStringList("savedStations") ?? [];
+            List<String> savedStations = prefs.getStringList("savedStations") ?? [];
             if (savedStations.contains(widget.widget.isBus
                 ? widget.widget.stop.id + "%BUS%"
                 : widget.widget.station.id.toString())) {

@@ -25,9 +25,8 @@ class StationViewCard extends StatelessWidget {
                 decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: isDark(context)
-                            ? Color(0xff424242)
-                            : Colors.grey[300].withOpacity(0.8),
+                        color:
+                            isDark(context) ? Color(0xff424242) : Colors.grey[300].withOpacity(0.8),
                         spreadRadius: 2,
                         blurRadius: 2,
                       )
@@ -48,8 +47,7 @@ class StationViewCard extends StatelessWidget {
                         Text(
                           "${convertShortColor(prediction.rt)}",
                           style: TextStyle(
-                              color: textColorFromLine(
-                                  convertShortColor(prediction.rt), context),
+                              color: textColorFromLine(convertShortColor(prediction.rt), context),
                               fontSize: 23,
                               fontWeight: FontWeight.w600),
                         ),

@@ -19,8 +19,7 @@ class RouteItem extends StatelessWidget {
         child: Container(
           height: 53,
           padding: EdgeInsets.only(bottom: 0, top: 4, left: 3),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10))),
+          decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

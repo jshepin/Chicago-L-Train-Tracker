@@ -16,12 +16,7 @@ class PredictionRow extends StatefulWidget {
   Stop stop;
   bool isBus;
   PredictionRow(this.settings,
-      {stop,
-      station,
-      stations,
-      this.distance,
-      this.isConnected,
-      this.callback}) {
+      {stop, station, stations, this.distance, this.isConnected, this.callback}) {
     if (station != null && stations != null) {
       this.station = station;
       this.stations = stations;
@@ -81,9 +76,7 @@ class _PredictionRowState extends State<PredictionRow> {
                                 Radius.circular(10),
                               ),
                             ),
-                            child: Icon(widget.isBus
-                                ? Icons.directions_bus
-                                : Icons.train),
+                            child: Icon(widget.isBus ? Icons.directions_bus : Icons.train),
                           ),
                           GestureDetector(
                             onTap: () {
@@ -101,9 +94,7 @@ class _PredictionRowState extends State<PredictionRow> {
                                               getLineFromColor("Red"),
                                               widget.station.lines.length > 1
                                                   ? Colors.black
-                                                  : colorFromLine(
-                                                      widget.station.lines[0],
-                                                      context),
+                                                  : colorFromLine(widget.station.lines[0], context),
                                               true)));
                             },
                             child: Padding(
@@ -117,8 +108,7 @@ class _PredictionRowState extends State<PredictionRow> {
                               ),
                             ),
                           ),
-                          if (widget.distance != null &&
-                              double.parse(widget.distance) > 0.03) ...[
+                          if (widget.distance != null && double.parse(widget.distance) > 0.03) ...[
                             Text(
                               "${widget.distance == null ? "" : '-'} ${widget.distance == null ? "" : widget.distance}",
                               style: TextStyle(
@@ -138,9 +128,7 @@ class _PredictionRowState extends State<PredictionRow> {
                     ),
                     if (widget.settings.showAlerts)
                       FutureBuilder(
-                          future: getAlerts(widget.isBus
-                              ? widget.stop.id
-                              : widget.station.id),
+                          future: getAlerts(widget.isBus ? widget.stop.id : widget.station.id),
                           builder: (c, snapshot) {
                             if (snapshot.hasData) {
                               return snapshot.data.length > 0
@@ -169,11 +157,9 @@ class _PredictionRowState extends State<PredictionRow> {
               ),
             ),
             Tooltip(
-              message:
-                  "Edit ${widget.isBus ? widget.stop.name : widget.station.name}",
+              message: "Edit ${widget.isBus ? widget.stop.name : widget.station.name}",
               child: Padding(
-                padding: const EdgeInsets.only(
-                    right: 13, left: 3, top: 12, bottom: 2),
+                padding: const EdgeInsets.only(right: 13, left: 3, top: 12, bottom: 2),
                 child: GestureDetector(
                     onTap: () {
                       showDialog(
@@ -190,27 +176,24 @@ class _PredictionRowState extends State<PredictionRow> {
                                         allSelected = (snapshot.data[1] == 0);
 
                                         if (selectedDestinationIndex == null) {
-                                          selectedDestinationIndex =
-                                              snapshot.data[2];
+                                          selectedDestinationIndex = snapshot.data[2];
                                         }
                                         if (!widget.isBus) {
                                           if (!allSelected) {
                                             selectedLine = getLineFromColor(
-                                                widget.station.lines[
-                                                    snapshot.data[1] - 1]);
+                                                widget.station.lines[snapshot.data[1] - 1]);
                                           } else {
-                                            if (widget.station.lines.length ==
-                                                1) {
-                                              selectedLine = getLineFromColor(
-                                                  widget.station.lines[0]);
+                                            if (widget.station.lines.length == 1) {
+                                              selectedLine =
+                                                  getLineFromColor(widget.station.lines[0]);
                                             } else {
-                                              selectedLine = new Line("", "",
-                                                  "D11A2C", "D11A2C", "D11A2C");
+                                              selectedLine =
+                                                  new Line("", "", "D11A2C", "D11A2C", "D11A2C");
                                             }
                                           }
                                         }
-                                        return EditDialog(widget, snapshot,
-                                            widget.station, widget.isBus);
+                                        return EditDialog(
+                                            widget, snapshot, widget.station, widget.isBus);
                                       } else {
                                         return Container();
                                       }
@@ -228,8 +211,7 @@ class _PredictionRowState extends State<PredictionRow> {
           ],
         ),
         widget.isBus
-            ? Predictions(Colors.black, true, false, widget.settings,
-                stop: widget.stop)
+            ? Predictions(Colors.black, true, false, widget.settings, stop: widget.stop)
             : Predictions(
                 widget.station.lines.length > 1
                     ? Colors.black
@@ -250,8 +232,8 @@ Future<void> setData(bool isBus, id, one, two, three) async {
   data.add(one);
   data.add(two);
   data.add(three);
-  prefs.setStringList("station${isBus ? (id + '%BUS%') : id}",
-      (data.map((e) => e.toString()).toList()));
+  prefs.setStringList(
+      "station${isBus ? (id + '%BUS%') : id}", (data.map((e) => e.toString()).toList()));
 }
 
 Line getLineFromColor(String color) {

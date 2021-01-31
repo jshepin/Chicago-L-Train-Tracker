@@ -8,23 +8,18 @@ import '../../exports.dart';
 class MapHeader extends StatelessWidget {
   bool all;
   Line line;
-  MapHeader(this.all,this.line);
+  MapHeader(this.all, this.line);
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.fromLTRB(3, 8, 6.5, 0),
-      decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: isDark(context)
-                  ? Colors.transparent
-                  : Colors.grey.withOpacity(0.21),
-              spreadRadius: 3,
-              blurRadius: 4,
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: getPrimary(context)),
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+          color: isDark(context) ? Colors.transparent : Colors.grey.withOpacity(0.21),
+          spreadRadius: 3,
+          blurRadius: 4,
+        ),
+      ], borderRadius: BorderRadius.all(Radius.circular(10)), color: getPrimary(context)),
       height: all ? 60 : 70,
       child: Row(
         children: <Widget>[
@@ -66,9 +61,7 @@ class MapHeader extends StatelessWidget {
                           "$x ${getDirection(line.name).indexOf(x) == 0 ? '- ' : ''}",
                           style: TextStyle(
                               fontSize: 16,
-                              color: isDark(context)
-                                  ? Colors.grey[400]
-                                  : Colors.grey[600]),
+                              color: isDark(context) ? Colors.grey[400] : Colors.grey[600]),
                         ),
                       )
                     ]

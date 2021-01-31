@@ -14,9 +14,8 @@ Future<List<BusPrediction>> getBusPredictions(String stationID) async {
   List<BusPrediction> busPredictions = [];
   if (isConnected) {
     try {
-      var diff = DateTime.now()
-          .difference(lastBusPredictionsCall[stationID] ?? DateTime.now())
-          .inSeconds;
+      var diff =
+          DateTime.now().difference(lastBusPredictionsCall[stationID] ?? DateTime.now()).inSeconds;
       if (diff >= 20) {
         gotBusData.update(stationID, (value) {
           return false;
@@ -100,8 +99,7 @@ Future<List<BusPrediction>> getBusPredictions(String stationID) async {
                 s["zone"],
               );
               String staId = s["stpid"];
-              List<BusPrediction> predictions =
-                  cachedBusPredictions[staId] ?? [];
+              List<BusPrediction> predictions = cachedBusPredictions[staId] ?? [];
               predictions.add(p);
               cachedBusPredictions.update(staId, (value) {
                 return predictions;

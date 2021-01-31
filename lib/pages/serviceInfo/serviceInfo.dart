@@ -37,8 +37,7 @@ class _ServiceInformationState extends State<ServiceInformation> {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -82,27 +81,21 @@ class _ServiceInformationState extends State<ServiceInformation> {
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           color: getPrimary(context),
                           border: Border.all(
-                              color:
-                                  isDark(context) ? line.darkColor : line.color,
-                              width: 2),
+                              color: isDark(context) ? line.darkColor : line.color, width: 2),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               table.name,
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                for (var x = 0;
-                                    x < table.data.length;
-                                    x++) ...[
+                                for (var x = 0; x < table.data.length; x++) ...[
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                         height: 10,
@@ -110,17 +103,10 @@ class _ServiceInformationState extends State<ServiceInformation> {
                                       Container(
                                           child: Row(
                                         children: [
-                                          for (var s in table.rowHeaders[x]
-                                                  .split(",") ??
-                                              []) ...[
-                                            if (table.rowHeaders[x]
-                                                    .split(",")
-                                                    .indexOf(s) ==
-                                                1) ...[
+                                          for (var s in table.rowHeaders[x].split(",") ?? []) ...[
+                                            if (table.rowHeaders[x].split(",").indexOf(s) == 1) ...[
                                               Padding(
-                                                padding:
-                                                    const EdgeInsets.only(
-                                                        right: 4, top: 5),
+                                                padding: const EdgeInsets.only(right: 4, top: 5),
                                                 child: Icon(
                                                   Icons.arrow_forward,
                                                   size: 18,
@@ -128,25 +114,18 @@ class _ServiceInformationState extends State<ServiceInformation> {
                                               ),
                                             ],
                                             Container(
-                                                margin: EdgeInsets.only(
-                                                    right: 3,
-                                                    bottom: 2,
-                                                    top: 7),
-                                                padding:
-                                                    EdgeInsets.fromLTRB(
-                                                        4, 3, 4, 2.2),
+                                                margin:
+                                                    EdgeInsets.only(right: 3, bottom: 2, top: 7),
+                                                padding: EdgeInsets.fromLTRB(4, 3, 4, 2.2),
                                                 decoration: BoxDecoration(
                                                     color: isDark(context)
                                                         ? line.darkColor
                                                         : line.color,
                                                     borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                5))),
+                                                        BorderRadius.all(Radius.circular(5))),
                                                 child: Text(s,
                                                     style: TextStyle(
-                                                        color: line.name ==
-                                                                "Yellow"
+                                                        color: line.name == "Yellow"
                                                             ? Colors.black
                                                             : Colors.white,
                                                         fontSize: 16.5)))
@@ -156,36 +135,23 @@ class _ServiceInformationState extends State<ServiceInformation> {
                                       Divider(),
                                       Container(
                                         child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment
-                                                  .spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            for (var y = 0;
-                                                y < table.data[x].length;
-                                                y++) ...[
+                                            for (var y = 0; y < table.data[x].length; y++) ...[
                                               Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
                                                   Text(
                                                     table.colHeaders[y],
-                                                    style: TextStyle(
-                                                        fontSize: 17.5),
+                                                    style: TextStyle(fontSize: 17.5),
                                                   ),
-                                                  TimeRow(
-                                                      table: table,
-                                                      x: x,
-                                                      y: y),
+                                                  TimeRow(table: table, x: x, y: y),
                                                 ],
                                               ),
                                               y == table.data[x].length - 1
                                                   ? Container()
                                                   : Container(
-                                                      margin:
-                                                          EdgeInsets.only(
-                                                              left: 0,
-                                                              right: 10),
+                                                      margin: EdgeInsets.only(left: 0, right: 10),
                                                       height: 20,
                                                       child: Divider())
                                             ]

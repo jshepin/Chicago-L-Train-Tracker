@@ -205,8 +205,7 @@ class _StationsState extends State<Stations> {
                       Padding(
                         padding: const EdgeInsets.only(top: 2),
                         child: Text(tr('btmBar.btmBar1'),
-                            style: TextStyle(
-                                fontSize: 40, fontWeight: FontWeight.w600)),
+                            style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600)),
                       ),
                     ],
                   ),
@@ -245,13 +244,9 @@ class _StationsState extends State<Stations> {
                                       ),
                                       color: line.color),
                                   child: Text(
-                                    alerts != null
-                                        ? alerts.length.toString()
-                                        : "",
+                                    alerts != null ? alerts.length.toString() : "",
                                     style: TextStyle(
-                                      color: line.name == "Yellow"
-                                          ? Colors.black
-                                          : Colors.white,
+                                      color: line.name == "Yellow" ? Colors.black : Colors.white,
                                     ),
                                   ),
                                 ),
@@ -299,9 +294,7 @@ class _StationsState extends State<Stations> {
               child: Text(
                 tr('stations.subTitle'),
                 style: TextStyle(
-                    fontSize: 18,
-                    color:
-                        isDark(context) ? Colors.grey[400] : Colors.grey[600]),
+                    fontSize: 18, color: isDark(context) ? Colors.grey[400] : Colors.grey[600]),
               ),
             ),
             Padding(
@@ -312,8 +305,7 @@ class _StationsState extends State<Stations> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -328,38 +320,28 @@ class _StationsState extends State<Stations> {
                                   width: 30,
                                   padding: EdgeInsets.only(bottom: 3.5, top: 1),
                                   decoration: BoxDecoration(
-                                      color: isDark(context)
-                                          ? line.darkColor
-                                          : line.color,
+                                      color: isDark(context) ? line.darkColor : line.color,
                                       borderRadius: line.name == "Purple"
                                           ? BorderRadius.only(
                                               topLeft: Radius.circular(30),
                                               topRight: Radius.circular(30))
-                                          : BorderRadius.all(
-                                              Radius.circular(30))),
+                                          : BorderRadius.all(Radius.circular(30))),
                                   child: Column(children: [
                                     for (var station in stations) ...[
                                       Column(
                                         children: [
                                           CCircle(station: station),
                                           Container(
-                                              height: (stations
-                                                          .indexOf(station) ==
+                                              height: (stations.indexOf(station) ==
                                                       (stations.length - 1)
                                                   ? 0
-                                                  : calculateDistance(
-                                                          station, stations) *
-                                                      20)),
-                                          if (station.name == "Garfield" &&
-                                                  line.name == "Green" ||
+                                                  : calculateDistance(station, stations) * 20)),
+                                          if (station.name == "Garfield" && line.name == "Green" ||
                                               (station.lines.length > 1 &&
                                                   (stations.indexOf(station) !=
-                                                      (stations.length -
-                                                          1)))) ...[
+                                                      (stations.length - 1)))) ...[
                                             Container(
-                                              height: line.name == "Green"
-                                                  ? 19.6
-                                                  : 19.2,
+                                              height: line.name == "Green" ? 19.6 : 19.2,
                                             )
                                           ],
                                         ],
@@ -385,46 +367,35 @@ class _StationsState extends State<Stations> {
                                     width: 30,
                                     padding: EdgeInsets.only(bottom: 3, top: 1),
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(30))),
+                                        borderRadius: BorderRadius.all(Radius.circular(30))),
                                     child: Column(children: [
                                       for (var x = 0; x < 7; x++) ...[
                                         Container(
                                           margin: EdgeInsets.only(top: 5.8),
                                           height: 7,
                                           decoration: BoxDecoration(
-                                              color: isDark(context)
-                                                  ? line.darkColor
-                                                  : line.color,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular((1)))),
+                                              color: isDark(context) ? line.darkColor : line.color,
+                                              borderRadius: BorderRadius.all(Radius.circular((1)))),
                                           width: 30,
                                         )
                                       ],
-                                      for (var station
-                                          in getPurpleExpress()) ...[
-                                        for (var x = 0; x < 3; x++) ...[
-                                          ExpressBar(line: line)
-                                        ],
+                                      for (var station in getPurpleExpress()) ...[
+                                        for (var x = 0; x < 3; x++) ...[ExpressBar(line: line)],
                                         Stack(
-                                          alignment:
-                                              AlignmentDirectional.center,
+                                          alignment: AlignmentDirectional.center,
                                           children: [
                                             Column(
                                               children: [
                                                 ExpressBar(line: line),
                                                 Container(
-                                                  margin:
-                                                      EdgeInsets.only(top: 8),
+                                                  margin: EdgeInsets.only(top: 8),
                                                   height: 6.6,
                                                   decoration: BoxDecoration(
                                                       color: isDark(context)
                                                           ? line.darkColor
                                                           : line.color,
                                                       borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  (1)))),
+                                                          BorderRadius.all(Radius.circular((1)))),
                                                   width: 30,
                                                 ),
                                               ],
@@ -442,28 +413,21 @@ class _StationsState extends State<Stations> {
                                         children: [
                                           Container(
                                             width: 30,
-                                            padding: EdgeInsets.only(
-                                                bottom: 3.5, top: 11),
+                                            padding: EdgeInsets.only(bottom: 3.5, top: 11),
                                             decoration: BoxDecoration(
                                                 color: line.color,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(30))),
+                                                borderRadius:
+                                                    BorderRadius.all(Radius.circular(30))),
                                             child: Column(children: [
-                                              CCircle(
-                                                  station:
-                                                      getGreenLineTrack()[0]),
+                                              CCircle(station: getGreenLineTrack()[0]),
                                               Container(
                                                 height: 39,
                                               ),
-                                              CCircle(
-                                                  station:
-                                                      getGreenLineTrack()[1]),
+                                              CCircle(station: getGreenLineTrack()[1]),
                                               Container(
                                                 height: 18,
                                               ),
-                                              CCircle(
-                                                  station:
-                                                      getGreenLineTrack()[2]),
+                                              CCircle(station: getGreenLineTrack()[2]),
                                             ]),
                                           ),
                                         ],
@@ -487,14 +451,11 @@ class _StationsState extends State<Stations> {
                                                 station,
                                                 stations,
                                                 line,
-                                                isDark(context)
-                                                    ? line.darkColor
-                                                    : line.color,
+                                                isDark(context) ? line.darkColor : line.color,
                                                 false),
                                           ));
                                     },
-                                    child: StationTitle(stations, station, line,
-                                        green: false),
+                                    child: StationTitle(stations, station, line, green: false),
                                   )
                                 ],
                                 Container(
@@ -503,27 +464,23 @@ class _StationsState extends State<Stations> {
                                 for (var station in getGreenLineTrack()) ...[
                                   line.name == "Green"
                                       ? Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 9),
+                                          padding: const EdgeInsets.only(top: 9),
                                           child: GestureDetector(
                                               onTap: () {
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          Station_view(
-                                                              station,
-                                                              stations,
-                                                              line,
-                                                              isDark(context)
-                                                                  ? line
-                                                                      .darkColor
-                                                                  : line.color,
-                                                              false),
+                                                      builder: (context) => Station_view(
+                                                          station,
+                                                          stations,
+                                                          line,
+                                                          isDark(context)
+                                                              ? line.darkColor
+                                                              : line.color,
+                                                          false),
                                                     ));
                                               },
-                                              child: StationTitle(
-                                                  stations, station, line,
+                                              child: StationTitle(stations, station, line,
                                                   green: true)),
                                         )
                                       : Container(),
@@ -532,59 +489,47 @@ class _StationsState extends State<Stations> {
                                   Container(
                                     width: 300,
                                     child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10, top: 5, bottom: 5),
+                                      padding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),
                                       child: Text(
                                         'purple.purpleEx'.tr(),
-                                        style: TextStyle(
-                                            height: 1.4, fontSize: 16),
+                                        style: TextStyle(height: 1.4, fontSize: 16),
                                       ),
                                     ),
                                   ),
                                   GestureDetector(
                                     child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10, top: 2),
+                                      padding: const EdgeInsets.only(left: 10, top: 2),
                                       child: Container(
                                           child: Text('purple.moreInfo'.tr(),
                                               style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16))),
+                                                  fontWeight: FontWeight.bold, fontSize: 16))),
                                     ),
                                     onTap: () {
                                       showDialog(
                                           context: context,
                                           builder: (_) => new AlertDialog(
-                                                title: new Text(
-                                                    'purple.title'.tr()),
+                                                title: new Text('purple.title'.tr()),
                                                 content: Container(
-                                                  constraints: BoxConstraints(
-                                                      maxWidth: 350),
-                                                  child: new Text(
-                                                      'purple.purpleLongEx'
-                                                          .tr(),
-                                                      style: TextStyle(
-                                                          height: 1.4)),
+                                                  constraints: BoxConstraints(maxWidth: 350),
+                                                  child: new Text('purple.purpleLongEx'.tr(),
+                                                      style: TextStyle(height: 1.4)),
                                                 ),
                                                 actions: <Widget>[
                                                   FlatButton(
-                                                    child:
-                                                        Text("View Schedule"),
+                                                    child: Text("View Schedule"),
                                                     onPressed: () {
                                                       Navigator.pushReplacement(
                                                           context,
                                                           MaterialPageRoute(
                                                             builder: (context) =>
-                                                                ServiceInformation(
-                                                                    line),
+                                                                ServiceInformation(line),
                                                           ));
                                                     },
                                                   ),
                                                   FlatButton(
                                                     child: Text('Dismiss'.tr()),
                                                     onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
+                                                      Navigator.of(context).pop();
                                                     },
                                                   )
                                                 ],
@@ -599,20 +544,16 @@ class _StationsState extends State<Stations> {
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Station_view(
-                                                          station,
-                                                          stations,
-                                                          line,
-                                                          isDark(context)
-                                                              ? line.darkColor
-                                                              : line.color,
-                                                          false),
+                                                  builder: (context) => Station_view(
+                                                      station,
+                                                      stations,
+                                                      line,
+                                                      isDark(context) ? line.darkColor : line.color,
+                                                      false),
                                                 ));
                                           },
-                                          child: StationTitle(
-                                              stations, station, line,
-                                              green: true)),
+                                          child:
+                                              StationTitle(stations, station, line, green: true)),
                                     )
                                   ],
                                 ]

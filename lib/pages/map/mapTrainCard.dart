@@ -17,8 +17,7 @@ class MapTrainCard extends StatelessWidget {
         height: 59,
         decoration: BoxDecoration(
             color: getPrimary(context),
-            border: Border.all(
-                width: 2, color: colorFromLine(selectedColor ?? "", context)),
+            border: Border.all(width: 2, color: colorFromLine(selectedColor ?? "", context)),
             borderRadius: BorderRadius.all(Radius.circular(10))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

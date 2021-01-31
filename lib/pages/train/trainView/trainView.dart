@@ -41,28 +41,13 @@ class TrainRunPrediction {
   String isSch;
   String isDly;
   String isFlt;
-  TrainRunPrediction(
-      this.staId,
-      this.stpId,
-      this.staNm,
-      this.stpDe,
-      this.rn,
-      this.rt,
-      this.destSt,
-      this.destNm,
-      this.trDr,
-      this.prdt,
-      this.arrT,
-      this.isApp,
-      this.isSch,
-      this.isDly,
-      this.isFlt);
+  TrainRunPrediction(this.staId, this.stpId, this.staNm, this.stpDe, this.rn, this.rt, this.destSt,
+      this.destNm, this.trDr, this.prdt, this.arrT, this.isApp, this.isSch, this.isDly, this.isFlt);
 }
 
 class MyBehavior extends ScrollBehavior {
   @override
-  Widget buildViewportChrome(
-      BuildContext context, Widget child, AxisDirection axisDirection) {
+  Widget buildViewportChrome(BuildContext context, Widget child, AxisDirection axisDirection) {
     return child;
   }
 }
@@ -116,9 +101,7 @@ class _TrainViewState extends State<TrainView> {
         setState(() {
           predictions = s;
         });
-        if (!predictions
-            .map((e) => e.staId)
-            .contains(widget.prediction.staId)) {
+        if (!predictions.map((e) => e.staId).contains(widget.prediction.staId)) {
           setState(() {
             statusTitle = "Train left Station";
           });
@@ -194,20 +177,15 @@ class _TrainViewState extends State<TrainView> {
           var found = false;
           for (var p in predictions) {
             if (!found && p.staId == widget.prediction.staId) {
-              mainInfo =
-                  new MainInfo(p.staNm, p.staId, p.arrT, p.isApp, p.isDly);
+              mainInfo = new MainInfo(p.staNm, p.staId, p.arrT, p.isApp, p.isDly);
               mainTime = p.arrT;
               found = true;
             }
           }
         }
       } else {
-        mainInfo = new MainInfo(
-            updatedPrediction.staNm,
-            updatedPrediction.staId,
-            updatedPrediction.arrT,
-            updatedPrediction.isApp,
-            updatedPrediction.isDly);
+        mainInfo = new MainInfo(updatedPrediction.staNm, updatedPrediction.staId,
+            updatedPrediction.arrT, updatedPrediction.isApp, updatedPrediction.isDly);
         // mainTime = updatedPrediction.arrT;
       }
     } else {
@@ -215,8 +193,7 @@ class _TrainViewState extends State<TrainView> {
         if (predictions.map((e) => e.staId).contains(mainInfo.staId)) {
           for (var p in predictions) {
             if (p.staId == mainInfo.staId) {
-              mainInfo =
-                  new MainInfo(p.staNm, p.staId, p.arrT, p.isApp, p.isDly);
+              mainInfo = new MainInfo(p.staNm, p.staId, p.arrT, p.isApp, p.isDly);
             }
           }
         } else {
@@ -230,8 +207,7 @@ class _TrainViewState extends State<TrainView> {
     }
 
     if (predictions != null && predictions.length > 0) {
-      var lastStopDiff =
-          (getTimeFromString(predictions.last.arrT).difference(DateTime.now()));
+      var lastStopDiff = (getTimeFromString(predictions.last.arrT).difference(DateTime.now()));
 
       var lastStopDiffSec = (lastStopDiff.inSeconds);
       if (lastStopDiffSec < 25) {
@@ -247,8 +223,7 @@ class _TrainViewState extends State<TrainView> {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(top: 5),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -291,8 +266,7 @@ class _TrainViewState extends State<TrainView> {
               Container(
                 padding: EdgeInsets.symmetric(vertical: 20),
                 width: double.infinity,
-                color:
-                    isDark(context) ? getSecondary(context) : Colors.grey[100],
+                color: isDark(context) ? getSecondary(context) : Colors.grey[100],
                 child: Align(
                   alignment: Alignment.center,
                   child: Container(
@@ -319,9 +293,8 @@ class _TrainViewState extends State<TrainView> {
                           margin: EdgeInsets.only(right: 8),
                           padding: EdgeInsets.all(4),
                           decoration: BoxDecoration(
-                            color: isDark(context)
-                                ? Colors.white.withOpacity(0.1)
-                                : Colors.grey[100],
+                            color:
+                                isDark(context) ? Colors.white.withOpacity(0.1) : Colors.grey[100],
                             borderRadius: BorderRadius.all(
                               Radius.circular(10),
                             ),
@@ -337,10 +310,8 @@ class _TrainViewState extends State<TrainView> {
                         Center(
                           child: Text(
                             "${convertShortColorDisplay(updatedPrediction.rt)} ${convertShortColorDisplay(updatedPrediction.rt).contains('Line') ? '' : 'Line'}",
-                            style: TextStyle(
-                                color: color,
-                                fontSize: 21,
-                                fontWeight: FontWeight.w600),
+                            style:
+                                TextStyle(color: color, fontSize: 21, fontWeight: FontWeight.w600),
                           ),
                         ),
                         Padding(
@@ -352,23 +323,20 @@ class _TrainViewState extends State<TrainView> {
                         ),
                         Text(
                           mainInfo.name,
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w600),
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                                 "${(mainInfo.isApp == "1") ? 'status.now'.tr() : formatTime(convertShortColor(mainInfo.arrT), updatedPrediction.prdt, false, preciseNow: true)}",
-                                style: TextStyle(
-                                    fontSize: 45, fontWeight: FontWeight.w600)),
+                                style: TextStyle(fontSize: 45, fontWeight: FontWeight.w600)),
                             if ((mainInfo.isApp == "0" &&
                                     formatTime(convertShortColor(mainInfo.arrT),
-                                            updatedPrediction.prdt, false,
-                                            preciseNow: true) !=
+                                            updatedPrediction.prdt, false, preciseNow: true) !=
                                         "Late") &&
-                                formatTime(convertShortColor(mainInfo.arrT),
-                                        updatedPrediction.prdt, false,
+                                formatTime(convertShortColor(mainInfo.arrT), updatedPrediction.prdt,
+                                        false,
                                         preciseNow: true) !=
                                     "Now") ...[
                               Container(width: 5),
@@ -388,12 +356,8 @@ class _TrainViewState extends State<TrainView> {
                             "${(updatedPrediction.isDly == "1" ? tr('predictionRow.delayed') : tr('predictionRow.onTime'))}",
                             style: TextStyle(
                                 color: isDark(context)
-                                    ? ((updatedPrediction.isDly == "1"
-                                        ? Colors.red
-                                        : color))
-                                    : ((updatedPrediction.isDly == "1"
-                                        ? Colors.red
-                                        : color)),
+                                    ? ((updatedPrediction.isDly == "1" ? Colors.red : color))
+                                    : ((updatedPrediction.isDly == "1" ? Colors.red : color)),
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -433,9 +397,7 @@ class _TrainViewState extends State<TrainView> {
                                 ),
                               ),
                               child: Icon(
-                                widget.isBus
-                                    ? Icons.directions_bus
-                                    : Icons.train,
+                                widget.isBus ? Icons.directions_bus : Icons.train,
                                 size: 25,
                               ),
                             ),

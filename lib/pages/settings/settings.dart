@@ -18,8 +18,8 @@ class SettingsData {
   bool showMap;
   bool showDarkMap;
   bool showAlerts;
-  SettingsData(this.closestStationEnabled, this.showExtraInformation,
-      this.showMap, this.showDarkMap, this.showAlerts);
+  SettingsData(this.closestStationEnabled, this.showExtraInformation, this.showMap,
+      this.showDarkMap, this.showAlerts);
 }
 
 Future<SettingsData> getSettings() async {
@@ -95,8 +95,7 @@ class _SettingsState extends State<Settings> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('btmBar.btmBar2'.tr(),
-                        style: Theme.of(context).textTheme.headline1),
+                    Text('btmBar.btmBar2'.tr(), style: Theme.of(context).textTheme.headline1),
                   ],
                 ),
                 Padding(
@@ -111,8 +110,7 @@ class _SettingsState extends State<Settings> {
                     sSettings.showExtraInformation = value;
                   });
 
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
                   prefs.setBool("showExtraInformation", value);
                 }),
                 Padding(
@@ -126,23 +124,19 @@ class _SettingsState extends State<Settings> {
                   setState(() {
                     sSettings.closestStationEnabled = value;
                   });
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
                   prefs.setBool("closestStationEnabled", value);
                 }),
                 Padding(
                   padding: const EdgeInsets.only(top: 3, bottom: 2),
                   child: DividerLine(),
                 ),
-                ToggleSwitch(
-                    'settings.showMap.title'.tr(),
-                    'settings.showMap.subtitle'.tr(),
+                ToggleSwitch('settings.showMap.title'.tr(), 'settings.showMap.subtitle'.tr(),
                     sSettings.showMap, (value) async {
                   setState(() {
                     sSettings.showMap = value;
                   });
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
                   prefs.setBool("showMap", value);
                 }),
                 Padding(
@@ -155,8 +149,7 @@ class _SettingsState extends State<Settings> {
                     title: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('settings.theme.theme'.tr(),
-                            style: TextStyle(fontSize: 21)),
+                        Text('settings.theme.theme'.tr(), style: TextStyle(fontSize: 21)),
                       ],
                     ),
                     trailing: Padding(
@@ -175,18 +168,14 @@ class _SettingsState extends State<Settings> {
                           });
 
                           if (newIndex == 0) {
-                            ThemeModeHandler.of(context)
-                                .saveThemeMode(ThemeMode.system);
+                            ThemeModeHandler.of(context).saveThemeMode(ThemeMode.system);
                           } else if (newIndex == 1) {
-                            ThemeModeHandler.of(context)
-                                .saveThemeMode(ThemeMode.dark);
+                            ThemeModeHandler.of(context).saveThemeMode(ThemeMode.dark);
                           } else {
-                            ThemeModeHandler.of(context)
-                                .saveThemeMode(ThemeMode.light);
+                            ThemeModeHandler.of(context).saveThemeMode(ThemeMode.light);
                           }
                         },
-                        items: themeOptions
-                            .map<DropdownMenuItem<String>>((String value) {
+                        items: themeOptions.map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(
@@ -205,15 +194,12 @@ class _SettingsState extends State<Settings> {
                 ),
                 if (sSettings.showMap &&
                     (selectedThemeOption == 0 || selectedThemeOption == 1)) ...[
-                  ToggleSwitch(
-                      'settings.darkMap.title'.tr(),
-                      'settings.darkMap.subtitle'.tr(),
+                  ToggleSwitch('settings.darkMap.title'.tr(), 'settings.darkMap.subtitle'.tr(),
                       sSettings.showDarkMap, (value) async {
                     setState(() {
                       sSettings.showDarkMap = value;
                     });
-                    SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
                     prefs.setBool("showDarkMap", value);
                   }),
                   Padding(
@@ -240,20 +226,17 @@ class _SettingsState extends State<Settings> {
                               builder: (i, snapshot) {
                                 if (snapshot.hasData) {
                                   if (snapshot.data.contains("denied")) {
-                                    return Text(
-                                        'settings.location.disabled'.tr(),
-                                        style: TextStyle(
-                                            fontSize: 18, color: Colors.red));
+                                    return Text('settings.location.disabled'.tr(),
+                                        style: TextStyle(fontSize: 18, color: Colors.red));
                                   } else {
                                     return Container(
                                       child: Text(snapshot.data,
                                           style: TextStyle(
                                               fontSize: 18,
-                                              color: snapshot.data ==
-                                                      'settings.location.enabled'
-                                                          .tr()
-                                                  ? Colors.green
-                                                  : Colors.red)),
+                                              color:
+                                                  snapshot.data == 'settings.location.enabled'.tr()
+                                                      ? Colors.green
+                                                      : Colors.red)),
                                     );
                                   }
                                 } else {
@@ -277,15 +260,12 @@ class _SettingsState extends State<Settings> {
                     child: DividerLine(),
                   ),
                 ],
-                ToggleSwitch(
-                    'Show Alerts',
-                    'Display station alerts/issues prominently',
+                ToggleSwitch('Show Alerts', 'Display station alerts/issues prominently',
                     sSettings.showAlerts, (value) async {
                   setState(() {
                     sSettings.showAlerts = value;
                   });
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
                   prefs.setBool("showAlerts", value);
                 }),
                 Padding(
@@ -297,8 +277,7 @@ class _SettingsState extends State<Settings> {
                     contentPadding: EdgeInsets.symmetric(horizontal: 5),
                     title: Padding(
                       padding: const EdgeInsets.only(top: 5),
-                      child: Text("Contact/Bug Fix",
-                          style: TextStyle(fontSize: 21)),
+                      child: Text("Contact/Bug Fix", style: TextStyle(fontSize: 21)),
                     ),
                     subtitle: Padding(
                       padding: const EdgeInsets.only(top: 4),
@@ -307,9 +286,7 @@ class _SettingsState extends State<Settings> {
                         style: TextStyle(
                             height: 1.3,
                             fontSize: 17,
-                            color: isDark(context)
-                                ? Colors.grey[400]
-                                : Colors.grey[600]),
+                            color: isDark(context) ? Colors.grey[400] : Colors.grey[600]),
                       ),
                     ),
                     trailing: defaultTargetPlatform != TargetPlatform.iOS
@@ -369,8 +346,7 @@ class SettingsLabel extends StatelessWidget {
           child: Text(
             description,
             style: TextStyle(
-                fontSize: 17,
-                color: isDark(context) ? Colors.grey[400] : Colors.grey[600]),
+                fontSize: 17, color: isDark(context) ? Colors.grey[400] : Colors.grey[600]),
           ),
         ),
         Container(
@@ -384,9 +360,7 @@ class SettingsLabel extends StatelessWidget {
 Future<String> checkLocationEnabled() async {
   try {
     Position position = await getLastKnownPosition();
-    return position != null
-        ? 'settings.location.enabled'.tr()
-        : 'settings.location.disabled'.tr();
+    return position != null ? 'settings.location.enabled'.tr() : 'settings.location.disabled'.tr();
   } catch (e) {
     return 'settings.location.disabled'.tr();
   }

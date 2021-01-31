@@ -35,12 +35,9 @@ class Line {
   Line(name, displayName, color, darkColor, darkText, {this.note, this.loops}) {
     this.name = name;
     this.displayName = displayName;
-    this.darkText =
-        Color(int.parse(darkText.substring(0, 6), radix: 16) + 0xFF000000);
-    this.color =
-        Color(int.parse(color.substring(0, 6), radix: 16) + 0xFF000000);
-    this.darkColor =
-        Color(int.parse(darkColor.substring(0, 6), radix: 16) + 0xFF000000);
+    this.darkText = Color(int.parse(darkText.substring(0, 6), radix: 16) + 0xFF000000);
+    this.color = Color(int.parse(color.substring(0, 6), radix: 16) + 0xFF000000);
+    this.darkColor = Color(int.parse(darkColor.substring(0, 6), radix: 16) + 0xFF000000);
   }
 }
 
@@ -153,9 +150,7 @@ class Service {
   String id;
   String backColor;
   String textColor;
-
-  Service(this.type, this.description, this.name, this.id, this.backColor,
-      this.textColor);
+  Service(this.type, this.description, this.name, this.id, this.backColor, this.textColor);
 }
 
 class Alert {
@@ -169,17 +164,8 @@ class Alert {
   bool tbd;
   bool majorAlert;
   List<Service> impactedServices;
-  Alert(
-      this.id,
-      this.headline,
-      this.shortDescription,
-      this.severityScore,
-      this.severityColor,
-      this.eventStart,
-      this.eventEnd,
-      this.tbd,
-      this.majorAlert,
-      this.impactedServices);
+  Alert(this.id, this.headline, this.shortDescription, this.severityScore, this.severityColor,
+      this.eventStart, this.eventEnd, this.tbd, this.majorAlert, this.impactedServices);
 }
 
 class LineLocations {
@@ -229,8 +215,7 @@ class Result {
   IconData icon;
   int itemType; //0 for train line, 1 for train station, 2 for bus line, 3 for bus station
   var passData;
-  Result(this.leading, this.title, this.itemType, this.passData,
-      {this.lines, this.icon});
+  Result(this.leading, this.title, this.itemType, this.passData, {this.lines, this.icon});
 }
 
 class Stop {
@@ -243,6 +228,6 @@ class Stop {
   String locationType;
   String parent;
   bool isAda;
-  Stop(this.id, this.code, this.name, this.desc, this.lat, this.lon,
-      this.locationType, this.parent, this.isAda);
+  Stop(this.id, this.code, this.name, this.desc, this.lat, this.lon, this.locationType, this.parent,
+      this.isAda);
 }

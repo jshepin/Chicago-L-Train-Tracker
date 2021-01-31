@@ -38,8 +38,7 @@ Set<Polyline> getPolyLine(Station station, context) {
   return polyLineSet;
 }
 
-Future<BitmapDescriptor> createCustomMarkerBitmap(
-    String title, Color color) async {
+Future<BitmapDescriptor> createCustomMarkerBitmap(String title, Color color) async {
   TextSpan span = new TextSpan(
     style: new TextStyle(
       fontSize: 35.0,
@@ -70,9 +69,8 @@ Future<BitmapDescriptor> createCustomMarkerBitmap(
   tp.paint(c, new Offset(0.0, 0.0));
 
   Picture p = recorder.endRecording();
-  ByteData pngBytes =
-      await (await p.toImage(tp.width.toInt() + 40, tp.height.toInt() + 20))
-          .toByteData(format: ImageByteFormat.png);
+  ByteData pngBytes = await (await p.toImage(tp.width.toInt() + 40, tp.height.toInt() + 20))
+      .toByteData(format: ImageByteFormat.png);
 
   Uint8List data = Uint8List.view(pngBytes.buffer);
 
@@ -93,8 +91,7 @@ class Station_view extends StatefulWidget {
   Line line;
   Station_view(this.station, this.stations, this.line, this.color, this.reload);
   @override
-  Station_viewState createState() =>
-      Station_viewState(station, stations, color, reload);
+  Station_viewState createState() => Station_viewState(station, stations, color, reload);
 }
 
 String reduce(String s) {
@@ -288,8 +285,7 @@ class Station_viewState extends State<Station_view> {
                 if (snap.hasData) {
                   favorited = snap.data.contains(selectedStation.id);
                   return Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
+                    padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -338,33 +334,26 @@ class Station_viewState extends State<Station_view> {
                                     tooltip: 'icons.favorite'.tr(),
                                     iconSize: 28,
                                     icon: Icon(
-                                      favorited
-                                          ? Icons.favorite
-                                          : Icons.favorite_border,
+                                      favorited ? Icons.favorite : Icons.favorite_border,
                                     ),
                                     onPressed: () async {
                                       SharedPreferences prefs =
                                           await SharedPreferences.getInstance();
 
-                                      List<String> savedStations = prefs
-                                              .getStringList("savedStations") ??
-                                          [];
-                                      if (savedStations.contains(
-                                          selectedStation.id.toString())) {
+                                      List<String> savedStations =
+                                          prefs.getStringList("savedStations") ?? [];
+                                      if (savedStations.contains(selectedStation.id.toString())) {
                                         setState(() {
                                           favorited = false;
                                         });
-                                        savedStations.remove(
-                                            selectedStation.id.toString());
+                                        savedStations.remove(selectedStation.id.toString());
                                       } else {
                                         setState(() {
                                           favorited = true;
                                         });
-                                        savedStations
-                                            .add(selectedStation.id.toString());
+                                        savedStations.add(selectedStation.id.toString());
                                       }
-                                      prefs.setStringList(
-                                          'savedStations', savedStations);
+                                      prefs.setStringList('savedStations', savedStations);
                                     },
                                   ),
                                 ),
@@ -389,8 +378,7 @@ class Station_viewState extends State<Station_view> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 10, bottom: 0),
+                              padding: const EdgeInsets.only(left: 10, bottom: 0),
                               child: Text(
                                 selectedStation.name,
                                 overflow: TextOverflow.clip,
@@ -403,8 +391,7 @@ class Station_viewState extends State<Station_view> {
                                   padding: EdgeInsets.only(right: 6, top: 4),
                                   child: ConnectionIndicator(),
                                 ),
-                                _settings.showExtraInformation &&
-                                        selectedStation.lines.length > 1
+                                _settings.showExtraInformation && selectedStation.lines.length > 1
                                     ? Container()
                                     : AccessiblilityRow(selectedStation)
                               ],
@@ -422,21 +409,17 @@ class Station_viewState extends State<Station_view> {
                                         Container(
                                           width: 10,
                                         ),
-                                        for (var color
-                                            in selectedStation.lines) ...[
+                                        for (var color in selectedStation.lines) ...[
                                           ColorCircle(
-                                              color: color,
-                                              selectedStation: selectedStation),
+                                              color: color, selectedStation: selectedStation),
                                         ],
                                       ],
                                     ),
                                   )
                                 : Container(),
-                            _settings.showExtraInformation &&
-                                    selectedStation.lines.length > 1
+                            _settings.showExtraInformation && selectedStation.lines.length > 1
                                 ? Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 10, right: 5),
+                                    padding: const EdgeInsets.only(top: 10, right: 5),
                                     child: AccessiblilityRow(selectedStation),
                                   )
                                 : Container(),
@@ -445,8 +428,7 @@ class Station_viewState extends State<Station_view> {
                         if (station.note != null) ...[
                           Container(height: 6),
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 14.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 14.0),
                             child: Text(
                               station.note,
                               style: TextStyle(height: 1.4, fontSize: 16),
@@ -480,8 +462,7 @@ class Station_viewState extends State<Station_view> {
                         if (_settings.showAlerts && (_alerts != null)) ...[
                           for (var alert in _alerts) ...[
                             Padding(
-                              padding:
-                                  EdgeInsets.only(left: 11, bottom: 5, top: 9),
+                              padding: EdgeInsets.only(left: 11, bottom: 5, top: 9),
                               child: Text(
                                 "There ${_alerts.length != 1 ? 'are' : 'is'} ${_alerts.length} alert${_alerts.length != 1 ? "s" : ''} for this station",
                                 style: TextStyle(fontSize: 18),
@@ -510,33 +491,21 @@ class Station_viewState extends State<Station_view> {
                                                 child: GoogleMap(
                                                   mapType: MapType.normal,
                                                   gestureRecognizers: Set()
-                                                    ..add(Factory<
-                                                            PanGestureRecognizer>(
-                                                        () =>
-                                                            PanGestureRecognizer()))
-                                                    ..add(Factory<
-                                                            VerticalDragGestureRecognizer>(
-                                                        () =>
-                                                            VerticalDragGestureRecognizer())),
-                                                  polylines: getPolyLine(
-                                                      selectedStation, context),
-                                                  onMapCreated:
-                                                      (GoogleMapController
-                                                          controller) {
+                                                    ..add(Factory<PanGestureRecognizer>(
+                                                        () => PanGestureRecognizer()))
+                                                    ..add(Factory<VerticalDragGestureRecognizer>(
+                                                        () => VerticalDragGestureRecognizer())),
+                                                  polylines: getPolyLine(selectedStation, context),
+                                                  onMapCreated: (GoogleMapController controller) {
                                                     controller = controller;
-                                                    controller
-                                                        .setMapStyle(_mapStyle);
+                                                    controller.setMapStyle(_mapStyle);
                                                   },
-                                                  initialCameraPosition:
-                                                      CameraPosition(
-                                                          target: LatLng(
-                                                              selectedStation
-                                                                  .lat,
-                                                              selectedStation
-                                                                  .long),
-                                                          zoom: 14
-                                                          // zoom: 16,
-                                                          ),
+                                                  initialCameraPosition: CameraPosition(
+                                                      target: LatLng(selectedStation.lat,
+                                                          selectedStation.long),
+                                                      zoom: 14
+                                                      // zoom: 16,
+                                                      ),
                                                   markers: markerSnapshot.data,
                                                 ));
                                           } else {
@@ -549,8 +518,7 @@ class Station_viewState extends State<Station_view> {
                                   padding: const EdgeInsets.only(top: 20),
                                   child: Center(
                                       child: CircularProgressIndicator(
-                                    valueColor:
-                                        AlwaysStoppedAnimation<Color>(color),
+                                    valueColor: AlwaysStoppedAnimation<Color>(color),
                                   )),
                                 )
                       ],

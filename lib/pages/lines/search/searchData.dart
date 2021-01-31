@@ -4,8 +4,7 @@ import 'package:CTA_Tracker/exports.dart';
 List<BusRoute> getItems(List<BusRoute> s, query) {
   List<BusRoute> routes = [];
   for (BusRoute route in s) {
-    if (queryContains(route.id, query) ||
-        queryContains(route.longName, query)) {
+    if (queryContains(route.id, query) || queryContains(route.longName, query)) {
       routes.add(route);
     }
   }
@@ -17,16 +16,14 @@ List<Result> getResults(trains, busses, query) {
 
   List<Station> stations = [];
   for (Station station in trains) {
-    if (queryContains(station.name, query) ||
-        queryContains(station.id, query)) {
+    if (queryContains(station.name, query) || queryContains(station.id, query)) {
       stations.add(station);
     }
   }
 
   List<BusRoute> routes = [];
   for (BusRoute route in busses) {
-    if (queryContains(route.id, query) ||
-        queryContains(route.longName, query)) {
+    if (queryContains(route.id, query) || queryContains(route.longName, query)) {
       routes.add(route);
     }
   }
@@ -39,15 +36,11 @@ List<Result> getResults(trains, busses, query) {
     }
   }
 
-  List<Result> a = stations
-      .map((e) =>
-          new Result("", e.name, 1, e, icon: Icons.train, lines: e.lines))
-      .toList();
-  List<Result> b =
-      routes.map((e) => new Result(e.id, e.longName, 2, e)).toList();
-  List<Result> c = stops
-      .map((e) => new Result("", e.name, 3, e, icon: Icons.directions_bus))
-      .toList();
+  List<Result> a =
+      stations.map((e) => new Result("", e.name, 1, e, icon: Icons.train, lines: e.lines)).toList();
+  List<Result> b = routes.map((e) => new Result(e.id, e.longName, 2, e)).toList();
+  List<Result> c =
+      stops.map((e) => new Result("", e.name, 3, e, icon: Icons.directions_bus)).toList();
   for (var x in a) {
     results.add(x);
   }

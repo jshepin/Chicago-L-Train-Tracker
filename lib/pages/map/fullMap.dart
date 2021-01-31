@@ -294,9 +294,7 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     getLocations("Red");
     getTopBar();
-    if (isDark(context) &&
-        fullMapSettings != null &&
-        fullMapSettings.showDarkMap != null) {
+    if (isDark(context) && fullMapSettings != null && fullMapSettings.showDarkMap != null) {
       if (fullMapSettings.showDarkMap) {
         rootBundle.loadString('assets/darkMapStyle.txt').then((string) {
           _mapStyle = string;
@@ -322,8 +320,7 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
                             indoorViewEnabled: false,
                             rotateGesturesEnabled: false,
                             gestureRecognizers: Set()
-                              ..add(Factory<PanGestureRecognizer>(
-                                  () => PanGestureRecognizer()))
+                              ..add(Factory<PanGestureRecognizer>(() => PanGestureRecognizer()))
                               ..add(Factory<VerticalDragGestureRecognizer>(
                                   () => VerticalDragGestureRecognizer())),
                             polylines: getFullPolyline(mapLayers, context),
@@ -332,9 +329,8 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
                               fullController.setMapStyle(_mapStyle);
                             },
                             initialCameraPosition: CameraPosition(
-                              target: all
-                                  ? LatLng(41.920288, -87.692974)
-                                  : getCenter(line.name).center,
+                              target:
+                                  all ? LatLng(41.920288, -87.692974) : getCenter(line.name).center,
                               zoom: all ? 11 : getCenter(line.name).zoom,
                             ),
                             markers: markers.data,
@@ -367,8 +363,7 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
                       },
                       toggleLayerCallback: (x) {
                         setState(() {
-                          mapLayers[lines.indexOf(x)] =
-                              !mapLayers[lines.indexOf(x)];
+                          mapLayers[lines.indexOf(x)] = !mapLayers[lines.indexOf(x)];
                         });
                       },
                       toggleStationsCallback: () {
@@ -397,8 +392,7 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
                   child: ConnectionIndicator(background: true),
                 ),
               ),
-            if (selectedTrain != null)
-              MapTrainCard(selectedTrain, selectedColor),
+            if (selectedTrain != null) MapTrainCard(selectedTrain, selectedColor),
             if (selectedStation != null) MapStationCard(selectedStation)
           ],
         ),

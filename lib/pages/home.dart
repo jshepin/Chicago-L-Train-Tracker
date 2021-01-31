@@ -20,19 +20,15 @@ class Main extends StatelessWidget {
             fontFamily: 'Roboto',
             brightness: Brightness.dark,
             textTheme: TextTheme(
-                headline1: TextStyle(
-                    fontSize: 49,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white)),
+                headline1:
+                    TextStyle(fontSize: 49, fontWeight: FontWeight.w600, color: Colors.white)),
           ),
           theme: ThemeData(
             fontFamily: 'Roboto',
             brightness: Brightness.light,
             textTheme: TextTheme(
-                headline1: TextStyle(
-                    fontSize: 49,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black)),
+                headline1:
+                    TextStyle(fontSize: 49, fontWeight: FontWeight.w600, color: Colors.black)),
           ),
         );
       },
@@ -118,8 +114,7 @@ class _HomeState extends State<Home> {
                               Row(
                                 children: <Widget>[
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 10, top: 2),
+                                    padding: const EdgeInsets.only(right: 10, top: 2),
                                     child: ConnectionIndicator(),
                                   ),
                                   IconButton(
@@ -152,17 +147,14 @@ class _HomeState extends State<Home> {
                                       return Column(
                                         children: [
                                           if (_connection != null)
-                                            for (StationWithDistance s
-                                                in snapshot.data) ...[
+                                            for (StationWithDistance s in snapshot.data) ...[
                                               PredictionRow(
                                                 _settingsData,
                                                 stop: s.isBus ? s.stop : null,
-                                                station:
-                                                    s.isBus ? null : s.station,
+                                                station: s.isBus ? null : s.station,
                                                 stations: s.isBus
                                                     ? null
-                                                    : getStations(
-                                                        s.station.lines[0]),
+                                                    : getStations(s.station.lines[0]),
                                                 distance: s.distance,
                                                 isConnected: _connection,
                                                 callback: () {
@@ -188,8 +180,7 @@ class _HomeState extends State<Home> {
                                     if (snapshot.data.length == 0) {
                                       return Center(
                                         child: Container(
-                                          constraints:
-                                              BoxConstraints(maxWidth: 500),
+                                          constraints: BoxConstraints(maxWidth: 500),
                                           width: double.infinity,
                                           decoration: BoxDecoration(
                                               color: getPrimary(context),
@@ -197,35 +188,27 @@ class _HomeState extends State<Home> {
                                                 BoxShadow(
                                                   color: isDark(context)
                                                       ? Colors.transparent
-                                                      : Colors.grey
-                                                          .withOpacity(0.2),
+                                                      : Colors.grey.withOpacity(0.2),
                                                   spreadRadius: 3,
                                                   blurRadius: 7,
                                                 ),
                                               ],
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10))),
+                                              borderRadius: BorderRadius.all(Radius.circular(10))),
                                           padding: EdgeInsets.all(8),
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal: 17),
+                                          margin: EdgeInsets.symmetric(horizontal: 17),
                                           child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
                                               Text(
                                                 "Hi there 👋 ",
                                                 style: TextStyle(
-                                                    fontSize: 22,
-                                                    fontWeight:
-                                                        FontWeight.w600),
+                                                    fontSize: 22, fontWeight: FontWeight.w600),
                                               ),
                                               Text(
                                                 "Welcome to Loop, favorited stops and stations will appear here.",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight:
-                                                        FontWeight.w500),
+                                                    fontSize: 18, fontWeight: FontWeight.w500),
                                               ),
                                             ],
                                           ),
@@ -236,8 +219,7 @@ class _HomeState extends State<Home> {
                                         children: [
                                           for (var id in snapshot.data) ...[
                                             Padding(
-                                                padding: EdgeInsets.only(
-                                                    top: 0, bottom: 0),
+                                                padding: EdgeInsets.only(top: 0, bottom: 0),
                                                 child: DividerLine()),
                                             id.contains("%BUS%")
                                                 ? PredictionRow(
@@ -249,11 +231,9 @@ class _HomeState extends State<Home> {
                                                   )
                                                 : PredictionRow(
                                                     _settingsData,
-                                                    station:
-                                                        getStationFromID(id),
-                                                    stations: getStations(
-                                                        getStationFromID(id)
-                                                            .lines[0]),
+                                                    station: getStationFromID(id),
+                                                    stations:
+                                                        getStations(getStationFromID(id).lines[0]),
                                                     callback: () {
                                                       setState(() {});
                                                     },

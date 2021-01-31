@@ -15,16 +15,13 @@ class AccessiblilityRow extends StatelessWidget {
         builder: (c, snapshot) {
           if (snapshot.hasData) {
             return Padding(
-              padding: isTrainRow != null
-                  ? EdgeInsets.only(right: 0)
-                  : EdgeInsets.only(right: 10),
+              padding: isTrainRow != null ? EdgeInsets.only(right: 0) : EdgeInsets.only(right: 10),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   if (station.isAirport != null && station.isAirport)
                     Container(
-                      padding:
-                          EdgeInsets.only(left: 7, top: 1, bottom: 1, right: 1),
+                      padding: EdgeInsets.only(left: 7, top: 1, bottom: 1, right: 1),
                       child: Tooltip(
                         message: tr('icons.airport'),
                         child: Icon(
@@ -33,27 +30,22 @@ class AccessiblilityRow extends StatelessWidget {
                         ),
                       ),
                     ),
-                  if (station.ada &&
-                      (snapshot.data.showExtraInformation || showAll != null))
+                  if (station.ada && (snapshot.data.showExtraInformation || showAll != null))
                     FutureBuilder(
                       future: hasElevatorIssue(station.id),
                       builder: (c, snapshot) {
                         if (snapshot.hasData) {
                           return Container(
-                            padding: EdgeInsets.only(
-                                left: 5, top: 1, bottom: 1, right: 1),
+                            padding: EdgeInsets.only(left: 5, top: 1, bottom: 1, right: 1),
                             child: Tooltip(
-                              message: snapshot.data
-                                  ? "Accessibility Related Issue"
-                                  : tr('icons.ADA'),
+                              message:
+                                  snapshot.data ? "Accessibility Related Issue" : tr('icons.ADA'),
                               child: Icon(
                                 Icons.accessible_forward,
                                 size: isTrainRow != null ? 20 : 25,
                                 color: snapshot.data
                                     ? Colors.red
-                                    : (isDark(context)
-                                        ? Colors.white
-                                        : Colors.black),
+                                    : (isDark(context) ? Colors.white : Colors.black),
                               ),
                             ),
                           );
@@ -62,11 +54,9 @@ class AccessiblilityRow extends StatelessWidget {
                         }
                       },
                     ),
-                  if (station.parking &&
-                      (snapshot.data.showExtraInformation || showAll != null))
+                  if (station.parking && (snapshot.data.showExtraInformation || showAll != null))
                     Container(
-                      padding:
-                          EdgeInsets.only(left: 2, top: 1, bottom: 1, right: 1),
+                      padding: EdgeInsets.only(left: 2, top: 1, bottom: 1, right: 1),
                       child: Tooltip(
                         message: tr('icons.parking'),
                         child: Icon(

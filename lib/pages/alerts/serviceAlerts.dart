@@ -48,103 +48,93 @@ class _ServiceAlertsState extends State<ServiceAlerts> {
                   child: Center(child: CircularProgressIndicator()),
                 )
               : Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
-                                tooltip: "Back",
-                                iconSize: 60,
-                                padding: EdgeInsets.all(0),
-                                icon: Icon(
-                                  Icons.chevron_left,
-                                ),
-                                onPressed: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => widget.isBus
-                                            ? RouteView(widget.busRoute)
-                                            : Stations(widget.line),
-                                      ));
-                                }),
+                        IconButton(
+                            tooltip: "Back",
+                            iconSize: 60,
+                            padding: EdgeInsets.all(0),
+                            icon: Icon(
+                              Icons.chevron_left,
+                            ),
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => widget.isBus
+                                        ? RouteView(widget.busRoute)
+                                        : Stations(widget.line),
+                                  ));
+                            }),
+                        Container(
+                          padding: EdgeInsets.only(top: 4),
+                          child: Text("Alerts",
+                              style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600)),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          if (!widget.isBus)
                             Container(
-                              padding: EdgeInsets.only(top: 4),
-                              child: Text("Alerts",
-                                  style: TextStyle(
-                                      fontSize: 40,
-                                      fontWeight: FontWeight.w600)),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              if (!widget.isBus)
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      left: 5, top: 0, right: 10),
-                                  height: 38,
-                                  width: 38,
-                                  decoration: BoxDecoration(
-                                      color: widget.isBus
-                                          ? Colors.red
-                                          : (isDark(context)
-                                              ? widget.line.darkColor
-                                              : widget.line.color),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(100))),
-                                  child: Center(
-                                      child: Text(
-                                    widget.line.name.substring(0, 1),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.w700),
-                                  )),
-                                ),
-                              Container(
-                                child: Text(
-                                    "${widget.isBus ? 'Route #' : ''}${widget.isBus ? widget.busRoute.id : widget.line.name}",
-                                    style: TextStyle(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.w500,
-                                    )),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 8),
-                          child: DividerLine(),
-                        ),
-                        if (alerts != null && alerts.length == 0) ...[
-                          Center(
-                            child: Container(
-                              padding: const EdgeInsets.only(top: 5),
-                              decoration: BoxDecoration(),
-                              child: Text(
-                                "Yay, no alerts today",
+                              margin: EdgeInsets.only(left: 5, top: 0, right: 10),
+                              height: 38,
+                              width: 38,
+                              decoration: BoxDecoration(
+                                  color: widget.isBus
+                                      ? Colors.red
+                                      : (isDark(context)
+                                          ? widget.line.darkColor
+                                          : widget.line.color),
+                                  borderRadius: BorderRadius.all(Radius.circular(100))),
+                              child: Center(
+                                  child: Text(
+                                widget.line.name.substring(0, 1),
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w600),
-                              ),
+                                    color: Colors.white, fontSize: 19, fontWeight: FontWeight.w700),
+                              )),
                             ),
-                          )
-                        ],
-                        for (Alert alert in alerts) ...[
-                          AlertCard(alert),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4, bottom: 7),
-                            child: DividerLine(),
+                          Container(
+                            child: Text(
+                                "${widget.isBus ? 'Route #' : ''}${widget.isBus ? widget.busRoute.id : widget.line.name}",
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.w500,
+                                )),
                           ),
-                        ]
-                      ]),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 8),
+                      child: DividerLine(),
+                    ),
+                    if (alerts != null && alerts.length == 0) ...[
+                      Center(
+                        child: Container(
+                          padding: const EdgeInsets.only(top: 5),
+                          decoration: BoxDecoration(),
+                          child: Text(
+                            "Yay, no alerts today",
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      )
+                    ],
+                    for (Alert alert in alerts) ...[
+                      AlertCard(alert),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4, bottom: 7),
+                        child: DividerLine(),
+                      ),
+                    ]
+                  ]),
                 ),
         ),
       ),

@@ -43,11 +43,9 @@ class DataSearch extends SearchDelegate<String> {
     final ThemeData theme = Theme.of(context);
     return theme.copyWith(
         inputDecorationTheme: InputDecorationTheme(
-            fillColor: Colors.red,
-            hintStyle: TextStyle(color: theme.primaryTextTheme.title.color)),
+            fillColor: Colors.red, hintStyle: TextStyle(color: theme.primaryTextTheme.title.color)),
         textTheme: theme.textTheme.copyWith(
-            title: theme.textTheme.title
-                .copyWith(color: theme.primaryTextTheme.title.color)));
+            title: theme.textTheme.title.copyWith(color: theme.primaryTextTheme.title.color)));
   }
 
   @override
@@ -89,20 +87,18 @@ class GetSearchResult extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => Station_view(results[i].passData,
-                      stations, getLines()[0], Colors.red, false)),
+                  builder: (context) => Station_view(
+                      results[i].passData, stations, getLines()[0], Colors.red, false)),
             );
           } else if (results[i].itemType == 2) {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => RouteView(results[i].passData)),
+              MaterialPageRoute(builder: (context) => RouteView(results[i].passData)),
             );
           } else {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => Stop_view(results[i].passData, false)),
+              MaterialPageRoute(builder: (context) => Stop_view(results[i].passData, false)),
             );
           }
         },

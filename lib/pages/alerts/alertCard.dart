@@ -37,16 +37,13 @@ class _AlertCardState extends State<AlertCard> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    widget.alert.eventStart == null ||
-                            widget.alert.eventStart == ""
+                    widget.alert.eventStart == null || widget.alert.eventStart == ""
                         ? Container()
                         : Text(dateString(widget.alert.eventStart.toString()),
                             style: TextStyle(fontSize: 17)),
                     widget.alert.eventEnd == null || widget.alert.eventEnd == ""
                         ? Container()
-                        : Text(
-                            " - " +
-                                dateString(widget.alert.eventEnd.toString()),
+                        : Text(" - " + dateString(widget.alert.eventEnd.toString()),
                             style: TextStyle(fontSize: 17)),
                   ],
                 ),
@@ -61,8 +58,7 @@ class _AlertCardState extends State<AlertCard> {
             if (selected) ...[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Text(
-                    widget.alert.shortDescription.replaceAll("\n", "") ?? "",
+                child: Text(widget.alert.shortDescription.replaceAll("\n", "") ?? "",
                     style: TextStyle(fontSize: 17)),
               ),
             ]

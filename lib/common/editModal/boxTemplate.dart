@@ -18,9 +18,7 @@ class _BoxTemplateState extends State<BoxTemplate> {
       height: widget.height,
       width: widget.width,
       decoration: BoxDecoration(
-        border: Border.all(
-            color: widget.selected ? Color(0xff2ECC71) : Colors.grey[300],
-            width: 2),
+        border: Border.all(color: widget.selected ? Color(0xff2ECC71) : Colors.grey[300], width: 2),
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Center(

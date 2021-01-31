@@ -28,8 +28,7 @@ class InnerCard extends StatelessWidget {
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            TrainView(prediction, isBus, true),
+                        builder: (context) => TrainView(prediction, isBus, true),
                       ));
                 }
               },
@@ -41,9 +40,7 @@ class InnerCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                      color: isDark(context)
-                          ? Color(0xff424242)
-                          : Colors.grey[200],
+                      color: isDark(context) ? Color(0xff424242) : Colors.grey[200],
                       spreadRadius: 2,
                       blurRadius: 2,
                     ),
@@ -61,11 +58,8 @@ class InnerCard extends StatelessWidget {
                         "${isBus ? 'Rt. #' : ''}${isBus ? prediction.rt : convertShortColorDisplay(prediction.rt)}",
                         style: TextStyle(
                             color: isBus
-                                ? (isDark(context)
-                                    ? Colors.grey[400]
-                                    : Colors.grey[600])
-                                : textColorFromLine(
-                                    convertShortColor(prediction.rt), context),
+                                ? (isDark(context) ? Colors.grey[400] : Colors.grey[600])
+                                : textColorFromLine(convertShortColor(prediction.rt), context),
                             fontSize: smallCard ? 20 : 22,
                             fontWeight: FontWeight.w600),
                       ),
@@ -90,14 +84,8 @@ class InnerCard extends StatelessWidget {
                       height: smallCard ? 0 : 4,
                     ),
                     isBus
-                        ? Time(
-                            bPrediction: prediction,
-                            vstack: true,
-                            smallCard: smallCard)
-                        : Time(
-                            tPrediction: prediction,
-                            vstack: true,
-                            smallCard: smallCard)
+                        ? Time(bPrediction: prediction, vstack: true, smallCard: smallCard)
+                        : Time(tPrediction: prediction, vstack: true, smallCard: smallCard)
                   ],
                 ),
               ),

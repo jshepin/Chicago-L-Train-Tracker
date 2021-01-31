@@ -100,8 +100,7 @@ var gotData = false;
 Map<String, List<Prediction>> cachedPredictions = {};
 DateTime lastPredictionsCall = DateTime.now();
 
-Future<List<Prediction>> getPredictions(String stationID,
-    {bool homeView}) async {
+Future<List<Prediction>> getPredictions(String stationID, {bool homeView}) async {
   List<String> s = await getSavedStations();
 
   //get predictions based on mapid
@@ -130,8 +129,7 @@ Future<List<Prediction>> getPredictions(String stationID,
         var url =
             '${ConfigReader.getServerURL()}/arrivalpredictions?stationID&token=${ConfigReader.getAPIKEY()}';
         print("FETCHING TRAIN DATA");
-        var response = await http.get(url).timeout(const Duration(seconds: 5),
-            onTimeout: () {
+        var response = await http.get(url).timeout(const Duration(seconds: 5), onTimeout: () {
           return null;
           // return new http.Response({}, 404);
         }).catchError((e) {

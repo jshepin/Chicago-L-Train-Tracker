@@ -69,19 +69,14 @@ class _ConnectionIndicatorState extends State<ConnectionIndicator>
                 height: 9,
                 width: 9,
                 decoration: BoxDecoration(
-                    color: (!connectedIndicator
-                            ? Color(0xffCD6155)
-                            : Color(0xff2ECC71))
-                        .withOpacity(
-                            0.5 * sin(_controller.value * 2 * pi) + 0.5),
+                    color: (!connectedIndicator ? Color(0xffCD6155) : Color(0xff2ECC71))
+                        .withOpacity(0.5 * sin(_controller.value * 2 * pi) + 0.5),
                     borderRadius: BorderRadius.all(Radius.circular(20))),
               ),
               Text(
                 connectedIndicator ? "Live" : "No Connection",
                 style: TextStyle(
-                    color: !connectedIndicator
-                        ? Color(0xffCD6155)
-                        : Color(0xff2ECC71),
+                    color: !connectedIndicator ? Color(0xffCD6155) : Color(0xff2ECC71),
                     fontSize: 17),
               ),
             ],

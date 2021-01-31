@@ -47,8 +47,7 @@ class _StopViewCardState extends State<StopViewCard> {
   bool busChanged = false;
   @override
   Widget build(BuildContext context) {
-    busDPredictions =
-        getBusDestinationPredictions(widget.predictions, widget.stop);
+    busDPredictions = getBusDestinationPredictions(widget.predictions, widget.stop);
     directions = getBusDirections(widget.predictions);
     directions.insert(0, "All");
     return Container(
@@ -82,8 +81,7 @@ class _StopViewCardState extends State<StopViewCard> {
           ],
           busDPredictions.length > 2
               ? Container(
-                  constraints: BoxConstraints(
-                      minWidth: MediaQuery.of(context).size.width),
+                  constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width),
                   height: 200,
                   child: new Swiper(
                     index: busSelected,
@@ -95,8 +93,7 @@ class _StopViewCardState extends State<StopViewCard> {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              for (BusPrediction p
-                                  in busDPredictions[index].busPredictions) ...[
+                              for (BusPrediction p in busDPredictions[index].busPredictions) ...[
                                 BusViewCard(
                                   busSelected,
                                   prediction: p,
@@ -119,8 +116,7 @@ class _StopViewCardState extends State<StopViewCard> {
               : SingleChildScrollView(
                   child: Column(
                     children: [
-                      for (BusPrediction p
-                          in busDPredictions[0].busPredictions) ...[
+                      for (BusPrediction p in busDPredictions[0].busPredictions) ...[
                         BusViewCard(busSelected, prediction: p),
                       ]
                     ],

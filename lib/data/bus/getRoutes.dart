@@ -5,7 +5,6 @@ List<BusRoute> getBusRoutes() {
   var csvTable = routes();
 
   return csvTable
-      .map((e) =>
-          new BusRoute(e[0].toString(), e[1].toString(), e[2].toString()))
+      .map((e) => new BusRoute(e[0].toString(), e[1].toString(), e[2].toString()))
       .toList();
 }

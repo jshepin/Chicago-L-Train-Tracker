@@ -42,24 +42,14 @@ List<String> getNames() {
 }
 
 bool editMode = false;
-List<String> defaultNames = [
-  "Red",
-  "Brown",
-  "Blue",
-  "Green",
-  "Pink",
-  "Orange",
-  "Yellow",
-  "Purple"
-];
+List<String> defaultNames = ["Red", "Brown", "Blue", "Green", "Pink", "Orange", "Yellow", "Purple"];
 
 class _LinesState extends State<Lines> {
   void getOrderedLines({reset}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<Line> lines = getLines();
     List<Line> oLines = [];
-    List<String> orderedNames =
-        prefs.getStringList("orderedLines") ?? defaultNames;
+    List<String> orderedNames = prefs.getStringList("orderedLines") ?? defaultNames;
     if (reset != null && reset) {
       orderedNames = defaultNames;
       prefs.setStringList("orderedLines", orderedNames);
@@ -132,9 +122,7 @@ class _LinesState extends State<Lines> {
                               : Container(),
                           if (trainSelected)
                             IconButton(
-                              tooltip: editMode
-                                  ? tr('lines.saveChanges')
-                                  : tr('lines.editOrder'),
+                              tooltip: editMode ? tr('lines.saveChanges') : tr('lines.editOrder'),
                               icon: Icon(
                                 editMode ? Icons.done : Icons.edit,
                                 size: editMode ? 27 : 24,
@@ -153,8 +141,7 @@ class _LinesState extends State<Lines> {
                                   size: 32,
                                 ),
                                 onPressed: () {
-                                  showSearch(
-                                      context: context, delegate: DataSearch());
+                                  showSearch(context: context, delegate: DataSearch());
                                 },
                               ))
                         ],
@@ -197,15 +184,13 @@ class _LinesState extends State<Lines> {
                   ),
                   editMode
                       ? Padding(
-                          padding: const EdgeInsets.only(
-                              left: 10, top: 5, bottom: 5),
+                          padding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 "Tap and hold a card to reorder it",
-                                style: TextStyle(
-                                    fontSize: 18, color: Colors.grey[600]),
+                                style: TextStyle(fontSize: 18, color: Colors.grey[600]),
                               ),
                             ],
                           ),
@@ -237,19 +222,16 @@ class _LinesState extends State<Lines> {
                               onReorder: (oldIndex, newIndex) async {
                                 var copied = orderedLines;
                                 Line removedValue = copied[oldIndex];
-                                bool lastIndex =
-                                    newIndex == orderedLines.length;
+                                bool lastIndex = newIndex == orderedLines.length;
 
                                 setState(() {
                                   orderedLines.removeAt(oldIndex);
                                   lastIndex
                                       ? orderedLines.add(removedValue)
-                                      : orderedLines.insert(
-                                          newIndex, removedValue);
+                                      : orderedLines.insert(newIndex, removedValue);
                                 });
 
-                                SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
+                                SharedPreferences prefs = await SharedPreferences.getInstance();
 
                                 prefs.setStringList("orderedLines", getNames());
                                 setState(() {});
@@ -258,8 +240,7 @@ class _LinesState extends State<Lines> {
                                 for (var line in orderedLines) ...[
                                   Container(
                                       key: ValueKey(line.name),
-                                      child: LineItem(
-                                          line: line, editMode: editMode)),
+                                      child: LineItem(line: line, editMode: editMode)),
                                 ]
                               ],
                             ),
@@ -272,23 +253,17 @@ class _LinesState extends State<Lines> {
                                 itemBuilder: (c, i) {
                                   Line line = orderedLines[i];
                                   return Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       GestureDetector(
                                         onTap: () {
                                           Navigator.push(
                                             context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Stations(line)),
+                                            MaterialPageRoute(builder: (context) => Stations(line)),
                                           );
                                         },
                                         child: Column(
-                                          children: [
-                                            LineItem(
-                                                line: line, editMode: editMode)
-                                          ],
+                                          children: [LineItem(line: line, editMode: editMode)],
                                         ),
                                       ),
                                       DividerLine()
@@ -319,9 +294,7 @@ class MenuButton extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 40, vertical: 5),
       decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(
-              width: 2.0,
-              color: selected ? Colors.blue[300] : Colors.blue[100]),
+          bottom: BorderSide(width: 2.0, color: selected ? Colors.blue[300] : Colors.blue[100]),
         ),
       ),
       child: Center(
@@ -336,8 +309,8 @@ class MenuButton extends StatelessWidget {
 
 List<Stop> getStops() {
   List<Stop> stopsData = getBusStops()
-      .map((e) => new Stop(e[0].toString(), e[1].toString(), e[2], e[3], e[4],
-          e[5], e[6].toString(), e[7].toString(), e[8] == 1))
+      .map((e) => new Stop(e[0].toString(), e[1].toString(), e[2], e[3], e[4], e[5],
+          e[6].toString(), e[7].toString(), e[8] == 1))
       .toList();
   return stopsData;
 }

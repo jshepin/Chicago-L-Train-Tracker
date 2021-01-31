@@ -40,9 +40,7 @@ class StationTitle extends StatelessWidget {
                     if (alerts != null &&
                         snapshot.data.showAlerts &&
                         alerts
-                            .map((e) => (e.impactedServices
-                                .map((f) => f.id)
-                                .contains(station.id)))
+                            .map((e) => (e.impactedServices.map((f) => f.id).contains(station.id)))
                             .contains(true)) ...[
                       Tooltip(
                         message: "Station Issues",
@@ -66,8 +64,7 @@ class StationTitle extends StatelessWidget {
                   children: [
                     for (var color in station.lines) ...[
                       if ((line.name != color) ||
-                          station.name == "Garfield" &&
-                              line.name == "Green") ...[
+                          station.name == "Garfield" && line.name == "Green") ...[
                         Container(
                           margin: EdgeInsets.only(right: 4, top: 2),
                           child: Container(
@@ -96,10 +93,9 @@ class StationTitle extends StatelessWidget {
                         height: 10,
                       )
                     : Container(
-                        height:
-                            (stations.indexOf(station) == (stations.length - 1)
-                                ? 0
-                                : calculateDistance(station, stations) * 20),
+                        height: (stations.indexOf(station) == (stations.length - 1)
+                            ? 0
+                            : calculateDistance(station, stations) * 20),
                       ),
               ],
             ),

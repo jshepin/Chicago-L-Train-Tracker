@@ -15,9 +15,7 @@ class BusViewCard extends StatelessWidget {
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: isDark(context)
-                  ? Color(0xff424242)
-                  : Colors.grey[300].withOpacity(0.8),
+              color: isDark(context) ? Color(0xff424242) : Colors.grey[300].withOpacity(0.8),
               spreadRadius: 2,
               blurRadius: 2,
             )

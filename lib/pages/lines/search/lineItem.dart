@@ -14,8 +14,7 @@ class LineItem extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 5, vertical: 0),
         child: Container(
           padding: EdgeInsets.only(bottom: 0, top: 4),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10))),
+          decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -31,10 +30,8 @@ class LineItem extends StatelessWidget {
                     child: Center(
                         child: Text(
                       line.name.substring(0, 1),
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 19,
-                          fontWeight: FontWeight.w700),
+                      style:
+                          TextStyle(color: Colors.white, fontSize: 19, fontWeight: FontWeight.w700),
                     )),
                   ),
                   Column(
@@ -58,9 +55,7 @@ class LineItem extends StatelessWidget {
                                 "$x ${getDirection(line.name).indexOf(x) == 0 ? '-' : ''}",
                                 style: TextStyle(
                                     fontSize: 16,
-                                    color: isDark(context)
-                                        ? Colors.grey[400]
-                                        : Colors.grey[600]),
+                                    color: isDark(context) ? Colors.grey[400] : Colors.grey[600]),
                               ),
                             )
                           ]

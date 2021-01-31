@@ -32,9 +32,7 @@ class TimeRow extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 2, bottom: 1.5),
                         child: Text(e.contains("a") ? "am" : "pm",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: secondary)),
+                            style: TextStyle(fontWeight: FontWeight.w700, fontSize: secondary)),
                       )
                     ] else if (e == "-") ...[
                       Text(

@@ -30,8 +30,7 @@ Future<List<RouteData>> getStopsFromID(String id) async {
   if (isConnected) {
     try {
       if (true) {
-        var url =
-            '${ConfigReader.getServerURL()}/stops?id=$id&token=${ConfigReader.getAPIKEY()}';
+        var url = '${ConfigReader.getServerURL()}/stops?id=$id&token=${ConfigReader.getAPIKEY()}';
         var response = await http
             .get(url)
             .timeout(const Duration(seconds: 5), onTimeout: () {})
@@ -50,16 +49,14 @@ Future<List<RouteData>> getStopsFromID(String id) async {
           for (var x = 0; x < stops.length; x++) {
             //for each stop
             var s = stops[x];
-            StopPreview stop =
-                new StopPreview(s["stpid"], s["stpnm"], s["lat"], s["lon"]);
+            StopPreview stop = new StopPreview(s["stpid"], s["stpnm"], s["lat"], s["lon"]);
             previews.add(stop);
           }
           List<String> directions = [];
           for (var d = 0; d < data['directions'].length; d++) {
             directions.add(data['directions'][d]);
           }
-          rData.add(new RouteData(
-              data['stops'][y]['dir'].toString(), previews, directions));
+          rData.add(new RouteData(data['stops'][y]['dir'].toString(), previews, directions));
         }
 
         cachedStops.update(id, (value) {
