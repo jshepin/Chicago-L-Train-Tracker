@@ -568,8 +568,8 @@ class _StationsState extends State<Stations> {
                                                 ),
                                                 actions: <Widget>[
                                                   FlatButton(
-                                                    child: Text(
-                                                        'View Schedule'.tr()),
+                                                    child:
+                                                        Text("View Schedule"),
                                                     onPressed: () {
                                                       Navigator.pushReplacement(
                                                           context,

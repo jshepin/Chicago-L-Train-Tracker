@@ -128,8 +128,7 @@ class Stop_viewState extends State<Stop_view> {
                                                   padding:
                                                       EdgeInsets.only(right: 5),
                                                   child: IconButton(
-                                                    tooltip:
-                                                        'icons.favorite'.tr(),
+                                                    tooltip: 'Favorite',
                                                     iconSize: 28,
                                                     icon: Icon(
                                                       favorited
@@ -198,8 +197,7 @@ class Stop_viewState extends State<Stop_view> {
                                                       const EdgeInsets.only(
                                                           right: 5),
                                                   child: IconButton(
-                                                      tooltip:
-                                                          'icons.refresh'.tr(),
+                                                      tooltip: "Refresh",
                                                       iconSize: 34,
                                                       icon: Icon(Icons.refresh),
                                                       onPressed: () async {

@@ -70,21 +70,21 @@ convertShortColorDisplay(String a) {
   //convert abbreviated color into long for. ex: brn -> brown
   switch (a) {
     case "Brn":
-      return 'colors.brown'.tr();
+      return "Brown";
     case "G":
-      return 'colors.green'.tr();
+      return "Green";
     case "Org":
-      return 'colors.orange'.tr();
+      return "Orange";
     case "P":
-      return 'colors.purple'.tr();
+      return "Purple";
     case "Y":
-      return 'colors.yellow'.tr();
+      return "Yellow";
     case "Red":
-      return 'colors.red'.tr();
+      return "Red";
     case "Blue":
-      return 'colors.blue'.tr();
+      return "Blue";
     case "Pink":
-      return 'colors.pink'.tr();
+      return "Pink";
 
     default:
       return a;

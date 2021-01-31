@@ -51,7 +51,7 @@ class Time extends StatelessWidget {
         Container(height: vstack ? 3 : 0.8),
         Row(children: [
           Text(
-            "${(prediction.isApp == "1") ? 'status.now'.tr() : formatTime(convertShortColor(prediction.arrT), prediction.prdt, vstack)}",
+            "${(prediction.isApp == "1") ? 'Now' : formatTime(convertShortColor(prediction.arrT), prediction.prdt, vstack)}",
             style: TextStyle(
                 fontSize: smallCard ? 22 : 26, fontWeight: FontWeight.w600),
           ),
@@ -73,7 +73,7 @@ class Time extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 0.5),
                 child: Text(
-                  'predictionRow.timeUnit'.tr(),
+                  'Min',
                   style: TextStyle(fontSize: smallCard ? 18 : 20),
                 ),
               )

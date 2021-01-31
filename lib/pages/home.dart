@@ -14,9 +14,6 @@ class Main extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'CTA',
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
           home: Home(),
           themeMode: themeMode,
           darkTheme: ThemeData(
@@ -115,7 +112,7 @@ class _HomeState extends State<Home> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'home.title'.tr(),
+                                "Home",
                                 style: Theme.of(context).textTheme.headline1,
                               ),
                               Row(
