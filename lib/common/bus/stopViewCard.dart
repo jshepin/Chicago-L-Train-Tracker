@@ -3,7 +3,6 @@ import 'package:CTA_Tracker/common/train/predictions.dart';
 import 'package:CTA_Tracker/data/classes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-
 import 'busViewCard.dart';
 
 class StopViewCard extends StatefulWidget {
@@ -48,7 +47,6 @@ class _StopViewCardState extends State<StopViewCard> {
   bool busChanged = false;
   @override
   Widget build(BuildContext context) {
-    // fetchAlerts(widget.stop.id);
     busDPredictions =
         getBusDestinationPredictions(widget.predictions, widget.stop);
     directions = getBusDirections(widget.predictions);

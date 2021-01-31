@@ -6,6 +6,6 @@ List<BusRoute> getBusRoutes() {
 
   return csvTable
       .map((e) =>
-          new BusRoute(e[0].toString(), e[2].toString(), e[3].toString()))
+          new BusRoute(e[0].toString(), e[1].toString(), e[2].toString()))
       .toList();
 }

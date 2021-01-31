@@ -1,8 +1,8 @@
 import 'package:CTA_Tracker/common/train/predictionRow.dart';
 import 'package:CTA_Tracker/data/classes.dart';
 import 'package:CTA_Tracker/data/colors.dart';
-import 'package:CTA_Tracker/pages/settings.dart';
 import 'package:CTA_Tracker/pages/lines/lines.dart';
+import 'package:CTA_Tracker/pages/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../colorCircle.dart';

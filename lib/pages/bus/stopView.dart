@@ -293,7 +293,8 @@ class Stop_viewState extends State<Stop_view> {
                                                               left: 10,
                                                               bottom: 3),
                                                       child: Text(
-                                                        widget.stop.desc,
+                                                        widget.stop.name +
+                                                            widget.stop.desc,
                                                         overflow:
                                                             TextOverflow.clip,
                                                         style: TextStyle(
