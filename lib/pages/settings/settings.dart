@@ -1,4 +1,5 @@
 import 'package:CTA_Tracker/exports.dart';
+import 'package:CTA_Tracker/pages/settings/switch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -102,7 +103,7 @@ class _SettingsState extends State<Settings> {
                   padding: const EdgeInsets.only(top: 5),
                   child: DividerLine(),
                 ),
-                Switch(
+                ToggleSwitch(
                     'settings.accessibility.title'.tr(),
                     'settings.accessibility.subtitle'.tr(),
                     sSettings.showExtraInformation, (value) async {
@@ -118,7 +119,7 @@ class _SettingsState extends State<Settings> {
                   padding: const EdgeInsets.only(top: 3, bottom: 2),
                   child: DividerLine(),
                 ),
-                Switch(
+                ToggleSwitch(
                     'settings.closestStation.title'.tr(),
                     'settings.closestStation.subtitle'.tr(),
                     sSettings.closestStationEnabled, (value) async {
@@ -133,7 +134,7 @@ class _SettingsState extends State<Settings> {
                   padding: const EdgeInsets.only(top: 3, bottom: 2),
                   child: DividerLine(),
                 ),
-                Switch(
+                ToggleSwitch(
                     'settings.showMap.title'.tr(),
                     'settings.showMap.subtitle'.tr(),
                     sSettings.showMap, (value) async {
@@ -204,7 +205,7 @@ class _SettingsState extends State<Settings> {
                 ),
                 if (sSettings.showMap &&
                     (selectedThemeOption == 0 || selectedThemeOption == 1)) ...[
-                  Switch(
+                  ToggleSwitch(
                       'settings.darkMap.title'.tr(),
                       'settings.darkMap.subtitle'.tr(),
                       sSettings.showDarkMap, (value) async {
@@ -276,7 +277,7 @@ class _SettingsState extends State<Settings> {
                     child: DividerLine(),
                   ),
                 ],
-                Switch(
+                ToggleSwitch(
                     'Show Alerts',
                     'Display station alerts/issues prominently',
                     sSettings.showAlerts, (value) async {
@@ -388,46 +389,5 @@ Future<String> checkLocationEnabled() async {
         : 'settings.location.disabled'.tr();
   } catch (e) {
     return 'settings.location.disabled'.tr();
-  }
-}
-
-class Switch extends StatefulWidget {
-  String title;
-  String subtitle;
-  bool enabled;
-  Function callback;
-  Switch(this.title, this.subtitle, this.enabled, this.callback);
-  @override
-  _SwitchState createState() => _SwitchState();
-}
-
-class _SwitchState extends State<Switch> {
-  @override
-  Widget build(BuildContext context) {
-    return MergeSemantics(
-      child: ListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 5),
-        title: Padding(
-          padding: const EdgeInsets.only(top: 5),
-          child: Text(widget.title, style: TextStyle(fontSize: 21)),
-        ),
-        subtitle: Padding(
-          padding: const EdgeInsets.only(top: 4),
-          child: Text(
-            widget.subtitle,
-            style: TextStyle(
-                height: 1.3,
-                fontSize: 17,
-                color: isDark(context) ? Colors.grey[400] : Colors.grey[600]),
-          ),
-        ),
-        trailing: CupertinoSwitch(
-          value: widget.enabled,
-          onChanged: (bool value) async {
-            this.widget.callback(value);
-          },
-        ),
-      ),
-    );
   }
 }

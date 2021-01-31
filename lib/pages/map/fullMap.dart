@@ -1,16 +1,14 @@
 import 'dart:async';
+import 'package:CTA_Tracker/pages/map/header.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'dart:core';
 import 'package:CTA_Tracker/exports.dart';
 
 Station selectedStation;
 Location selectedTrain;
-
 bool includesAll(arr, arr2) {
   if (arr.length != arr2.length) {
     return false;
@@ -49,7 +47,6 @@ Set<Polyline> getFullPolyline(List<bool> layers, context) {
       var row = data[x];
       polylineCords.add(LatLng(row[0], row[1]));
     }
-
     List<LatLng> greenPolyLine = new List();
 
     var secondGreen = getSecondGreen();
@@ -99,12 +96,10 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Timer _timer;
   bool loadMap = false;
-
   @override
   void initState() {
     _timer = Timer.periodic(Duration(seconds: 10), (Timer t) => refresh());
     Future.delayed(const Duration(milliseconds: 200), () => initLoadMap());
-
     if (all != null && all) {
       mapLayers = [true, true, true, true, true, true, true, true];
     } else {
@@ -126,7 +121,6 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
     super.initState();
   }
 
-  @override
   void dispose() {
     _timer?.cancel();
     _controller?.dispose();
@@ -169,7 +163,6 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
 
     if (showTrains) {
       List<String> layerStrings = getLines().map((e) => e.displayName).toList();
-
       var c = 0;
       for (var x = 0; x < layers.length; x++) {
         if (layers[x]) {
@@ -180,7 +173,6 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
               var rn = selectedTrain.rn;
               if (rn == p.rn) {
                 if (selectedTrain != p) {
-                  // "resetting selected train");
                   setState(() {
                     selectedTrain = p;
                   });
@@ -211,13 +203,10 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
     if (showStations) {
       for (int x = 0; x < lineLayers.length; x++) {
         Line line = lineLayers[x];
-
         List<Station> oStations = getStations(line.name);
         for (int x = 0; x < oStations.length; x++) {
           Station s = oStations[x];
-
           var icon;
-
           List<String> icons = [
             "Red,P,Y",
             "Pink,Org,G,P,Brn,Blue",
@@ -238,14 +227,12 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
             for (var r = 0; r < icons.length; r++) {
               bool isIcon = true;
               int index = 0;
-
               List<String> ls = icons[r].split(",");
               if (includesAll(ls, s.lines)) {
                 index = r;
               } else {
                 isIcon = false;
               }
-
               if (isIcon) {
                 icon = BitmapDescriptor.fromAsset(
                     "assets/markers/${index.toString()}${defaultTargetPlatform == TargetPlatform.iOS ? 'iOS' : ''}.png");
@@ -364,79 +351,7 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (!all)
-                      Container(
-                        margin: EdgeInsets.fromLTRB(3, 8, 6.5, 0),
-                        decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: isDark(context)
-                                    ? Colors.transparent
-                                    : Colors.grey.withOpacity(0.21),
-                                spreadRadius: 3,
-                                blurRadius: 4,
-                              ),
-                            ],
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: getPrimary(context)),
-                        height: all ? 60 : 70,
-                        child: Row(
-                          children: <Widget>[
-                            IconButton(
-                              tooltip: tr('icons.back'),
-                              padding: EdgeInsets.all(0),
-                              iconSize: 60,
-                              icon: Icon(
-                                Icons.chevron_left,
-                              ),
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    PageTransition(
-                                        curve: Curves.fastLinearToSlowEaseIn,
-                                        type: PageTransitionType.fade,
-                                        duration: Duration(milliseconds: 50),
-                                        child: Stations(line)));
-                              },
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(top: 2.2, right: 10),
-                                  child: Text(
-                                      "${line.displayName} ${'general.line'.tr()}",
-                                      style: TextStyle(
-                                        fontSize: 37,
-                                        fontWeight: FontWeight.w600,
-                                      )),
-                                ),
-                                if (!all) ...[
-                                  Row(
-                                    children: [
-                                      for (var x
-                                          in getDirection(line.name)) ...[
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 1),
-                                          child: Text(
-                                            "$x ${getDirection(line.name).indexOf(x) == 0 ? '- ' : ''}",
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                color: isDark(context)
-                                                    ? Colors.grey[400]
-                                                    : Colors.grey[600]),
-                                          ),
-                                        )
-                                      ]
-                                    ],
-                                  ),
-                                ]
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                    if (!all) MapHeader(all, line),
                     Layers(
                       lines: lines,
                       dropdown: dropdown,

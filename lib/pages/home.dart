@@ -60,8 +60,6 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-
-    print("initstate");
     _timer = Timer.periodic(Duration(seconds: 15), (Timer t) => update(t));
     getWelcomeShown().then((value) {
       setState(() {

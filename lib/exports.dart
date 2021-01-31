@@ -13,7 +13,7 @@ export 'package:CTA_Tracker/data/train/coords.dart';
 export 'package:CTA_Tracker/data/train/trainData.dart';
 export 'package:CTA_Tracker/pages/alerts/alertCard.dart';
 export 'package:CTA_Tracker/pages/map/fullMap.dart';
-export 'package:CTA_Tracker/pages/settings.dart';
+export 'package:CTA_Tracker/pages/settings/settings.dart';
 export 'package:CTA_Tracker/pages/train/stations.dart';
 export 'package:flutter/foundation.dart';
 export 'package:flutter/gestures.dart';

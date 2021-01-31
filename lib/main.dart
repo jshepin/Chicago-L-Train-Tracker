@@ -39,14 +39,11 @@ abstract class ConfigReader {
 }
 
 Future<void> main() async {
-  // Always call this if the main method is asynchronous
   WidgetsFlutterBinding.ensureInitialized();
-  // Load the JSON config into memory
   await ConfigReader.initialize();
-
   runApp(EasyLocalization(
       supportedLocales: [Locale('en')],
-      path: 'assets/translations', // <-- change patch to your
+      path: 'assets/translations',
       fallbackLocale: Locale('es'),
       child: Main()));
 }
