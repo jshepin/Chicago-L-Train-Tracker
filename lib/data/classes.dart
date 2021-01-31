@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 
 class BusRoute {
   String id;
-  String shortName;
   String longName;
   String routeType;
-  Color routeColor;
-  BusRoute(
-      this.id, this.shortName, this.longName, this.routeType, this.routeColor);
+  BusRoute(this.id, this.longName, this.routeType);
 }
 
 class StationWithDistance {
