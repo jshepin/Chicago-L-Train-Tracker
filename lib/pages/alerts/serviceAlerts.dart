@@ -54,35 +54,30 @@ class _ServiceAlertsState extends State<ServiceAlerts> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                    tooltip: "Back",
-                                    iconSize: 60,
-                                    padding: EdgeInsets.all(0),
-                                    icon: Icon(
-                                      Icons.chevron_left,
-                                    ),
-                                    onPressed: () {
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => widget.isBus
-                                                ? RouteView(widget.busRoute)
-                                                : Stations(widget.line),
-                                          ));
-                                    }),
-                                Container(
-                                  padding: EdgeInsets.only(top: 4),
-                                  child: Text("Alerts",
-                                      style: TextStyle(
-                                          fontSize: 40,
-                                          fontWeight: FontWeight.w600)),
+                            IconButton(
+                                tooltip: "Back",
+                                iconSize: 60,
+                                padding: EdgeInsets.all(0),
+                                icon: Icon(
+                                  Icons.chevron_left,
                                 ),
-                              ],
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => widget.isBus
+                                            ? RouteView(widget.busRoute)
+                                            : Stations(widget.line),
+                                      ));
+                                }),
+                            Container(
+                              padding: EdgeInsets.only(top: 4),
+                              child: Text("Alerts",
+                                  style: TextStyle(
+                                      fontSize: 40,
+                                      fontWeight: FontWeight.w600)),
                             ),
                           ],
                         ),
@@ -130,34 +125,25 @@ class _ServiceAlertsState extends State<ServiceAlerts> {
                           child: DividerLine(),
                         ),
                         if (alerts != null && alerts.length == 0) ...[
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5),
-                            child: Center(
-                              child: Container(
-                                decoration: BoxDecoration(),
-                                child: Text(
-                                  "Yay, no alerts today",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600),
-                                ),
+                          Center(
+                            child: Container(
+                              padding: const EdgeInsets.only(top: 5),
+                              decoration: BoxDecoration(),
+                              child: Text(
+                                "Yay, no alerts today",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w600),
                               ),
                             ),
                           )
                         ],
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            for (Alert alert in alerts) ...[
-                              AlertCard(alert),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 4, bottom: 7),
-                                child: DividerLine(),
-                              ),
-                            ]
-                          ],
-                        )
+                        for (Alert alert in alerts) ...[
+                          AlertCard(alert),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4, bottom: 7),
+                            child: DividerLine(),
+                          ),
+                        ]
                       ]),
                 ),
         ),

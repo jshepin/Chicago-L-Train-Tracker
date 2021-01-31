@@ -34,120 +34,107 @@ class UpcomingStations extends StatelessWidget {
           behavior: MyBehavior(),
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  children: [
-                    for (TrainRunPrediction p in predictions) ...[
-                      GestureDetector(
-                        onTap: () {
-                          this.callback(new MainInfo(
-                              p.staNm, p.staId, p.arrT, p.isApp, p.isDly));
-                        },
-                        child: Container(
-                          color: Colors.transparent,
-                          child: Column(
+                for (TrainRunPrediction p in predictions) ...[
+                  GestureDetector(
+                    onTap: () {
+                      this.callback(new MainInfo(
+                          p.staNm, p.staId, p.arrT, p.isApp, p.isDly));
+                    },
+                    child: Container(
+                      color: Colors.transparent,
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    width: 200,
-                                    child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Text(p.staNm,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: p.staId ==
-                                                      widget.prediction.staId
+                              Container(
+                                width: 200,
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Text(p.staNm,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 22,
+                                          fontWeight:
+                                              p.staId == widget.prediction.staId
                                                   ? FontWeight.w500
                                                   : FontWeight.w400)),
-                                    ),
-                                  ),
-                                  Row(children: [
-                                    Text(
-                                      "${(p.isApp == "1") ? "Now" : formatTime(convertShortColor(p.arrT), p.prdt, false, preciseNow: true)}",
-                                      style: TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    if ((p.isApp == "0" &&
-                                            formatTime(
-                                                    convertShortColor(p.arrT),
-                                                    p.prdt,
-                                                    false,
-                                                    preciseNow: true) !=
-                                                "Late") &&
+                                ),
+                              ),
+                              Row(children: [
+                                Text(
+                                  "${(p.isApp == "1") ? "Now" : formatTime(convertShortColor(p.arrT), p.prdt, false, preciseNow: true)}",
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                if ((p.isApp == "0" &&
                                         formatTime(convertShortColor(p.arrT),
                                                 p.prdt, false,
                                                 preciseNow: true) !=
-                                            "Now") ...[
-                                      Container(width: 4),
-                                      if (formatTime(p.arrT, "", false,
-                                                  preciseNow: true) !=
-                                              "Late" ||
-                                          formatTime(p.arrT, "", false,
-                                                  preciseNow: true) !=
-                                              "Now")
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 0.5),
-                                          child: Text(
-                                            "min",
-                                            style: TextStyle(fontSize: 20),
-                                          ),
-                                        )
-                                    ],
-                                  ]),
+                                            "Late") &&
+                                    formatTime(convertShortColor(p.arrT),
+                                            p.prdt, false,
+                                            preciseNow: true) !=
+                                        "Now") ...[
+                                  Container(width: 4),
+                                  if (formatTime(p.arrT, "", false,
+                                              preciseNow: true) !=
+                                          "Late" ||
+                                      formatTime(p.arrT, "", false,
+                                              preciseNow: true) !=
+                                          "Now")
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 0.5),
+                                      child: Text(
+                                        "min",
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                    )
                                 ],
-                              ),
-                              Container(
-                                height: 20,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        for (String line
-                                            in getStationFromID(p.staId)
-                                                .lines) ...[
-                                          Container(
-                                            margin: EdgeInsets.only(right: 4),
-                                            child: Container(
-                                              height: 15,
-                                              width: 15,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(20)),
-                                                color: colorFromLine(
-                                                    line, context),
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ],
-                                    ),
-                                    AccessiblilityRow(
-                                      getStationFromID(p.staId),
-                                      isTrainRow: true,
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              ]),
                             ],
                           ),
-                        ),
+                          Container(
+                            height: 20,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    for (String line
+                                        in getStationFromID(p.staId).lines) ...[
+                                      Container(
+                                        margin: EdgeInsets.only(right: 4),
+                                        child: Container(
+                                          height: 15,
+                                          width: 15,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20)),
+                                            color: colorFromLine(line, context),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ],
+                                ),
+                                AccessiblilityRow(
+                                  getStationFromID(p.staId),
+                                  isTrainRow: true,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                      if (predictions.indexOf(p) != predictions.length - 1)
-                        Container(height: 8, child: Divider()),
-                    ]
-                  ],
-                )
+                    ),
+                  ),
+                  if (predictions.indexOf(p) != predictions.length - 1)
+                    Container(height: 8, child: Divider()),
+                ]
               ],
             ),
           ),

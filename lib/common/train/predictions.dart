@@ -15,7 +15,6 @@ List<DirectionPrediction> getDestinationPredictions(
           subPredictions.add(p);
         }
       }
-
       if (subPredictions.length > 0) {
         directionPredictions.add(new DirectionPrediction(l, subPredictions));
       }
@@ -102,84 +101,49 @@ class _PredictionsState extends State<Predictions> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        dPredictions.length > 2
-                                            ? Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  for (int x = 0;
-                                                      x < dPredictions.length;
-                                                      x++) ...[
-                                                    x == 0
-                                                        ? Container(
-                                                            margin:
-                                                                EdgeInsets.only(
-                                                                    top: 7,
-                                                                    right: 4),
-                                                            height:
-                                                                selected == x
-                                                                    ? 13
-                                                                    : 9,
-                                                            width: selected == x
-                                                                ? 13
-                                                                : 9,
-                                                            decoration: BoxDecoration(
-                                                                color: (isDark(
-                                                                            context)
-                                                                        ? Colors
-                                                                            .white
-                                                                        : Colors.grey[
-                                                                            350])
-                                                                    .withOpacity(
-                                                                        selected ==
-                                                                                x
-                                                                            ? 0.8
-                                                                            : 0.7),
-                                                                borderRadius:
-                                                                    BorderRadius.all(
-                                                                        Radius.circular(
-                                                                            20))),
-                                                          )
-                                                        : Container(
-                                                            margin:
-                                                                EdgeInsets.only(
-                                                                    top: 6,
-                                                                    right: 4),
-                                                            height:
-                                                                selected == x
-                                                                    ? 13
-                                                                    : 9,
-                                                            width: selected == x
-                                                                ? 13
-                                                                : 9,
-                                                            decoration: BoxDecoration(
-                                                                color: ((colorFromLine(
-                                                                        convertShortColor(dPredictions[x]
-                                                                            .predictions[
-                                                                                0]
-                                                                            .rt),
-                                                                        context)))
-                                                                    .withOpacity(
-                                                                        selected ==
-                                                                                x
-                                                                            ? 1.0
-                                                                            : 0.8),
-                                                                borderRadius:
-                                                                    BorderRadius.all(
-                                                                        Radius.circular(
-                                                                            20))),
-                                                          )
-                                                  ]
-                                                ],
-                                              )
-                                            : Container(),
+                                        if (dPredictions.length > 2)
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              for (int x = 0;
+                                                  x < dPredictions.length;
+                                                  x++) ...[
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                      top: 7, right: 4),
+                                                  height:
+                                                      selected == x ? 13 : 9,
+                                                  width: selected == x ? 13 : 9,
+                                                  decoration: BoxDecoration(
+                                                      color: x == 0
+                                                          ? (isDark(context)
+                                                                  ? Colors.white
+                                                                  : Colors.grey[
+                                                                      350])
+                                                              .withOpacity(
+                                                                  selected == x
+                                                                      ? 0.8
+                                                                      : 0.7)
+                                                          : ((colorFromLine(convertShortColor(dPredictions[x].predictions[0].rt), context)))
+                                                              .withOpacity(
+                                                                  selected == x
+                                                                      ? 1.0
+                                                                      : 0.8),
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  20))),
+                                                )
+                                              ]
+                                            ],
+                                          ),
                                         widget.isBus
                                             ? Row(
                                                 children: [
                                                   InnerCard(
                                                       snapshot.data[0] == 0,
-                                                      busPrediction:
-                                                          data.data), //fix
+                                                      busPrediction: data.data),
                                                 ],
                                               )
                                             : Container(
@@ -272,12 +236,11 @@ class _PredictionsState extends State<Predictions> {
                                             )
                                           : StationViewCard(data.data),
                                     ),
-                                    dPredictions.length > 2
-                                        ? HDots(
-                                            selected,
-                                            dPredictions: dPredictions,
-                                          )
-                                        : Container(),
+                                    if (dPredictions.length > 2)
+                                      HDots(
+                                        selected,
+                                        dPredictions: dPredictions,
+                                      )
                                   ],
                                 ))
                           : Center(
@@ -327,6 +290,9 @@ class HDots extends StatelessWidget {
       this.busDPredictions = busDPredictions;
     }
   }
+  double getHeight(x) {
+    return selected == x ? 13 : 9;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -336,33 +302,28 @@ class HDots extends StatelessWidget {
         for (int x = 0;
             x < (isBus ? busDPredictions.length : dPredictions.length);
             x++) ...[
-          x == 0
-              ? Container(
-                  margin: EdgeInsets.only(top: 7, right: 4),
-                  height: selected == x ? 13 : 9,
-                  width: selected == x ? 13 : 9,
-                  decoration: BoxDecoration(
-                      color: isBus
-                          ? Colors.grey[700]
-                              .withOpacity(selected == x ? 0.9 : 0.4)
-                          : (isDark(context) ? Colors.white : Colors.grey[350])
-                              .withOpacity(selected == x ? 0.8 : 0.7),
-                      borderRadius: BorderRadius.all(Radius.circular(20))))
-              : Container(
-                  margin: EdgeInsets.only(top: 7, right: 4),
-                  height: selected == x ? 13 : 9,
-                  width: selected == x ? 13 : 9,
-                  decoration: BoxDecoration(
-                      color: isBus
-                          ? Colors.grey[700]
-                              .withOpacity(selected == x ? 0.9 : 0.4)
-                          : ((colorFromLine(
-                                  convertShortColor(
-                                      dPredictions[x].predictions[0].rt),
-                                  context)))
-                              .withOpacity(selected == x ? 1.0 : 0.8),
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                )
+          Container(
+            margin: EdgeInsets.only(top: 7, right: 4), //
+            height: getHeight(x), //
+            width: getHeight(x), //
+            decoration: BoxDecoration(
+              color: x == 0
+                  ? (isBus
+                      ? Colors.grey[700].withOpacity(selected == x ? 0.9 : 0.4)
+                      : (isDark(context) ? Colors.white : Colors.grey[350])
+                          .withOpacity(selected == x ? 0.8 : 0.7))
+                  : (isBus
+                      ? Colors.grey[700].withOpacity(selected == x ? 0.9 : 0.4)
+                      : ((colorFromLine(
+                              convertShortColor(
+                                  dPredictions[x].predictions[0].rt),
+                              context)))
+                          .withOpacity(selected == x ? 1.0 : 0.8)),
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
+              ),
+            ),
+          )
         ]
       ],
     );

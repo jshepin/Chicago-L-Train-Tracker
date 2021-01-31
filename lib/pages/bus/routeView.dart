@@ -19,6 +19,11 @@ Future<List<Alert>> getEmptyAlerts() async {
 
 class _RouteViewState extends State<RouteView> {
   var selectedDirection = 0;
+
+  double getWidth(x) {
+    return selectedDirection == x ? 15 : 11;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -167,217 +172,170 @@ class _RouteViewState extends State<RouteView> {
                                   itemBuilder: (context, i) {
                                     List<StopPreview> stops =
                                         snapshot.data[i].stops;
-
-                                    return Container(
-                                      child: SingleChildScrollView(
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 2, left: 3),
-                                                child: Container(
-                                                  child: Text(
-                                                      snapshot
-                                                          .data[
-                                                              selectedDirection]
-                                                          .direction,
-                                                      style: TextStyle(
-                                                          fontSize: 40,
-                                                          fontWeight:
-                                                              FontWeight.w600)),
-                                                ),
+                                    return SingleChildScrollView(
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10, vertical: 0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 2, left: 3),
+                                              child: Container(
+                                                child: Text(
+                                                    snapshot
+                                                        .data[selectedDirection]
+                                                        .direction,
+                                                    style: TextStyle(
+                                                        fontSize: 40,
+                                                        fontWeight:
+                                                            FontWeight.w600)),
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 5),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    for (int x = 0;
-                                                        x < directions.length;
-                                                        x++) ...[
-                                                      x == 0
-                                                          ? Container(
-                                                              margin:
-                                                                  EdgeInsets.only(
-                                                                      top: 7,
-                                                                      right: 4),
-                                                              height:
-                                                                  selectedDirection == x
-                                                                      ? 15
-                                                                      : 11,
-                                                              width:
-                                                                  selectedDirection == x
-                                                                      ? 15
-                                                                      : 11,
-                                                              decoration: BoxDecoration(
-                                                                  color: (isDark(context)
-                                                                          ? Colors
-                                                                              .white
-                                                                          : Colors.grey[
-                                                                              400])
-                                                                      .withOpacity(selectedDirection ==
-                                                                              x
-                                                                          ? 0.8
-                                                                          : 0.7),
-                                                                  borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(20))))
-                                                          : Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      top: 7,
-                                                                      right: 4),
-                                                              height:
-                                                                  selectedDirection ==
-                                                                          x
-                                                                      ? 15
-                                                                      : 11,
-                                                              width:
-                                                                  selectedDirection ==
-                                                                          x
-                                                                      ? 15
-                                                                      : 11,
-                                                              decoration: BoxDecoration(
-                                                                  color: Colors
-                                                                      .grey[700]
-                                                                      .withOpacity(selectedDirection ==
-                                                                              x
-                                                                          ? 1.0
-                                                                          : 0.8),
-                                                                  borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              20))),
-                                                            )
-                                                    ]
-                                                  ],
-                                                ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 5),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  for (int x = 0;
+                                                      x < directions.length;
+                                                      x++) ...[
+                                                    Container(
+                                                        margin: EdgeInsets.only(
+                                                            top: 7, right: 4),
+                                                        height: getWidth(x),
+                                                        width: getWidth(x),
+                                                        decoration: BoxDecoration(
+                                                            color: x == 0
+                                                                ? Colors
+                                                                    .grey[700]
+                                                                    .withOpacity(
+                                                                        selectedDirection == x
+                                                                            ? 1.0
+                                                                            : 0.8)
+                                                                : (isDark(context)
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors.grey[
+                                                                            400])
+                                                                    .withOpacity(
+                                                                        selectedDirection == x
+                                                                            ? 0.8
+                                                                            : 0.7),
+                                                            borderRadius:
+                                                                BorderRadius.all(Radius.circular(20))))
+                                                  ]
+                                                ],
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 5, bottom: 10),
-                                                child: DividerLine(),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 10),
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Column(
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 5, bottom: 10),
+                                              child: DividerLine(),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    width: 30,
+                                                    padding: EdgeInsets.only(
+                                                        bottom: 3.5, top: 0),
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.grey[800],
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    30))),
+                                                    child: Column(children: [
+                                                      for (var stop
+                                                          in stops) ...[
+                                                        FutureBuilder(
+                                                            future: getAlerts(
+                                                                stop.id),
+                                                            builder:
+                                                                (c, snapshot) {
+                                                              if (snapshot
+                                                                  .hasData) {
+                                                                return CCircle(
+                                                                    stop: stop,
+                                                                    isAlert: settings
+                                                                            .showAlerts &&
+                                                                        snapshot.data.length >
+                                                                            0);
+                                                              } else {
+                                                                return Container();
+                                                              }
+                                                            }),
+                                                        if (stops.indexOf(
+                                                                stop) !=
+                                                            stops.length - 1)
+                                                          Container(height: 20)
+                                                      ],
+                                                    ]),
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 5, top: 1),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
-                                                        Container(
-                                                          width: 30,
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  bottom: 3.5,
-                                                                  top: 1),
-                                                          decoration: BoxDecoration(
-                                                              color:
-                                                                  Colors.grey[
-                                                                      800],
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          30))),
-                                                          child: Column(
-                                                              children: [
-                                                                for (var stop
-                                                                    in stops) ...[
-                                                                  Column(
-                                                                    children: [
-                                                                      FutureBuilder(
-                                                                          future: getAlerts(stop
-                                                                              .id),
-                                                                          builder:
-                                                                              (c, snapshot) {
-                                                                            if (snapshot.hasData) {
-                                                                              return CCircle(stop: stop, isAlert: settings.showAlerts && snapshot.data.length > 0);
-                                                                            } else {
-                                                                              return Container();
-                                                                            }
-                                                                          }),
-                                                                      stops.indexOf(stop) !=
-                                                                              stops.length -
-                                                                                  1
-                                                                          ? Container(
-                                                                              height: 20)
-                                                                          : Container()
-                                                                    ],
+                                                        for (StopPreview stop
+                                                            in stops) ...[
+                                                          GestureDetector(
+                                                              onTap: () {
+                                                                Navigator.push(
+                                                                    context,
+                                                                    MaterialPageRoute(
+                                                                      builder: (context) => Stop_view(
+                                                                          getStopFromID(stop
+                                                                              .id
+                                                                              .toString()),
+                                                                          false),
+                                                                    ));
+                                                              },
+                                                              child: Column(
+                                                                children: [
+                                                                  Container(
+                                                                    padding: EdgeInsets
+                                                                        .symmetric(
+                                                                            vertical:
+                                                                                5),
+                                                                    color: Colors
+                                                                        .transparent,
+                                                                    child: Text(
+                                                                      stop.name,
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              19),
+                                                                    ),
                                                                   ),
+                                                                  Container(
+                                                                    height:
+                                                                        14.995,
+                                                                  )
                                                                 ],
-                                                              ]),
+                                                              ))
+                                                        ],
+                                                        Container(
+                                                          height: 4,
                                                         ),
                                                       ],
                                                     ),
-                                                    Container(
-                                                      padding: EdgeInsets.only(
-                                                          left: 5, top: 3),
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          for (StopPreview stop
-                                                              in stops) ...[
-                                                            GestureDetector(
-                                                                onTap: () {
-                                                                  Navigator.push(
-                                                                      context,
-                                                                      MaterialPageRoute(
-                                                                        builder: (context) => Stop_view(
-                                                                            getStopFromID(stop.id.toString()),
-                                                                            false),
-                                                                      ));
-                                                                },
-                                                                child: Column(
-                                                                  children: [
-                                                                    Container(
-                                                                      padding: EdgeInsets.symmetric(
-                                                                          vertical:
-                                                                              5),
-                                                                      color: Colors
-                                                                          .transparent,
-                                                                      child:
-                                                                          Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceBetween,
-                                                                        children: [
-                                                                          Text(
-                                                                            stop.name,
-                                                                            style:
-                                                                                TextStyle(fontSize: 19),
-                                                                          ),
-                                                                          Container()
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                    Container(
-                                                                      height:
-                                                                          14.955,
-                                                                    )
-                                                                  ],
-                                                                ))
-                                                          ],
-                                                          Container(
-                                                            height: 4,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     );

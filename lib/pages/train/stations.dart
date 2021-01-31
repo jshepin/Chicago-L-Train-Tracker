@@ -440,194 +440,183 @@ class _StationsState extends State<Stations> {
                                 line.name == "Green"
                                     ? Row(
                                         children: [
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 10),
-                                            child: Container(
-                                              width: 30,
-                                              padding: EdgeInsets.only(
-                                                  bottom: 3.5, top: 1),
-                                              decoration: BoxDecoration(
-                                                  color: line.color,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(30))),
-                                              child: Column(children: [
-                                                CCircle(
-                                                    station:
-                                                        getGreenLineTrack()[0]),
-                                                Container(
-                                                  height: 39,
-                                                ),
-                                                CCircle(
-                                                    station:
-                                                        getGreenLineTrack()[1]),
-                                                Container(
-                                                  height: 18,
-                                                ),
-                                                CCircle(
-                                                    station:
-                                                        getGreenLineTrack()[2]),
-                                              ]),
-                                            ),
+                                          Container(
+                                            width: 30,
+                                            padding: EdgeInsets.only(
+                                                bottom: 3.5, top: 11),
+                                            decoration: BoxDecoration(
+                                                color: line.color,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(30))),
+                                            child: Column(children: [
+                                              CCircle(
+                                                  station:
+                                                      getGreenLineTrack()[0]),
+                                              Container(
+                                                height: 39,
+                                              ),
+                                              CCircle(
+                                                  station:
+                                                      getGreenLineTrack()[1]),
+                                              Container(
+                                                height: 18,
+                                              ),
+                                              CCircle(
+                                                  station:
+                                                      getGreenLineTrack()[2]),
+                                            ]),
                                           ),
                                         ],
                                       )
                                     : Container(),
                               ],
                             ),
-                            Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  height: 2,
+                                ),
+                                for (var station in stations) ...[
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Station_view(
+                                                station,
+                                                stations,
+                                                line,
+                                                isDark(context)
+                                                    ? line.darkColor
+                                                    : line.color,
+                                                false),
+                                          ));
+                                    },
+                                    child: StationTitle(stations, station, line,
+                                        green: false),
+                                  )
+                                ],
+                                Container(
+                                  height: 4,
+                                ),
+                                for (var station in getGreenLineTrack()) ...[
+                                  line.name == "Green"
+                                      ? Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 9),
+                                          child: GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Station_view(
+                                                              station,
+                                                              stations,
+                                                              line,
+                                                              isDark(context)
+                                                                  ? line
+                                                                      .darkColor
+                                                                  : line.color,
+                                                              false),
+                                                    ));
+                                              },
+                                              child: StationTitle(
+                                                  stations, station, line,
+                                                  green: true)),
+                                        )
+                                      : Container(),
+                                ],
+                                if (line.name == "Purple") ...[
                                   Container(
-                                    height: 2,
+                                    width: 300,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, top: 5, bottom: 5),
+                                      child: Text(
+                                        'purple.purpleEx'.tr(),
+                                        style: TextStyle(
+                                            height: 1.4, fontSize: 16),
+                                      ),
+                                    ),
                                   ),
-                                  for (var station in stations) ...[
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Station_view(
-                                                      station,
-                                                      stations,
-                                                      line,
-                                                      isDark(context)
-                                                          ? line.darkColor
-                                                          : line.color,
-                                                      false),
-                                            ));
-                                      },
-                                      child: StationTitle(
-                                          stations, station, line,
-                                          green: false),
+                                  GestureDetector(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, top: 2),
+                                      child: Container(
+                                          child: Text('purple.moreInfo'.tr(),
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16))),
+                                    ),
+                                    onTap: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (_) => new AlertDialog(
+                                                title: new Text(
+                                                    'purple.title'.tr()),
+                                                content: Container(
+                                                  constraints: BoxConstraints(
+                                                      maxWidth: 350),
+                                                  child: new Text(
+                                                      'purple.purpleLongEx'
+                                                          .tr(),
+                                                      style: TextStyle(
+                                                          height: 1.4)),
+                                                ),
+                                                actions: <Widget>[
+                                                  FlatButton(
+                                                    child: Text(
+                                                        'View Schedule'.tr()),
+                                                    onPressed: () {
+                                                      Navigator.pushReplacement(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                ServiceInformation(
+                                                                    line),
+                                                          ));
+                                                    },
+                                                  ),
+                                                  FlatButton(
+                                                    child: Text('Dismiss'.tr()),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                  )
+                                                ],
+                                              ));
+                                    },
+                                  ),
+                                  for (var station in getPurpleExpress()) ...[
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 9),
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Station_view(
+                                                          station,
+                                                          stations,
+                                                          line,
+                                                          isDark(context)
+                                                              ? line.darkColor
+                                                              : line.color,
+                                                          false),
+                                                ));
+                                          },
+                                          child: StationTitle(
+                                              stations, station, line,
+                                              green: true)),
                                     )
                                   ],
-                                  Container(
-                                    height: 4,
-                                  ),
-                                  for (var station in getGreenLineTrack()) ...[
-                                    line.name == "Green"
-                                        ? Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 9),
-                                            child: GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            Station_view(
-                                                                station,
-                                                                stations,
-                                                                line,
-                                                                isDark(context)
-                                                                    ? line
-                                                                        .darkColor
-                                                                    : line
-                                                                        .color,
-                                                                false),
-                                                      ));
-                                                },
-                                                child: StationTitle(
-                                                    stations, station, line,
-                                                    green: true)),
-                                          )
-                                        : Container(),
-                                  ],
-                                  if (line.name == "Purple") ...[
-                                    Container(
-                                      width: 300,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10, top: 5, bottom: 5),
-                                        child: Text(
-                                          'purple.purpleEx'.tr(),
-                                          style: TextStyle(
-                                              height: 1.4, fontSize: 16),
-                                        ),
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10, top: 2),
-                                        child: Container(
-                                            child: Text('purple.moreInfo'.tr(),
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16))),
-                                      ),
-                                      onTap: () {
-                                        showDialog(
-                                            context: context,
-                                            builder: (_) => new AlertDialog(
-                                                  title: new Text(
-                                                      'purple.title'.tr()),
-                                                  content: Container(
-                                                    constraints: BoxConstraints(
-                                                        maxWidth: 350),
-                                                    child: new Text(
-                                                        'purple.purpleLongEx'
-                                                            .tr(),
-                                                        style: TextStyle(
-                                                            height: 1.4)),
-                                                  ),
-                                                  actions: <Widget>[
-                                                    FlatButton(
-                                                      child: Text(
-                                                          'View Schedule'.tr()),
-                                                      onPressed: () {
-                                                        Navigator.pushReplacement(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  ServiceInformation(
-                                                                      line),
-                                                            ));
-                                                      },
-                                                    ),
-                                                    FlatButton(
-                                                      child:
-                                                          Text('Dismiss'.tr()),
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                    )
-                                                  ],
-                                                ));
-                                      },
-                                    ),
-                                    for (var station in getPurpleExpress()) ...[
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 9),
-                                        child: GestureDetector(
-                                            onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Station_view(
-                                                            station,
-                                                            stations,
-                                                            line,
-                                                            isDark(context)
-                                                                ? line.darkColor
-                                                                : line.color,
-                                                            false),
-                                                  ));
-                                            },
-                                            child: StationTitle(
-                                                stations, station, line,
-                                                green: true)),
-                                      )
-                                    ],
-                                  ]
-                                ],
-                              ),
+                                ]
+                              ],
                             ),
                           ],
                         ),

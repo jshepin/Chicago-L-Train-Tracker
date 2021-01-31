@@ -364,84 +364,79 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    !all
-                        ? Container(
-                            margin: EdgeInsets.fromLTRB(3, 8, 6.5, 0),
-                            decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: isDark(context)
-                                        ? Colors.transparent
-                                        : Colors.grey.withOpacity(0.21),
-                                    spreadRadius: 3,
-                                    blurRadius: 4,
-                                  ),
-                                ],
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                color: getPrimary(context)),
-                            height: all ? 60 : 70,
-                            child: Row(
-                              children: <Widget>[
-                                IconButton(
-                                  tooltip: tr('icons.back'),
-                                  padding: EdgeInsets.all(0),
-                                  iconSize: 60,
-                                  icon: Icon(
-                                    Icons.chevron_left,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.pushReplacement(
-                                        context,
-                                        PageTransition(
-                                            curve:
-                                                Curves.fastLinearToSlowEaseIn,
-                                            type: PageTransitionType.fade,
-                                            duration:
-                                                Duration(milliseconds: 50),
-                                            child: Stations(line)));
-                                  },
+                    if (!all)
+                      Container(
+                        margin: EdgeInsets.fromLTRB(3, 8, 6.5, 0),
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: isDark(context)
+                                    ? Colors.transparent
+                                    : Colors.grey.withOpacity(0.21),
+                                spreadRadius: 3,
+                                blurRadius: 4,
+                              ),
+                            ],
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            color: getPrimary(context)),
+                        height: all ? 60 : 70,
+                        child: Row(
+                          children: <Widget>[
+                            IconButton(
+                              tooltip: tr('icons.back'),
+                              padding: EdgeInsets.all(0),
+                              iconSize: 60,
+                              icon: Icon(
+                                Icons.chevron_left,
+                              ),
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    PageTransition(
+                                        curve: Curves.fastLinearToSlowEaseIn,
+                                        type: PageTransitionType.fade,
+                                        duration: Duration(milliseconds: 50),
+                                        child: Stations(line)));
+                              },
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(top: 2.2, right: 10),
+                                  child: Text(
+                                      "${line.displayName} ${'general.line'.tr()}",
+                                      style: TextStyle(
+                                        fontSize: 37,
+                                        fontWeight: FontWeight.w600,
+                                      )),
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 2.2, right: 10),
-                                      child: Text(
-                                          "${line.displayName} ${'general.line'.tr()}",
-                                          style: TextStyle(
-                                            fontSize: 37,
-                                            fontWeight: FontWeight.w600,
-                                          )),
-                                    ),
-                                    if (!all) ...[
-                                      Row(
-                                        children: [
-                                          for (var x
-                                              in getDirection(line.name)) ...[
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 1),
-                                              child: Text(
-                                                "$x ${getDirection(line.name).indexOf(x) == 0 ? '- ' : ''}",
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    color: isDark(context)
-                                                        ? Colors.grey[400]
-                                                        : Colors.grey[600]),
-                                              ),
-                                            )
-                                          ]
-                                        ],
-                                      ),
-                                    ]
-                                  ],
-                                ),
+                                if (!all) ...[
+                                  Row(
+                                    children: [
+                                      for (var x
+                                          in getDirection(line.name)) ...[
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 1),
+                                          child: Text(
+                                            "$x ${getDirection(line.name).indexOf(x) == 0 ? '- ' : ''}",
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                color: isDark(context)
+                                                    ? Colors.grey[400]
+                                                    : Colors.grey[600]),
+                                          ),
+                                        )
+                                      ]
+                                    ],
+                                  ),
+                                ]
                               ],
                             ),
-                          )
-                        : Container(),
+                          ],
+                        ),
+                      ),
                     Layers(
                       lines: lines,
                       dropdown: dropdown,
@@ -471,23 +466,22 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
                 ),
               ),
             ),
-            showTrains
-                ? Align(
-                    alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: all
-                          ? EdgeInsets.only(
-                              right: 8,
-                              top: 8,
-                            )
-                          : EdgeInsets.only(
-                              right: 12,
-                              top: 13,
-                            ),
-                      child: ConnectionIndicator(background: true),
-                    ),
-                  )
-                : Container(),
+            if (showTrains)
+              Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: all
+                      ? EdgeInsets.only(
+                          right: 8,
+                          top: 8,
+                        )
+                      : EdgeInsets.only(
+                          right: 12,
+                          top: 13,
+                        ),
+                  child: ConnectionIndicator(background: true),
+                ),
+              ),
             if (selectedTrain != null)
               MapTrainCard(selectedTrain, selectedColor),
             if (selectedStation != null) MapStationCard(selectedStation)

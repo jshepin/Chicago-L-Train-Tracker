@@ -108,14 +108,12 @@ class _PredictionRowState extends State<PredictionRow> {
                             },
                             child: Padding(
                               padding: const EdgeInsets.only(top: 2),
-                              child: Container(
-                                child: Text(
-                                  "${widget.isBus ? widget.stop.name : widget.station.name} ",
-                                  style: TextStyle(
-                                    fontSize: widget.isBus ? 25 : 27,
-                                  ),
-                                  softWrap: false,
+                              child: Text(
+                                "${widget.isBus ? widget.stop.name : widget.station.name} ",
+                                style: TextStyle(
+                                  fontSize: widget.isBus ? 25 : 27,
                                 ),
+                                softWrap: false,
                               ),
                             ),
                           ),
@@ -170,75 +168,62 @@ class _PredictionRowState extends State<PredictionRow> {
                 ),
               ),
             ),
-            Row(
-              children: [
-                Tooltip(
-                  message:
-                      "Edit ${widget.isBus ? widget.stop.name : widget.station.name}",
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        right: 13, left: 3, top: 12, bottom: 2),
-                    child: GestureDetector(
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (_) => StatefulBuilder(
-                                    builder: (context, setState) {
-                                      return FutureBuilder(
-                                        future: getStationSettings(widget.isBus
-                                            ? widget.stop.id + "%BUS%"
-                                            : widget.station.id),
-                                        builder: (context, snapshot) {
-                                          if (snapshot.hasData) {
-                                            selectedStyle = snapshot.data[0];
-                                            allSelected =
-                                                (snapshot.data[1] == 0);
+            Tooltip(
+              message:
+                  "Edit ${widget.isBus ? widget.stop.name : widget.station.name}",
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    right: 13, left: 3, top: 12, bottom: 2),
+                child: GestureDetector(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (_) => StatefulBuilder(
+                                builder: (context, setState) {
+                                  return FutureBuilder(
+                                    future: getStationSettings(widget.isBus
+                                        ? widget.stop.id + "%BUS%"
+                                        : widget.station.id),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData) {
+                                        selectedStyle = snapshot.data[0];
+                                        allSelected = (snapshot.data[1] == 0);
 
-                                            if (selectedDestinationIndex ==
-                                                null) {
-                                              selectedDestinationIndex =
-                                                  snapshot.data[2];
-                                            }
-                                            if (!widget.isBus) {
-                                              if (!allSelected) {
-                                                selectedLine = getLineFromColor(
-                                                    widget.station.lines[
-                                                        snapshot.data[1] - 1]);
-                                              } else {
-                                                if (widget
-                                                        .station.lines.length ==
-                                                    1) {
-                                                  selectedLine =
-                                                      getLineFromColor(widget
-                                                          .station.lines[0]);
-                                                } else {
-                                                  selectedLine = new Line(
-                                                      "",
-                                                      "",
-                                                      "D11A2C",
-                                                      "D11A2C",
-                                                      "D11A2C");
-                                                }
-                                              }
-                                            }
-
-                                            return EditDialog(widget, snapshot,
-                                                widget.station, widget.isBus);
+                                        if (selectedDestinationIndex == null) {
+                                          selectedDestinationIndex =
+                                              snapshot.data[2];
+                                        }
+                                        if (!widget.isBus) {
+                                          if (!allSelected) {
+                                            selectedLine = getLineFromColor(
+                                                widget.station.lines[
+                                                    snapshot.data[1] - 1]);
                                           } else {
-                                            return Container();
+                                            if (widget.station.lines.length ==
+                                                1) {
+                                              selectedLine = getLineFromColor(
+                                                  widget.station.lines[0]);
+                                            } else {
+                                              selectedLine = new Line("", "",
+                                                  "D11A2C", "D11A2C", "D11A2C");
+                                            }
                                           }
-                                        },
-                                      );
+                                        }
+                                        return EditDialog(widget, snapshot,
+                                            widget.station, widget.isBus);
+                                      } else {
+                                        return Container();
+                                      }
                                     },
-                                  ));
-                        },
-                        child: Icon(
-                          Icons.more_horiz,
-                          color: isDark(context) ? Colors.white : Colors.black,
-                        )),
-                  ),
-                ),
-              ],
+                                  );
+                                },
+                              ));
+                    },
+                    child: Icon(
+                      Icons.more_horiz,
+                      color: isDark(context) ? Colors.white : Colors.black,
+                    )),
+              ),
             ),
           ],
         ),

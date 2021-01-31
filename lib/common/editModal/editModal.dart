@@ -48,7 +48,7 @@ class _EditDialogState extends State<EditDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return new AlertDialog(
+    return AlertDialog(
       insetPadding: EdgeInsets.all(0),
       actionsPadding: EdgeInsets.only(right: 5, bottom: 5),
       contentPadding: EdgeInsets.fromLTRB(11, 9, 11, 0),
@@ -112,7 +112,6 @@ class _EditDialogState extends State<EditDialog> {
                     if (this.widget.widget.callback != null) {
                       this.widget.widget.callback();
                     }
-
                     setState(() {
                       selectedStyle = 1;
                     });
@@ -244,7 +243,6 @@ class _EditDialogState extends State<EditDialog> {
                   color: isDark(context) ? Colors.red[400] : Colors.red)),
           onPressed: () async {
             SharedPreferences prefs = await SharedPreferences.getInstance();
-
             List<String> savedStations =
                 prefs.getStringList("savedStations") ?? [];
             if (savedStations.contains(widget.widget.isBus
@@ -254,12 +252,10 @@ class _EditDialogState extends State<EditDialog> {
                   ? widget.widget.stop.id + '%BUS%'
                   : widget.widget.station.id.toString());
             }
-
             prefs.setStringList('savedStations', savedStations);
             if (this.widget.widget.callback != null) {
               this.widget.widget.callback();
             }
-
             Navigator.of(context).pop();
           },
         ),
@@ -269,7 +265,6 @@ class _EditDialogState extends State<EditDialog> {
             if (this.widget.widget.callback != null) {
               this.widget.widget.callback();
             }
-
             Navigator.of(context).pop();
           },
         ),

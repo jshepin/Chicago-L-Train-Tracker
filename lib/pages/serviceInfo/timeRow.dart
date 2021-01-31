@@ -17,7 +17,6 @@ class TimeRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<List<String>> elements = getElements(table.data[x][y]);
-
     return Padding(
       padding: const EdgeInsets.only(left: 10),
       child: Column(

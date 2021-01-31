@@ -32,11 +32,11 @@ abstract class ConfigReader {
   static String getServerURL() {
     return _config['serverURL'] as String;
   }
+
   static String getAPIKEY() {
     return _config['APIKEY'] as String;
   }
 }
-
 
 Future<void> main() async {
   // Always call this if the main method is asynchronous

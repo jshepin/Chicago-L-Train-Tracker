@@ -19,50 +19,48 @@ class StationTitle extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: line.name == "Green"
-                            ? EdgeInsets.only(top: 1.2)
-                            : EdgeInsets.only(top: 1.08),
-                        child: Text(
-                          "${station.name}",
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 22,
-                          ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: line.name == "Green"
+                          ? EdgeInsets.only(top: 1.2)
+                          : EdgeInsets.only(top: 1.08),
+                      child: Text(
+                        "${station.name}",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 22,
                         ),
                       ),
-                      AccessiblilityRow(
-                        station,
-                        isTrainRow: true,
-                      ),
-                      if (alerts != null &&
-                          snapshot.data.showAlerts &&
-                          alerts
-                              .map((e) => (e.impactedServices
-                                  .map((f) => f.id)
-                                  .contains(station.id)))
-                              .contains(true)) ...[
-                        Tooltip(
-                          message: "Station Issues",
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: isDark(context)
-                                ? Icon(
-                                    Icons.error_outline,
-                                    color: Colors.red,
-                                  )
-                                : Icon(
-                                    Icons.error,
-                                    color: Colors.red,
-                                  ),
-                          ),
-                        )
-                      ]
-                    ],
-                  ),
+                    ),
+                    AccessiblilityRow(
+                      station,
+                      isTrainRow: true,
+                    ),
+                    if (alerts != null &&
+                        snapshot.data.showAlerts &&
+                        alerts
+                            .map((e) => (e.impactedServices
+                                .map((f) => f.id)
+                                .contains(station.id)))
+                            .contains(true)) ...[
+                      Tooltip(
+                        message: "Station Issues",
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: isDark(context)
+                              ? Icon(
+                                  Icons.error_outline,
+                                  color: Colors.red,
+                                )
+                              : Icon(
+                                  Icons.error,
+                                  color: Colors.red,
+                                ),
+                        ),
+                      )
+                    ]
+                  ],
                 ),
                 Row(
                   children: [

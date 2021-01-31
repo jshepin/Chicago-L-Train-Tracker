@@ -105,7 +105,6 @@ class Stop_viewState extends State<Stop_view> {
                                                           ));
                                                     } else {
                                                       _timer.cancel();
-
                                                       Navigator.pop(context);
                                                     }
                                                   },
@@ -241,11 +240,11 @@ class Stop_viewState extends State<Stop_view> {
                                             ),
                                             Row(
                                               children: [
-                                                _settings.showExtraInformation &&
-                                                        widget.stop.isAda
-                                                    ? Icon(Icons
-                                                        .accessible_forward)
-                                                    : Container(),
+                                                if (_settings
+                                                        .showExtraInformation &&
+                                                    widget.stop.isAda)
+                                                  Icon(
+                                                      Icons.accessible_forward),
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(

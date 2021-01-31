@@ -416,50 +416,44 @@ class _TrainViewState extends State<TrainView> {
                 Center(
                   child: Container(
                     constraints: BoxConstraints(maxWidth: 700),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 5, right: 5, top: 8),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(right: 5, left: 6),
-                                padding: EdgeInsets.all(4),
-                                decoration: BoxDecoration(
-                                  color: isDark(context)
-                                      ? Colors.white.withOpacity(0.1)
-                                      : Colors.grey[100],
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                                child: Icon(
-                                  widget.isBus
-                                      ? Icons.directions_bus
-                                      : Icons.train,
-                                  size: 25,
+                    padding: EdgeInsets.only(left: 5, right: 5, top: 8),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(right: 5, left: 6),
+                              padding: EdgeInsets.all(4),
+                              decoration: BoxDecoration(
+                                color: isDark(context)
+                                    ? Colors.white.withOpacity(0.1)
+                                    : Colors.grey[100],
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
                                 ),
                               ),
-                              Text(
-                                "#${updatedPrediction.rn}",
-                                style: TextStyle(fontSize: 20),
+                              child: Icon(
+                                widget.isBus
+                                    ? Icons.directions_bus
+                                    : Icons.train,
+                                size: 25,
                               ),
-                            ],
-                          ),
-                          if (!endOfLine)
-                            if (predictions != null &&
-                                predictions.length > 0) ...[
-                              UpcomingStations(predictions, widget, (var data) {
-                                setState(() {
-                                  changed = true;
-                                  mainInfo = data;
-                                });
-                              })
-                            ]
-
-                          // })
-                        ],
-                      ),
+                            ),
+                            Text(
+                              "#${updatedPrediction.rn}",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ],
+                        ),
+                        if (predictions != null && predictions.length > 0) ...[
+                          UpcomingStations(predictions, widget, (var data) {
+                            setState(() {
+                              changed = true;
+                              mainInfo = data;
+                            });
+                          })
+                        ]
+                      ],
                     ),
                   ),
                 )

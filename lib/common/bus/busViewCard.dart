@@ -10,6 +10,8 @@ class BusViewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 5, bottom: 3, right: 10, left: 10),
+      padding: EdgeInsets.only(top: 3, bottom: 4, left: 7, right: 5),
+      width: double.infinity,
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -24,38 +26,30 @@ class BusViewCard extends StatelessWidget {
             Radius.circular(10),
           ),
           color: getPrimary(context)),
-      padding: EdgeInsets.only(top: 3, bottom: 4, left: 7, right: 5),
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 1,
-                  ),
-                  Text(
-                    "${prediction.des} ${selected == 0 ? 'Rt. #' : ''}${selected == 0 ? prediction.rt : ''}",
-                    style: TextStyle(fontSize: 21, fontWeight: FontWeight.w600),
-                  ),
-                  Container(height: 1),
-                  Text(
-                    "Bus #${prediction.vid}",
-                    style: TextStyle(fontSize: 18),
-                  )
-                ],
+              Container(
+                height: 1,
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 2, top: 1),
-                child: Time(bPrediction: prediction),
+              Text(
+                "${prediction.des} ${selected == 0 ? 'Rt. #' : ''}${selected == 0 ? prediction.rt : ''}",
+                style: TextStyle(fontSize: 21, fontWeight: FontWeight.w600),
               ),
+              Container(height: 1),
+              Text(
+                "Bus #${prediction.vid}",
+                style: TextStyle(fontSize: 18),
+              )
             ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 2, top: 1),
+            child: Time(bPrediction: prediction),
           ),
         ],
       ),

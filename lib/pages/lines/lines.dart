@@ -231,40 +231,37 @@ class _LinesState extends State<Lines> {
                     ),
                   if (trainSelected)
                     editMode
-                        ? Container(
-                            child: Expanded(
-                              child: ReorderableListView(
-                                scrollDirection: Axis.vertical,
-                                onReorder: (oldIndex, newIndex) async {
-                                  var copied = orderedLines;
-                                  Line removedValue = copied[oldIndex];
-                                  bool lastIndex =
-                                      newIndex == orderedLines.length;
+                        ? Expanded(
+                            child: ReorderableListView(
+                              scrollDirection: Axis.vertical,
+                              onReorder: (oldIndex, newIndex) async {
+                                var copied = orderedLines;
+                                Line removedValue = copied[oldIndex];
+                                bool lastIndex =
+                                    newIndex == orderedLines.length;
 
-                                  setState(() {
-                                    orderedLines.removeAt(oldIndex);
-                                    lastIndex
-                                        ? orderedLines.add(removedValue)
-                                        : orderedLines.insert(
-                                            newIndex, removedValue);
-                                  });
+                                setState(() {
+                                  orderedLines.removeAt(oldIndex);
+                                  lastIndex
+                                      ? orderedLines.add(removedValue)
+                                      : orderedLines.insert(
+                                          newIndex, removedValue);
+                                });
 
-                                  SharedPreferences prefs =
-                                      await SharedPreferences.getInstance();
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
 
-                                  prefs.setStringList(
-                                      "orderedLines", getNames());
-                                  setState(() {});
-                                },
-                                children: [
-                                  for (var line in orderedLines) ...[
-                                    Container(
-                                        key: ValueKey(line.name),
-                                        child: LineItem(
-                                            line: line, editMode: editMode)),
-                                  ]
-                                ],
-                              ),
+                                prefs.setStringList("orderedLines", getNames());
+                                setState(() {});
+                              },
+                              children: [
+                                for (var line in orderedLines) ...[
+                                  Container(
+                                      key: ValueKey(line.name),
+                                      child: LineItem(
+                                          line: line, editMode: editMode)),
+                                ]
+                              ],
                             ),
                           )
                         : Expanded(

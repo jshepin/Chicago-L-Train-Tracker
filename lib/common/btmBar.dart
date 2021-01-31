@@ -51,43 +51,39 @@ class _BtmBarState extends State<BtmBar> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      // height: 58,
-      child: BottomNavigationBar(
-        backgroundColor: getSecondary(context),
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home_outlined,
-                size: 27,
-              ),
-              label: "Home"),
-          BottomNavigationBarItem(
+    return BottomNavigationBar(
+      backgroundColor: getSecondary(context),
+      type: BottomNavigationBarType.fixed,
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
             icon: Icon(
-              Icons.info_outline_rounded,
+              Icons.home_outlined,
               size: 27,
             ),
-            label: "Stations",
+            label: "Home"),
+        BottomNavigationBarItem(
+          icon: Icon(
+            Icons.info_outline_rounded,
+            size: 27,
           ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.map,
-                size: 27,
-              ),
-              label: "Map"),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.settings,
-                size: 27,
-              ),
-              label: "Settings"),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor:
-            isDark(context) ? Colors.blue[400] : Color(0xff0073BA),
-        onTap: _onItemTapped,
-      ),
+          label: "Stations",
+        ),
+        BottomNavigationBarItem(
+            icon: Icon(
+              Icons.map,
+              size: 27,
+            ),
+            label: "Map"),
+        BottomNavigationBarItem(
+            icon: Icon(
+              Icons.settings,
+              size: 27,
+            ),
+            label: "Settings"),
+      ],
+      currentIndex: _selectedIndex,
+      selectedItemColor: isDark(context) ? Colors.blue[400] : Color(0xff0073BA),
+      onTap: _onItemTapped,
     );
   }
 }
