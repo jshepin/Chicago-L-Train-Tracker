@@ -2,7 +2,6 @@ import 'package:CTA_Tracker/data/colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-
 import '../../exports.dart';
 
 class MapHeader extends StatelessWidget {

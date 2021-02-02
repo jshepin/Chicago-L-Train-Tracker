@@ -1,5 +1,4 @@
 import 'package:CTA_Tracker/common/accessabilityRow.dart';
-import 'package:CTA_Tracker/data/colors.dart';
 import 'package:CTA_Tracker/data/train/station_data.dart';
 import 'package:CTA_Tracker/data/train/trainData.dart';
 import 'package:CTA_Tracker/exports.dart';
@@ -9,7 +8,6 @@ import '../stations.dart';
 
 class UpcomingStations extends StatelessWidget {
   Function callback;
-
   List<TrainRunPrediction> predictions;
   TrainView widget;
   UpcomingStations(this.predictions, this.widget, this.callback);

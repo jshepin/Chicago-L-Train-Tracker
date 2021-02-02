@@ -13,7 +13,6 @@ List<BusRoute> getItems(List<BusRoute> s, query) {
 
 List<Result> getResults(trains, busses, query) {
   List<Result> results = [];
-
   List<Station> stations = [];
   for (Station station in trains) {
     if (queryContains(station.name, query) || queryContains(station.id, query)) {

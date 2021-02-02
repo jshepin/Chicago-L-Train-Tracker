@@ -2,7 +2,6 @@ import 'package:CTA_Tracker/common/train/stations/circle.dart';
 import 'package:CTA_Tracker/pages/bus/stopView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-
 import '../../exports.dart';
 
 class RouteSwiper extends StatefulWidget {

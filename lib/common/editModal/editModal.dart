@@ -15,8 +15,6 @@ class EditDialog extends StatefulWidget {
   var snapshot;
   var isBus;
   EditDialog(this.widget, this.snapshot, this.station, this.isBus);
-  // Function callback;
-
   @override
   _EditDialogState createState() => _EditDialogState();
 }
