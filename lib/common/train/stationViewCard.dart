@@ -20,23 +20,9 @@ class StationViewCard extends StatelessWidget {
                       builder: (context) => TrainView(prediction, false, false),
                     ));
               },
-              child: Container(
+              child: AppCard(
                 margin: EdgeInsets.only(top: 5, bottom: 3, right: 10, left: 10),
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color:
-                            isDark(context) ? Color(0xff424242) : Colors.grey[300].withOpacity(0.8),
-                        spreadRadius: 2,
-                        blurRadius: 2,
-                      )
-                    ],
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                    color: getPrimary(context)),
                 padding: EdgeInsets.only(top: 3, bottom: 4, left: 7, right: 5),
-                width: double.infinity,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

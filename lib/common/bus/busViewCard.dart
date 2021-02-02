@@ -8,22 +8,9 @@ class BusViewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AppCard(
       margin: EdgeInsets.only(top: 5, bottom: 3, right: 10, left: 10),
       padding: EdgeInsets.only(top: 3, bottom: 4, left: 7, right: 5),
-      width: double.infinity,
-      decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: isDark(context) ? Color(0xff424242) : Colors.grey[300].withOpacity(0.8),
-              spreadRadius: 2,
-              blurRadius: 2,
-            )
-          ],
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-          ),
-          color: getPrimary(context)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

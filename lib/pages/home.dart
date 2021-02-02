@@ -181,36 +181,26 @@ class _HomeState extends State<Home> {
                                       return Center(
                                         child: Container(
                                           constraints: BoxConstraints(maxWidth: 500),
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                              color: getPrimary(context),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: isDark(context)
-                                                      ? Colors.transparent
-                                                      : Colors.grey.withOpacity(0.2),
-                                                  spreadRadius: 3,
-                                                  blurRadius: 7,
+                                          child: AppCard(
+                                            padding:
+                                                EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                            margin: EdgeInsets.all(12),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  "Hi there 👋 ",
+                                                  style: TextStyle(
+                                                      fontSize: 22, fontWeight: FontWeight.w600),
+                                                ),
+                                                Text(
+                                                  "Welcome to Loop, favorited stops and stations will appear here.",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontSize: 18, fontWeight: FontWeight.w500),
                                                 ),
                                               ],
-                                              borderRadius: BorderRadius.all(Radius.circular(10))),
-                                          padding: EdgeInsets.all(8),
-                                          margin: EdgeInsets.symmetric(horizontal: 17),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                "Hi there 👋 ",
-                                                style: TextStyle(
-                                                    fontSize: 22, fontWeight: FontWeight.w600),
-                                              ),
-                                              Text(
-                                                "Welcome to Loop, favorited stops and stations will appear here.",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    fontSize: 18, fontWeight: FontWeight.w500),
-                                              ),
-                                            ],
+                                            ),
                                           ),
                                         ),
                                       );
@@ -282,4 +272,35 @@ Future<bool> getWelcomeShown() async {
 Future<void> setWelcomeShown(bool s) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setBool("welcomeShown", s);
+}
+
+class AppCard extends StatefulWidget {
+  final Widget child;
+  final EdgeInsets margin;
+  final EdgeInsets padding;
+  AppCard({Key key, @required this.child, this.margin, this.padding}) : super(key: key);
+  @override
+  _AppCardState createState() => _AppCardState();
+}
+
+class _AppCardState extends State<AppCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: widget.padding,
+      margin: widget.margin,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          color: getPrimary(context),
+          boxShadow: [
+            BoxShadow(
+              color: isDark(context) ? Colors.transparent : Colors.grey.withOpacity(0.21),
+              spreadRadius: 2,
+              blurRadius: 2,
+            ),
+          ],
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+      child: widget.child,
+    );
+  }
 }

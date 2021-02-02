@@ -18,20 +18,11 @@ class Layers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(left: 3, top: 5),
-        padding: EdgeInsets.only(bottom: 3),
-        decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: isDark(context) ? Colors.transparent : Colors.grey.withOpacity(0.21),
-                spreadRadius: 3,
-                blurRadius: 5,
-              ),
-            ],
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            color: getPrimary(context).withOpacity(0.99)),
-        height: dropdown ? 270 : 42,
-        width: 110,
+      padding: const EdgeInsets.only(top: 6, left: 4),
+      height: dropdown ? 270 : 42,
+      width: 120,
+      child: AppCard(
+        padding: EdgeInsets.only(top: 3),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,8 +34,9 @@ class Layers extends StatelessWidget {
                 child: Container(
                   width: 115,
                   color: Colors.transparent,
-                  padding: EdgeInsets.only(left: 3, top: 2),
+                  padding: EdgeInsets.only(left: 3),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       !dropdown
                           ? Icon(
@@ -53,7 +45,7 @@ class Layers extends StatelessWidget {
                             )
                           : Icon(Icons.arrow_drop_up, size: 30),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(3, 7, 8, 8),
+                        padding: EdgeInsets.fromLTRB(3, 0, 8, 4),
                         child: Text(
                           "Layers",
                           style: TextStyle(fontSize: 19),
@@ -177,6 +169,8 @@ class Layers extends StatelessWidget {
               ],
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
