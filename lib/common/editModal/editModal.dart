@@ -27,13 +27,9 @@ int _selectedDestinationIndex;
 class _EditDialogState extends State<EditDialog> {
   @override
   void initState() {
-    // TODO: implement initStat
     var index = widget.snapshot.data[1] - 1;
-
     var line = widget.isBus ? "Red" : widget.station.lines[index == -1 ? 0 : index];
-
     var x = getLineFromColor(line);
-
     setState(() {
       _selectedLine = x;
       selectedStyle = widget.snapshot.data[0];

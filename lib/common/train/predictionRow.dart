@@ -32,7 +32,7 @@ class PredictionRow extends StatefulWidget {
 
 Future<List<int>> getStationSettings(String id) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  List<String> data = prefs.getStringList("station$id") ?? ["0", "0", "0"];
+  List<String> data = prefs.getStringList("station$id") ?? ["1", "0", "0"];
   var intData = data.map((String e) => int.parse(e));
   return intData.toList();
 }

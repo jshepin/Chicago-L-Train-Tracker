@@ -1,5 +1,4 @@
 import 'package:CTA_Tracker/data/colors.dart';
-import 'package:CTA_Tracker/data/train/trainData.dart';
 import 'package:flutter/material.dart';
 
 class BoxTemplate extends StatefulWidget {
