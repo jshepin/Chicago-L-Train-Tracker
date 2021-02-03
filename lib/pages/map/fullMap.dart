@@ -8,6 +8,7 @@ import 'dart:core';
 import 'package:CTA_Tracker/exports.dart';
 import 'dart:ui' as ui;
 
+bool isAndroid;
 Future<Uint8List> getBytesFromAsset(String path, int width) async {
   ByteData data = await rootBundle.load(path);
   ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
@@ -32,7 +33,10 @@ bool includesAll(arr, arr2) {
 }
 
 getIconSize(context) {
-  return (Theme.of(context).platform == TargetPlatform.iOS) ? 120 : 100;
+  if (isAndroid == null) {
+    isAndroid = Theme.of(context).platform == TargetPlatform.android;
+  }
+  return isAndroid ? 100 : 120;
 }
 
 GoogleMapController fullController;
