@@ -15,7 +15,6 @@ Future<Uint8List> getBytesFromAsset(String path, int width) async {
   return (await fi.image.toByteData(format: ui.ImageByteFormat.png)).buffer.asUint8List();
 }
 
-int iconSize = 120;
 Station selectedStation;
 Location selectedTrain;
 bool includesAll(arr, arr2) {
@@ -30,6 +29,10 @@ bool includesAll(arr, arr2) {
     }
   }
   return true;
+}
+
+getIconSize(context) {
+  return (Theme.of(context).platform == TargetPlatform.iOS) ? 120 : 100;
 }
 
 GoogleMapController fullController;
@@ -189,8 +192,8 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
               }
             }
             if (p.lat != null && p.lon != null) {
-              final Uint8List markerIcon =
-                  await getBytesFromAsset("assets/arrows/${layerStrings[c]}.png", iconSize);
+              final Uint8List markerIcon = await getBytesFromAsset(
+                  "assets/arrows/${layerStrings[c]}.png", getIconSize(context));
               markerSet.add(Marker(
                   rotation: (double.parse(p.heading)),
                   anchor: Offset(0.5, 0.82),
@@ -232,7 +235,8 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
           ];
 
           if (s.lines.length > 1) {
-            markerIcon = await getBytesFromAsset("assets/markers/Transfer.png", iconSize);
+            markerIcon =
+                await getBytesFromAsset("assets/markers/Transfer.png", getIconSize(context));
             for (var r = 0; r < icons.length; r++) {
               bool isIcon = true;
               int index = 0;
@@ -243,13 +247,13 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
                 isIcon = false;
               }
               if (isIcon) {
-                markerIcon =
-                    await getBytesFromAsset("assets/markers/${index.toString()}.png", iconSize);
+                markerIcon = await getBytesFromAsset(
+                    "assets/markers/${index.toString()}.png", getIconSize(context));
               }
             }
           } else {
-            markerIcon = await getBytesFromAsset(
-                "assets/markers/${line.name}.png", iconSize);
+            markerIcon =
+                await getBytesFromAsset("assets/markers/${line.name}.png", getIconSize(context));
           }
 
           markerSet.add(Marker(
@@ -266,7 +270,8 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
         }
 
         if (line.name == "Green") {
-          var markerIcon = await getBytesFromAsset("assets/markers/Green.png", iconSize);
+          var markerIcon =
+              await getBytesFromAsset("assets/markers/Green.png", getIconSize(context));
 
           markerSet.add(Marker(
               markerId: MarkerId("King Drive"),

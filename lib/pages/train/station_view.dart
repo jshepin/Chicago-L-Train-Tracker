@@ -198,7 +198,7 @@ class Station_viewState extends State<Station_view> {
         ];
         var markerIcon;
         if (s.lines.length > 1) {
-          markerIcon = await getBytesFromAsset("assets/markers/Transfer.png", iconSize);
+          markerIcon = await getBytesFromAsset("assets/markers/Transfer.png", getIconSize(context));
           for (var r = 0; r < icons.length; r++) {
             bool isIcon = true;
             int index = 0;
@@ -209,12 +209,13 @@ class Station_viewState extends State<Station_view> {
               isIcon = false;
             }
             if (isIcon) {
-              markerIcon =
-                  await getBytesFromAsset("assets/markers/${index.toString()}.png", iconSize);
+              markerIcon = await getBytesFromAsset(
+                  "assets/markers/${index.toString()}.png", getIconSize(context));
             }
           }
         } else {
-          markerIcon = await getBytesFromAsset("assets/markers/${station.lines[q]}.png", iconSize);
+          markerIcon = await getBytesFromAsset(
+              "assets/markers/${station.lines[q]}.png", getIconSize(context));
         }
         markerSet.add(Marker(
             anchor: Offset(0.5, 0.82),
@@ -230,7 +231,7 @@ class Station_viewState extends State<Station_view> {
       }
     }
 
-    var greenMarkerIcon = await getBytesFromAsset("assets/markers/Green.png", iconSize);
+    var greenMarkerIcon = await getBytesFromAsset("assets/markers/Green.png", getIconSize(context));
     if (station.lines[0] == "Green") {
       markerSet.add(Marker(
           markerId: MarkerId("King Drive"),
