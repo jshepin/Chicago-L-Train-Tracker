@@ -6,7 +6,16 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'dart:core';
 import 'package:CTA_Tracker/exports.dart';
+import 'dart:ui' as ui;
 
+Future<Uint8List> getBytesFromAsset(String path, int width) async {
+  ByteData data = await rootBundle.load(path);
+  ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+  ui.FrameInfo fi = await codec.getNextFrame();
+  return (await fi.image.toByteData(format: ui.ImageByteFormat.png)).buffer.asUint8List();
+}
+
+int iconSize = 120;
 Station selectedStation;
 Location selectedTrain;
 bool includesAll(arr, arr2) {
@@ -180,13 +189,14 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
               }
             }
             if (p.lat != null && p.lon != null) {
+              final Uint8List markerIcon =
+                  await getBytesFromAsset("assets/arrows/${layerStrings[c]}.png", iconSize);
               markerSet.add(Marker(
                   rotation: (double.parse(p.heading)),
                   anchor: Offset(0.5, 0.82),
                   markerId: MarkerId("${p.rn}${p.lat}${p.lon}$count"),
                   position: LatLng(double.parse(p.lat), double.parse(p.lon)),
-                  icon: BitmapDescriptor.fromAsset(
-                      "assets/arrows/${layerStrings[c]}${defaultTargetPlatform == TargetPlatform.iOS ? 'IOS' : ''}.png"),
+                  icon: BitmapDescriptor.fromBytes(markerIcon),
                   onTap: () {
                     setState(() {
                       selectedStation = null;
@@ -206,7 +216,7 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
         List<Station> oStations = getStations(line.name);
         for (int x = 0; x < oStations.length; x++) {
           Station s = oStations[x];
-          var icon;
+          Uint8List markerIcon;
           List<String> icons = [
             "Red,P,Y",
             "Pink,Org,G,P,Brn,Blue",
@@ -222,8 +232,7 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
           ];
 
           if (s.lines.length > 1) {
-            icon = BitmapDescriptor.fromAsset(
-                "assets/markers/Transfer${defaultTargetPlatform == TargetPlatform.iOS ? 'iOS' : ''}.png");
+            markerIcon = await getBytesFromAsset("assets/markers/Transfer.png", iconSize);
             for (var r = 0; r < icons.length; r++) {
               bool isIcon = true;
               int index = 0;
@@ -234,20 +243,20 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
                 isIcon = false;
               }
               if (isIcon) {
-                icon = BitmapDescriptor.fromAsset(
-                    "assets/markers/${index.toString()}${defaultTargetPlatform == TargetPlatform.iOS ? 'iOS' : ''}.png");
+                markerIcon =
+                    await getBytesFromAsset("assets/markers/${index.toString()}.png", iconSize);
               }
             }
           } else {
-            icon = BitmapDescriptor.fromAsset(
-                "assets/markers/${line.name == "Yellow" ? "Foo" : line.name}${defaultTargetPlatform == TargetPlatform.iOS ? 'iOS' : ''}.png");
+            markerIcon = await getBytesFromAsset(
+                "assets/markers/${line.name}.png", iconSize);
           }
 
           markerSet.add(Marker(
               anchor: Offset(0.5, 0.82),
               markerId: MarkerId("${s.name}${s.lat}${s.long}"),
               position: LatLng(s.lat, s.long),
-              icon: icon,
+              icon: BitmapDescriptor.fromBytes(markerIcon),
               onTap: () {
                 setState(() {
                   selectedStation = s;
@@ -257,11 +266,12 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
         }
 
         if (line.name == "Green") {
+          var markerIcon = await getBytesFromAsset("assets/markers/Green.png", iconSize);
+
           markerSet.add(Marker(
               markerId: MarkerId("King Drive"),
               position: LatLng(41.78013, -87.615546),
-              icon: BitmapDescriptor.fromAsset(
-                  "assets/markers/Green${defaultTargetPlatform == TargetPlatform.iOS ? 'iOS' : ''}.png"),
+              icon: BitmapDescriptor.fromBytes(markerIcon),
               onTap: () {
                 setState(() {
                   selectedStation = getGreenLineTrack()[1];
@@ -271,8 +281,7 @@ class _FullMapState extends State<FullMap> with SingleTickerProviderStateMixin {
           markerSet.add(Marker(
               markerId: MarkerId("Cottage Grove"),
               position: LatLng(41.780309, -87.605857),
-              icon: BitmapDescriptor.fromAsset(
-                  "assets/markers/Green${defaultTargetPlatform == TargetPlatform.iOS ? 'iOS' : ''}.png"),
+              icon: BitmapDescriptor.fromBytes(markerIcon),
               onTap: () {
                 setState(() {
                   selectedStation = getGreenLineTrack()[2];

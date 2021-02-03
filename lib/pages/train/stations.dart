@@ -413,7 +413,8 @@ class _StationsState extends State<Stations> {
                                         children: [
                                           Container(
                                             width: 30,
-                                            padding: EdgeInsets.only(bottom: 3.5, top: 11),
+                                            margin: EdgeInsets.only(top: 10),
+                                            padding: EdgeInsets.only(bottom: 3.5, top: 0),
                                             decoration: BoxDecoration(
                                                 color: line.color,
                                                 borderRadius:

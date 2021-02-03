@@ -196,10 +196,9 @@ class Station_viewState extends State<Station_view> {
           "Org,G,Red",
           "Pink,Org,G,Red,P,Brn,Blue",
         ];
-
+        var markerIcon;
         if (s.lines.length > 1) {
-          icon = BitmapDescriptor.fromAsset(
-              "assets/markers/Transfer${defaultTargetPlatform == TargetPlatform.iOS ? 'iOS' : ''}.png");
+          markerIcon = await getBytesFromAsset("assets/markers/Transfer.png", iconSize);
           for (var r = 0; r < icons.length; r++) {
             bool isIcon = true;
             int index = 0;
@@ -210,19 +209,18 @@ class Station_viewState extends State<Station_view> {
               isIcon = false;
             }
             if (isIcon) {
-              icon = BitmapDescriptor.fromAsset(
-                  "assets/markers/${index.toString()}${defaultTargetPlatform == TargetPlatform.iOS ? 'iOS' : ''}.png");
+              markerIcon =
+                  await getBytesFromAsset("assets/markers/${index.toString()}.png", iconSize);
             }
           }
         } else {
-          icon = BitmapDescriptor.fromAsset(
-              "assets/markers/${station.lines[q] == "Yellow" ? "Foo" : station.lines[q]}${iOS ? 'iOS' : ''}.png");
+          markerIcon = await getBytesFromAsset("assets/markers/${station.lines[q]}.png", iconSize);
         }
         markerSet.add(Marker(
             anchor: Offset(0.5, 0.82),
             markerId: MarkerId("${s.name}${s.lat}${s.long}${q}"),
             position: LatLng(s.lat, s.long),
-            icon: icon,
+            icon: BitmapDescriptor.fromBytes(markerIcon),
             onTap: () {
               setState(() {
                 count++;
@@ -232,12 +230,12 @@ class Station_viewState extends State<Station_view> {
       }
     }
 
+    var greenMarkerIcon = await getBytesFromAsset("assets/markers/Green.png", iconSize);
     if (station.lines[0] == "Green") {
       markerSet.add(Marker(
           markerId: MarkerId("King Drive"),
           position: LatLng(41.78013, -87.615546),
-          icon: BitmapDescriptor.fromAsset(
-              "assets/markers/Green${defaultTargetPlatform == TargetPlatform.iOS ? 'iOS' : ''}.png"),
+          icon: BitmapDescriptor.fromBytes(greenMarkerIcon),
           onTap: () {
             setState(() {
               selectedStation = getGreenLineTrack()[1];
@@ -247,8 +245,7 @@ class Station_viewState extends State<Station_view> {
       markerSet.add(Marker(
           markerId: MarkerId("Cottage Grove"),
           position: LatLng(41.780309, -87.605857),
-          icon: BitmapDescriptor.fromAsset(
-              "assets/markers/Green${defaultTargetPlatform == TargetPlatform.iOS ? 'iOS' : ''}.png"),
+          icon: BitmapDescriptor.fromBytes(greenMarkerIcon),
           onTap: () {
             setState(() {
               selectedStation = getGreenLineTrack()[2];
