@@ -76,7 +76,7 @@
 
         "showMap": {
             "title": "Show Map",
-            "subtitle": "Show map view for stations"
+            "subtitle": "Map view for stations"
         },
         "darkMap": {
             "title": "Map Dark Theme",

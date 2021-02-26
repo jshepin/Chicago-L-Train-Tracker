@@ -67,16 +67,16 @@
     "settings": {
         "accessibility": {
             "title": "Show Accessibility Info.",
-            "subtitle": "Show Parking and ADA compliance info on stations"
+            "subtitle": "Parking and ADA compliance info"
         },
         "closestStation": {
-            "title": "Show Closest Station",
-            "subtitle": "Show the station closest to you within 10 miles"
+            "title": "Nearby Station",
+            "subtitle": "Show Station closest to you"
         },
 
         "showMap": {
             "title": "Show Map",
-            "subtitle": "Show map view for stations"
+            "subtitle": "Map view for stations"
         },
         "darkMap": {
             "title": "Map Dark Theme",
@@ -91,7 +91,7 @@
         "showStations": "Show Stations",
         "location": {
             "title": "Location Services",
-            "subtitle": "Your location data never leaves your device",
+            "subtitle": "Required for nearby station",
             "enabled": "Enabled",
             "disabled": "Disabled"
         },

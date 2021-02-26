@@ -118,23 +118,41 @@ class _SettingsState extends State<Settings> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'InAppReview status: ${_isAvailable == null ? loadingMessage : _isAvailable ? availableMessage : unavailableMessage}',
-                ),
-                RaisedButton(
-                  onPressed: _requestReview,
-                  child: Text('Request Review'),
-                ),
-                RaisedButton(
-                  onPressed: _openStoreListing,
-                  child: Text('Open Store Listing'),
-                ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text('btmBar.btmBar2'.tr(), style: Theme.of(context).textTheme.headline1),
                   ],
                 ),
+                if (_isAvailable != null && _isAvailable) ...[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: DividerLine(),
+                  ),
+                  MergeSemantics(
+                    child: ListTile(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 5),
+                      title: Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Text("Review/Review", style: TextStyle(fontSize: 21)),
+                      ),
+                      subtitle: Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Text(
+                          "Enjoy Loop? Please spend a minute and throw me a review! (It helps your train come faster)",
+                          style: TextStyle(
+                              height: 1.3,
+                              fontSize: 15,
+                              color: isDark(context) ? Colors.grey[400] : Colors.grey[600]),
+                        ),
+                      ),
+                      trailing: RaisedButton(
+                        onPressed: _requestReview,
+                        child: Text('Review'),
+                      ),
+                    ),
+                  ),
+                ],
                 Padding(
                   padding: const EdgeInsets.only(top: 5),
                   child: DividerLine(),
