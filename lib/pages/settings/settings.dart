@@ -104,9 +104,6 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     getThemeMode(context);
     getTopBar();
-    const loadingMessage = 'LOADING';
-    const availableMessage = 'AVAILABLE';
-    const unavailableMessage = 'UNAVAILABLE';
 
     return Scaffold(
       bottomNavigationBar: BtmBar(),
@@ -124,7 +121,7 @@ class _SettingsState extends State<Settings> {
                     Text('btmBar.btmBar2'.tr(), style: Theme.of(context).textTheme.headline1),
                   ],
                 ),
-                if (_isAvailable != null && _isAvailable) ...[
+                if (Platform.isAndroid) ...[
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
                     child: DividerLine(),
@@ -134,7 +131,7 @@ class _SettingsState extends State<Settings> {
                       contentPadding: EdgeInsets.symmetric(horizontal: 5),
                       title: Padding(
                         padding: const EdgeInsets.only(top: 5),
-                        child: Text("Review/Review", style: TextStyle(fontSize: 21)),
+                        child: Text("Give a review", style: TextStyle(fontSize: 21)),
                       ),
                       subtitle: Padding(
                         padding: const EdgeInsets.only(top: 4),
