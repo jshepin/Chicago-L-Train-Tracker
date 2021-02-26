@@ -6,6 +6,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:theme_mode_handler/theme_mode_handler.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:in_app_review/in_app_review.dart';
+import 'dart:io';
 
 class Settings extends StatefulWidget {
   @override
@@ -41,13 +43,33 @@ var themeOptions = [
 
 SettingsData sSettings = new SettingsData(false, false, false, false, false);
 bool gotten = false;
+final InAppReview _inAppReview = InAppReview.instance;
+String _appStoreId = '1550464970';
+bool _isAvailable;
 
 class _SettingsState extends State<Settings> {
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _inAppReview
+          .isAvailable()
+          .then(
+            (bool isAvailable) => setState(
+              () => _isAvailable = isAvailable && !Platform.isAndroid,
+            ),
+          )
+          .catchError((_) => setState(() => _isAvailable = false));
+    });
+
     fetchSettings();
     super.initState();
   }
+
+  Future<void> _requestReview() => _inAppReview.requestReview();
+
+  Future<void> _openStoreListing() => _inAppReview.openStoreListing(
+        appStoreId: _appStoreId,
+      );
 
   void getThemeMode(context) {
     var themeMode = ThemeModeHandler.of(context).themeMode;
@@ -82,6 +104,10 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     getThemeMode(context);
     getTopBar();
+    const loadingMessage = 'LOADING';
+    const availableMessage = 'AVAILABLE';
+    const unavailableMessage = 'UNAVAILABLE';
+
     return Scaffold(
       bottomNavigationBar: BtmBar(),
       backgroundColor: getPrimary(context),
@@ -92,6 +118,17 @@ class _SettingsState extends State<Settings> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(
+                  'InAppReview status: ${_isAvailable == null ? loadingMessage : _isAvailable ? availableMessage : unavailableMessage}',
+                ),
+                RaisedButton(
+                  onPressed: _requestReview,
+                  child: Text('Request Review'),
+                ),
+                RaisedButton(
+                  onPressed: _openStoreListing,
+                  child: Text('Open Store Listing'),
+                ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
